@@ -2,9 +2,9 @@
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-        <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
-        <script src="script.js"></script>
-        <link rel="stylesheet" href="style.css">
+        <link rel="shortcut icon" type="image/x-icon" href="@(Url.Content(favicon.ico))">
+        <script src="@(Url.Content(script.js))"></script>
+        <link ref="@(Url.Content(style.css))" rel="stylesheet">
     </head>
     <body>
         <section id="header"></section>    

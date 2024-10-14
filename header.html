@@ -2,18 +2,18 @@
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-        <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
-        <script src="script.js"></script>
-        <link rel="stylesheet" href="style.css">
+        <link rel="shortcut icon" type="image/x-icon" href="@(Url.Content(favicon.ico))">
+        <script src="@(Url.Content(script.js))"></script>
+        <link ref="@(Url.Content(style.css))" rel="stylesheet">
     </head>
     <body>
         <header>
             <nav class="header">
                 <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="login.html">Login</a></li>
-                    <li><a href="purchase.html">Purchase</a></li>
-                    <li><a href="#footer">About</a></li>
+                    <li><a href="@(Url.Content(index.html))">Home</a></li>
+                    <li><a href="@(Url.Content(login.html))">Login</a></li>
+                    <li><a href="@(Url.Content(purchase.html))">Purchase</a></li>
+                    <li><a href="@(Url.Content(#footer))">About</a></li>
                 </ul>
             </nav>
         </header>
