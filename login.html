@@ -2,14 +2,26 @@
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-        <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico">
-        <script src="/script/script.js"></script>
-        <link rel="stylesheet" href="style/style.css">
+        <link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico">
+        <script src="../script/script.js"></script>
+        <link rel="stylesheet" href="../style/style.css">
     </head>
     <body>
         <section id="header"></section>    
         <main class="main">
             <h2>Welcome to Your Pub's Systems!</h2>
+            <form class="formLogin" action="../home.html">
+                <div class="insertForm">
+                    <label for="username">Username:</label><br>
+                    <input class="userPwd" type="text" id="username" name="username" required><br>
+                    <label for="pwd">Password:</label><br>
+                    <input class="userPwd" type="password" id="pwd" name="pwd" required><br>
+                </div>
+                <div class="btnForm">
+                    <input class="btn" type="submit" value="Submit">
+                    <input class="btn" type="reset" value="Reset">
+                </div>
+              </form>
         </main>
         <section id="footer"></section>
     </body>

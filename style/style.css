@@ -1,31 +1,22 @@
-/* General Styles */
-* {
+*{
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
-
-body {
+body{
     font-family: Arial, sans-serif;
     padding: 1em;
 }
-
-/* Main Content */
-h2 {
+h2{
     text-align: center;
 }
-
-main {
+main{
     margin: 20px;
 }
-
-/* List Items in Main */
-.main li {
+.main li{
     margin: 1em;
 }
-
-/* Button Styles */
-input.btn {
+input.btn{
     width: 120px;
     height: 35px;
     border-radius: 20%;
@@ -34,13 +25,31 @@ input.btn {
     border: none;
     cursor: pointer;
 }
-
-input.btn:hover {
+input.btn:hover{
     background-color: #d9d2e9;
 }
-
-/* Header Styles */
-.header {
+input.userPwd{
+    margin-bottom: 20px;
+    height: 30px;
+    width: 250px;
+    border-radius: 5px;
+}
+form.formLogin{
+    display: flex;
+    padding: 30px;
+    background-color: #B4A7D6;
+    font-size: 18px;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+form.insertForm label{
+    margin-top: 30px;
+}
+form.btnForn{
+    margin-top: 30px;
+}
+.header{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -48,8 +57,7 @@ input.btn:hover {
     background-color: #6A329F;
     font-size: 18px;
 }
-
-.header ul {
+.header ul{
     list-style-type: none;
     display: flex;
     flex-wrap: wrap;
@@ -57,27 +65,22 @@ input.btn:hover {
     width: 100%;
     max-width: 1200px;
 }
-
-.header li {
+.header li{
     flex: 1;
     text-align: center;
     padding: 10px;
 }
-
-.header li a {
+.header li a{
     display: block;
     color: white;
     text-decoration: none;
     padding: 10px;
 }
-
-.header li a:hover {
+.header li a:hover{
     background-color: #d9d2e9;
     transition: 0.3s;
 }
-
-/* Footer Styles */
-.footer {
+.footer{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -85,48 +88,35 @@ input.btn:hover {
     padding: 20px;
     color: white;
 }
-
-.footer .column {
+.footer .column{
     flex: 1;
     margin: 10px;
 }
-
-.footer .column a {
+.footer .column a{
     text-decoration: none;
     color: #bcbcbc;
 }
-
-.footer .column p {
+.footer .column p{
     color: #ffffff;
-}
-
-/* Google Map iframe responsiveness */
-.google-map iframe {
+}.google-map iframe{
     width: 100%;
     height: 100%;
     border-radius: 10px;
-    min-height: 250px; /* Set a minimum height for small screens */
+    min-height: 250px; 
 }
-
-/* Responsive Styles */
-@media (max-width: 768px) {
-    /* Header Responsiveness */
-    .header ul {
+@media (max-width: 768px){
+    .header ul{
         flex-direction: column;
         text-align: center;
     }
-
-    .header li {
+    .header li{
         padding: 10px 0;
     }
-
-    /* Footer Responsiveness */
-    .footer {
+    .footer{
         flex-direction: column;
         align-items: center;
     }
-
-    .google-map iframe {
-        height: 300px; /* Adjust the height for mobile screens */
+    .google-map iframe{
+        height: 300px;
     }
 }

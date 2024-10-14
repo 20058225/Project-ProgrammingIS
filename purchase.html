@@ -2,9 +2,9 @@
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico">
-        <link rel="stylesheet" href="style/style.css">
-        <link rel="stylesheet" href="style/animation.css">
+        <link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico">
+        <link rel="stylesheet" href="../style/style.css">
+        <link rel="stylesheet" href="../style/animation.css">
     </head>
     <body>
         <section id="header"></section>  
@@ -20,7 +20,12 @@
               </div>
         </main>  
         <script>  
-        window.location.assign("../index.html");
+          //window.location.assign("../index.html");
+          (function(){
+              setTimeout(function(){
+                window.location="../index.html";
+              },2000); /* 1000 = 1 second*/
+            })();
         </script>
     </body>
 </html>
