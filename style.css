@@ -33,6 +33,7 @@ input.userPwd{
     height: 30px;
     width: 250px;
     border-radius: 5px;
+    padding-left: 10px;
 }
 form.formLogin{
     display: flex;

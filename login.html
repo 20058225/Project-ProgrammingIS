@@ -2,15 +2,15 @@
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-        <link rel="shortcut icon" type="image/x-icon" href="@(Url.Content(favicon.ico))">
-        <script src="@(Url.Content(script.js))"></script>
-        <link ref="@(Url.Content(style.css))" rel="stylesheet">
+        <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
+        <script src="script.js"></script>
+        <link rel="stylesheet" href="style.css">
     </head>
     <body>
         <section id="header"></section>    
         <main class="main">
             <h2>Welcome to Your Pub's Systems!</h2>
-            <form class="formLogin" action="@(Url.Content(home.html))">
+            <form class="formLogin" action="home.html">
                 <div class="insertForm">
                     <label for="username">Username:</label><br>
                     <input class="userPwd" type="text" id="username" name="username" required><br>

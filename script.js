@@ -10,15 +10,16 @@ document.addEventListener("DOMContentLoaded", function() {
             document.getElementById("footer").innerHTML = data;
         });
 });
-function openLogin(){
-    window.location="Login.html";
+function clearInputs() {
+    const inputs = document.querySelectorAll('input');
+    inputs.forEach(input => {
+        if (input.type === 'checkbox' || input.type === 'radio') 
+            input.checked = false;
+        else if (input.type === 'text' || input.type === 'number') 
+            input.value = '';
+    });
+    document.getElementById('result').style.display = 'none';
 }
-function openUser(){
-    window.location="User.html";
-}
-function openBeverage(){
-    window.location="Beverage.html";
-}
-function openLogin(){
-    window.location="Login.html";
+function openPage(pageName) {
+    window.location = `${pageName}.html`;
 }
