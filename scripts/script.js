@@ -4,14 +4,14 @@ document.addEventListener("DOMContentLoaded", function() {
         <title>PubPal</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico">
+        <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
         
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-        <link rel="stylesheet" href="../styles/style.css">
-        <link rel="stylesheet" href="../styles/animation.css">
+        <link rel="stylesheet" href="styles/style.css">
+        <link rel="stylesheet" href="styles/animation.css">
     `;
     document.head.insertAdjacentHTML("beforeend", titleHTML);
 
@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Generate header HTML
     const headerHTML = `
-        <a href="index.html"><img src="../images/logo.png" alt="Logo" class="icons" id="logo"></a>
+        <a href="index.html"><img src="images/logo.png" alt="Logo" class="icons" id="logo"></a>
         <h3>${title}</h3>
         <h6>${subtitle}</h6>
         <button onclick="btnGoTop()" id="btnGoTop" title="Go to top"><i class="fa-solid fa-arrow-up"></i></button>
