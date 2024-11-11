@@ -1,0 +1,76 @@
+:root {
+    --primary-color: #2C3E50;
+    --secondary-color: #ECF0F1;
+    --accent-color-teal: #1ABC9C;
+    --accent-color-orange: #E67E22;
+    --text-primary: #333333;
+    --text-secondary: #555555;
+    --background-light: #F5E9DA;
+    --success-color: #2ECC71;
+}
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    background-color: var(--background-light);
+    color: var(--text-primary);
+}
+header, footer {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    padding: 20px;
+    text-align: center;
+}
+.button-primary {
+    background-color: var(--accent-color-teal);
+    color: var(--secondary-color);
+}
+.button-cta {
+    background-color: var(--accent-color-orange);
+    color: white;
+}
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+main {
+    flex: 1; /* Grow to fill the remaining space */
+}
+.footer {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    padding: 20px;
+    text-align: center;
+}
+.icons {
+    height: 50px;
+    width: auto;
+}
+#btnGoTop {
+    display: none; /* Hidden by default */
+    position: fixed; /* Fixed position */
+    bottom: 20px; /* Place it at the bottom of the page */
+    right: 20px; /* Place it on the right */
+    z-index: 99; /* Make sure it’s on top of other elements */
+    font-size: 18px;
+    background-color: #555; /* Dark background */
+    color: white; /* White text */
+    border: none; /* Remove borders */
+    outline: none; /* Remove outline */
+    cursor: pointer; /* Pointer cursor on hover */
+    padding: 15px; /* Some padding */
+    border-radius: 50%; /* Rounded corners */
+    transition: 0.3s; /* Smooth transition */
+}
+#btnGoTop:hover {
+    background-color: #333; /* Darker background on hover */
+}

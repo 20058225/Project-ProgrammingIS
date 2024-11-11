@@ -1,0 +1,133 @@
+.modal-house {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1050; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.5); /* Black w/ opacity */
+}
+.modal-dialog-house {
+    max-width: 50%; /* Set a max-width for the modal */
+    margin: 1.75rem auto; /* Center the modal */
+}
+.modal-content-house {
+    background-color: #fff; /* White background */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+}
+.modal-header-house {
+    border-bottom: none; /* No border on the header */
+}
+.modal-title-house {
+    margin: 0; /* Remove default margin */
+}
+/* Results and Sell Modal */
+#resultsModal, .modal-sell {
+    display: none;
+    position: fixed;
+    z-index: 1050;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    overflow-y: auto;
+}
+#resultsModal .modal-content-search, .modal-content-sell {
+    max-width: 25%;
+    margin: 10% auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.modal-body-search, .modal-body-sell{
+    padding: 20px;
+}
+.modal-body-search h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+/* Close button style for results modal */
+.close {
+    position: static;
+    color: #333;
+    font-size: 24px;
+    cursor: pointer;
+}
+/* Additional styling for the new confirmation modal */
+.modal-contact {
+    display: none;
+    position: fixed;
+    z-index: 1050;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    overflow: auto;
+}
+.modal-content-contact {
+    max-width: 30%;
+    margin: 10% auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Tablet View */
+@media (max-width: 768px) {
+    .modal-dialog-house,
+    .modal-content-contact,
+    .modal-content-search,
+    .modal-content-sell {
+        max-width: 70%; 
+        margin: 5% auto; 
+        padding: 15px; 
+    }
+    .modal-body-search h2 {
+        font-size: 20px; 
+    }
+}
+
+/* Mobile View */
+@media (max-width: 480px) {
+        .modal-dialog-house,
+        .modal-content-contact,
+        .modal-content-sell {
+            max-width: 90%;
+            margin: 5% auto;
+            padding: 10px;
+        }
+    
+        #resultsModal 
+        .modal-content-search {
+            display:flex;
+            align-items: center;
+            justify-content: center;
+            max-width: 90%;
+            margin: 5% auto;
+            padding: 10px;
+        }
+    
+        .modal-body-search h2,
+        .modal-title-house {
+            font-size: 18px;
+        }
+    
+        .close {
+            font-size: 20px;
+        }
+    }
+
+  
+
+   
+
+   
+
+

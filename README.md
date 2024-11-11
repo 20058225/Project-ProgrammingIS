@@ -1,3 +1,3 @@
 # Project -  Programming for Information Systems. 
-* Name: Your Pub Systems
+* Name: PubPal Systems
 * Focus: Bar drinks sales system

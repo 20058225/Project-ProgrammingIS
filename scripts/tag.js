@@ -1,15 +1,3 @@
-document.addEventListener("DOMContentLoaded", function() {
-    fetch("model/header.html")
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById("header").innerHTML = data;
-        });
-    fetch("model/footer.html")
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById("footer").innerHTML = data;
-        });
-});
 function clearInputs() {
     const inputs = document.querySelectorAll('input');
     inputs.forEach(input => {
@@ -23,3 +11,16 @@ function clearInputs() {
 function openPage(pageName) {
     window.location = `${pageName}.html`;
 }
+function showHidePwd() {
+    var pwd = document.getElementById("pwdLogin");
+    var pwdIcon = document.getElementById("pwdIcon");
+    if (pwd.type === "password" && pwdIcon.src.endsWith("eye_closed.png")) {
+        pwd.type = "text";
+        pwdIcon.src = "img/eye_opened.png";
+
+    } else {
+        pwd.type = "password";
+        pwdIcon.src = "img/eye_closed.png";
+    }
+    return false;
+  }
