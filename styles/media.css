@@ -1,0 +1,40 @@
+@media (max-width: 768px) {
+    .header-container {
+        width: 100%;
+        justify-content: space-between; /* Centers header text with menu button on left */
+    }
+    
+    ul {
+        display: none; /* Hide the full menu on small screens */
+    }
+    .main {
+        padding-top: 130px; /* Increase padding to prevent overlap */
+    }
+    .header-container {
+        padding: 10px; /* Adjust header padding on small screens */
+    }
+    /* Hide the regular menu items on small screens */
+    ul > li:not(.dropdown) {
+        display: none;
+    }
+
+    /* Show dropdown items stacked vertically */
+    .dropdown-content {
+        position: relative;
+        width: 100%;
+        box-shadow: none;
+    }
+
+    /* Style dropdown menu for mobile */
+    .dropdown-content a {
+        padding: 12px 16px;
+        text-align: left;
+    }
+
+    /* Dropdown button */
+    .dropbtn {
+        display: block;
+        width: 100%;
+        text-align: center;
+    }
+}

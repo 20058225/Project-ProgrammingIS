@@ -1,3 +1,13 @@
+:root {
+    --primary-color: #2C3E50;
+    --secondary-color: #ECF0F1;
+    --accent-color-teal: #1ABC9C;
+    --accent-color-orange: #E67E22;
+    --text-primary: #333333;
+    --text-secondary: #555555;
+    --background-light: #F5E9DA;
+    --success-color: #2ECC71;
+}
 .list {
     flex: 1 1 calc(33% - 20px);
     box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.1);
