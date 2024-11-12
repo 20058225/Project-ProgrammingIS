@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function() {
             title: "Welcome to PubPal's Systems!",
             subtitle: "Here you find the best tools to manage your establishment."
         },
-        "comingsoon.html": {
+        "customize.html": {
             title: "Coming Soon",
             subtitle: "Stay tuned for updates."
         },

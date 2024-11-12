@@ -3,24 +3,28 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Define the content for each page
     const pageContent = {
-        "comingsoon.html": {
-            main: `
-                <div class="col-3">
-                    <div class="snippet" data-title="dot-falling">
-                        <div class="stage">
-                            <div class="dot-falling"></div>
-                        </div>
-                    </div>
-                </div>
-            `,
+        "index.html": {
+            main: `<h2>Welcome to PubPal Systems!</h2><p>Find the best tools to manage your establishment.</p>`,
+            redirect: false
+        },
+        "login.html": {
+            main: `<form id="loginForm"><input type="text" placeholder="Username"><input type="password" placeholder="Password"><button type="submit">Login</button></form>`,
+            redirect: false
+        },
+        "home.html": {
+            main: `<h2>Home</h2><p>Welcome to your dashboard. Start managing your bar inventory!</p>`,
+            redirect: false
+        },
+        "user.html": {
+            main: `<h2>User Management</h2><button onclick="addUser()">Add User</button>`,
+            redirect: false
+        },
+        "customize.html": {
+            main: `<h2>Coming Soon!</h2><div class="snippet"><div class="dot-falling"></div></div>`,
             redirect: true, // Indicate whether this page should redirect
             redirectDelay: 2000 // Delay in milliseconds
         },
         "announcements.html": {
-            main: "<p>Hi there! Check out the latest announcements.</p>",
-            redirect: false
-        },
-        "index.html": {
             main: "<p>Hi there! Check out the latest announcements.</p>",
             redirect: false
         }
