@@ -8,18 +8,14 @@
     --background-light: #F5E9DA;
     --success-color: #2ECC71;
 }
-
-/* Reset styles */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
-
 html {
     scroll-behavior: smooth;
 }
-
 body {
     background-color: var(--background-light);
     color: var(--text-primary);
@@ -27,32 +23,26 @@ body {
     display: flex;
     justify-content: center;
 }
-
 html, body {
     height: 100%;
 }
-
 .container {
     width: 100%; 
-    max-width: 1200px; /* Set a max width to prevent overflow on very large screens */
+    max-width: 1200px; 
     display: flex;
     flex-direction: column;
     min-height: 100vh;
     padding: 0;
-    margin: 0 auto; /* Center-aligns the container */
+    margin: 0 auto;
 }
-
-/* Header styles */
-#main-header  {
+#main-header {
     position: fixed;
     top: 0;
     max-width: 1200px;
     width: 100%;
-    z-index: 1000; /* Ensure it stays above other content */
+    z-index: 1000;
     transition: all 0.3s ease;
 }
-
-/* Before Scroll */
 .header-wrapper {
     position: relative;
     display: flex;
@@ -60,100 +50,95 @@ html, body {
     align-items: center;
     background-color: var(--primary-color);
     padding: 10px 0;
-    transition: all 0.3s ease;
+    transition: padding 0.3s ease, background-color 0.3s ease, height 0.3s ease;
 }
-
-.header-container {
+.header-content {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
 }
-
+.logo-container {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    margin-right: 20px;
+}
 .header-text h3 {
     color: var(--secondary-color);
 }
-
 .header-text h6 {
     color: var(--secondary-color);
     font-size: 0.9em;
 }
-
-/* After Scroll */
-.scrolled .header-wrapper {
-    position: fixed;
-    top: 0;
+.scrolled .header-content {
     width: 100%;
     max-width: 1200px;
-    padding: 10px 30px;
-    background-color: var(--primary-color); /* Ensures header background remains solid */
-    z-index: 1000;
-    flex-direction: row;
-    justify-content: space-between;
+    background-color: var(--primary-color);
+    margin: -10px;
 }
-
-.scrolled .header-container {
-    justify-content: flex-start; /* Align items to the left on scroll */
-    padding-left: 10px;
-}
-
 .scrolled-logo {
-    height: 40px !important; /* Shrinks logo on scroll */
+    flex-shrink: 0; /* Keeps the logo from resizing */
+    height: 35px !important;
 }
-
 .scrolled .header-text h6 {
-    display: none; /* Hide subtitle on scroll */
+    display: none;
 }
-
-/* Navigation menu */
-ul {
-    list-style-type: none;
+.header-menu{
+    margin-top: 10px;
+}
+.nav-list {
     display: flex;
-    gap: 15px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 20px;
+}
+.nav-item {
+    margin: 0;
     padding: 0;
 }
-
-ul li a {
+.nav-item a {
+    display: block;
     color: var(--secondary-color);
     text-decoration: none;
-    font-weight: bold;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
 }
-
-/* Main content */
+.nav-item a:hover {
+    color: var(--accent-color-orange);
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
 main {
-    flex: 1; /* Allows main to grow and fill available space */
+    flex: 1;
     width: 100%;
-    padding: 150px 20px 20px 20px; /* Adjust according to your header height */
+    padding: 150px 20px 20px 20px;
 }
 
-/* Footer styles */
 .footer {
     background-color: var(--primary-color);
     color: var(--secondary-color);
     padding: 20px;
     text-align: center;
 }
-
-/* Buttons */
 .button-primary {
     background-color: var(--accent-color-teal);
     color: var(--secondary-color);
 }
-
 .button-cta {
     background-color: var(--accent-color-orange);
     color: white;
 }
-
-/* Icon styles */
 .icons {
     height: 50px;
     width: auto;
-}
 
-/* "Go to Top" button */
+}
 #btnGoTop {
-    display: none; /* Hidden by default */
+    display: none;
     position: fixed;
     bottom: 20px;
     right: 20px;
@@ -168,7 +153,64 @@ main {
     border-radius: 50%;
     transition: 0.3s;
 }
-
 #btnGoTop:hover {
     background-color: #333;
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 15px;
+    overflow: hidden;
+    background-color: var(--primary-color);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+ul li a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    font-weight: bold;
+}
+li {
+    float: left;
+}
+li a, .dropbtn {
+    display: inline-block;
+    color: var(--secondary-color);
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 13px;
+}
+li a:hover, .dropdown:hover .dropbtn {
+    text-decoration: none;
+    color: var(--accent-color-orange);
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+li.dropdown {
+    display: inline-block;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--secondary-color);
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+.dropdown-content a {
+    color: var(--text-primary);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+}
+.dropdown-content a:hover {
+    background-color: var(--background-light);
+    text-decoration: none;
+}
+.dropdown:hover .dropdown-content {
+    display: block;
 }

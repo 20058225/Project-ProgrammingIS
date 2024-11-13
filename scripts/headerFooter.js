@@ -1,25 +1,21 @@
 document.addEventListener("DOMContentLoaded", function() {
     // Add Head Elements
-    const titleHTML = `
+    const headHTML = `
         <title>PubPal</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
         <link rel="stylesheet" href="styles/style.css">
-        <link rel="stylesheet" href="styles/media.css">
         <link rel="stylesheet" href="styles/animation.css">
-
     `;
-    document.head.insertAdjacentHTML("beforeend", titleHTML);
+    document.head.insertAdjacentHTML("beforeend", headHTML);
 
     // Add Header Section with Dynamic Content
     const currentFile = window.location.pathname.split("/").pop();
-    // Define the content for each page
     const pageContent = {
         "index.html": {
             title: "Welcome to PubPal's Systems!",
@@ -27,57 +23,63 @@ document.addEventListener("DOMContentLoaded", function() {
         },
         "login.html": {
             title: "Login",
-            subtitle: "Login."
+            subtitle: "Login to your account."
         },
         "home.html": {
-            title: "home",
-            subtitle: "home."
+            title: "Home",
+            subtitle: "Welcome back!"
         },
         "user.html": {
-            title: "user",
-            subtitle: "user."
+            title: "User Dashboard",
+            subtitle: "Manage your profile here."
         },
         "customize.html": {
             title: "Coming Soon",
             subtitle: "Stay tuned for updates."
         },
         "announcements.html": {
-            title: "PubPal's Systems!",
+            title: "PubPal's News",
             subtitle: "Latest updates and information"
         },
         "contactUs.html": {
             title: "Contact Us!",
-            subtitle: "If you have any questions, please fill out the form below and await your response."
+            subtitle: "Feel free to reach out to us."
+        },
+        "privacy-policy.html": {
+            title: "Privacy Policy",
+            subtitle: "Feel free to reach out to us."
         }
     };
 
-    // Get title and subtitle for the current page or set default values
     const { title = "", subtitle = "" } = pageContent[currentFile] || {};
 
-    // Generate header HTML
     const headerElement = document.querySelector("header");
     if (headerElement) {
         const headerHTML = `
                     <div class="header-wrapper">
                         <div class="header-container">
-                            <a href="index.html"><img src="images/logo.png" alt="PubPal" class="icons" id="logo"></a>
-                            <div class="header-text">
-                                <h3 id="header-title">${title}</h3>
-                                <h6 id="header-subtitle">${subtitle}</h6>
-                            </div>
+                            <div class="header-content">
+                                <div class="logo-container">
+                                    <a href="#" onclick="openPage('index')"><img src="images/logo.png" alt="PubPal" class="icons" id="logo"></a>
+                                </div>
+                                <div class="header-text">
+                                    <h3 id="header-title">${title}</h3>
+                                    <h6 id="header-subtitle">${subtitle}</h6>
+                                </div>
+                            </div> 
+                            <div>
+                                <nav class="header-menu">
+                                    <ul class="nav-list">
+                                        <li class="nav-item"><a href="#" onclick="openPage('index')">Home</a></li>
+                                        <li class="nav-item"><a href="#" onclick="openPage('contactUs')">Book Demo</a></li>
+                                        <li class="nav-item"><a href="#" onclick="openPage('announcements')">News</a></li>
+                                        <li class="nav-item"><a href="#" onclick="openPage('contactUs')">Contact Us</a></li>
+                                        <li class="nav-item"><a href="#" onclick="openPage('contactUs')">About</a></li>
+                                    </ul>
+                                </nav>  
+                            </div>                                         
                         </div>
-                        <ul>
-                            <li><a href="index.html">Home</a></li>
-                            <li><a href="contactUs.html">Book Demo</a></li>
-                            <li><a href="announcements.html">News</a></li>
-                            <li><a href="contactUs.html">Contact Us</a></li>
-                            <li><a href="about.html">About</a></li>
-                        </ul>
-                    </div>
                     <button onclick="btnGoTop()" id="btnGoTop" title="Go to top"><i class="fa-solid fa-arrow-up"></i></button>
-                    <!--<button onclick="btnGoTop()" id="btnGoTop" title="Go to top"><i class="fa-regular fa-circle-user"></i></button>
-                        <button onclick="btnGoTop()" id="btnGoTop" title="Go to top"><i class="fa-regular fa-circle-question"></i></button>                    
-                    -->
         `;
         headerElement.insertAdjacentHTML("beforeend", headerHTML);
     }
@@ -89,12 +91,23 @@ document.addEventListener("DOMContentLoaded", function() {
             <div>
                 <p>&copy; ${new Date().getFullYear()} My Website. All rights reserved.</p>
                 <p>Brenda Lopes</p>
-                <a href="https://www.linkedin.com/in/llopesbrenda"><i class="fa-brands fa-linkedin"></i></a>
-                <a href="https://github.com/20058225"><i class="fa-brands fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/llopesbrenda" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="https://github.com/20058225" target="_blank"><i class="fa-brands fa-github"></i></a>
                 <a href="mailto:20058225@mydbs.ie" target="_blank"><i class="fas fa-envelope"></i></a>
                 <a href="tel:+3530839999999"><i class="fas fa-phone"></i></a>
             </div>
         `;
         footerElement.insertAdjacentHTML("beforeend", footerHTML);
     }
+
+    // "Go to Top" Button Functionality
+    const btnGoTop = document.getElementById("btnGoTop");
+    window.onscroll = function() { 
+        if (btnGoTop) {
+            btnGoTop.style.display = (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) ? "block" : "none";
+        }
+    };
+    window.btnGoTop = function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
 });

@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function() {
     // Show "Go to Top" button when scrolling down
     window.onscroll = function() { 
-        scrollFunction() 
+        scrollFunction();
     };
 
     function scrollFunction() {
@@ -17,27 +17,34 @@ document.addEventListener("DOMContentLoaded", function() {
     };
 
     // JavaScript to toggle the "scrolled" class on scroll
-    const header = document.getElementById("main-header");
-    const logo = document.getElementById("logo");
-    const headerContainer = document.querySelector(".header-container");
-    const headerWrapper = document.querySelector(".header-wrapper");
+    setTimeout(() => {
+        // JavaScript to toggle the "scrolled" class on scroll
+        const header = document.getElementById("main-header");
+        const logo = document.getElementById("logo");
+        const headerContent = document.querySelector(".header-content");
 
-    if (header && logo && headerContainer && headerWrapper) {
-        window.addEventListener("scroll", function() {
-            if (window.scrollY > 50) {
-                header.classList.add("scrolled");
-                headerContainer.classList.add("scrolled");
-                logo.classList.add("scrolled-logo");
-                headerWrapper.classList.add("scrolled");
-            } else {
-                header.classList.remove("scrolled");
-                headerContainer.classList.remove("scrolled");
-                logo.classList.remove("scrolled-logo");
-                headerWrapper.classList.remove("scrolled");
-            }
-        });
-    }
+        if (header && logo && headerContent) {
+            window.addEventListener("scroll", function() {
+                if (window.scrollY > 50) {
+                    header.classList.add("scrolled");
+                    logo.classList.add("scrolled-logo");
+                    headerContent.classList.add("scrolled");
+                    console.log("Header scrolled class added");
+                } else {
+                    header.classList.remove("scrolled");
+                    logo.classList.remove("scrolled-logo");
+                    headerContent.classList.remove("scrolled");
+                    console.log("Header scrolled class removed");
+                }
+            });
+        } else {
+            console.error("One or more header elements are missing.");
+        }
 
+        if (!header) console.error("Header element (#main-header) is missing.");
+        if (!logo) console.error("Logo element (#logo) is missing.");
+        if (!headerContent) console.error("Header wrapper (.header-wrapper) is missing.");
+    }, 100); // Delay to allow dynamic elements to load
     // Dropdown toggle for mobile
     const dropdownBtn = document.querySelector(".dropbtn");
     const dropdownContent = document.querySelector(".dropdown-content");
@@ -55,5 +62,9 @@ document.addEventListener("DOMContentLoaded", function() {
                 dropdownContent.style.display = "none";
             }
         });
-    }    
+    }  
 });
+
+function openPage(pageName) {
+    window.location = `${pageName}.html`;
+}

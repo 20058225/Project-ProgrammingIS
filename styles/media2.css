@@ -1,0 +1,47 @@
+            /* === Small Phones (320px and up) === */
+@media(min-width: 320px) { /* ok */
+    .header-container {
+        padding: 0 5px 0px 5px;
+    }
+    .header-text {
+        text-align: center;
+        font-size: 12px;
+    }
+    .header-text h6{
+        display: none;
+    }
+    .header-menu {
+        display: none;
+    }
+    .icons {
+        height: 40px;
+    }
+    main {
+        padding: 120px 20px 20px 20px;
+    }
+}
+            /* === iPad Mini & Small Tablets (768px) === */
+@media(min-width: 768px) {
+    .header-menu {
+        display: block;
+    }
+    .header-container {
+        padding: 15px 30px;
+    }
+    .icons {
+        height: 50px;
+    }
+    main {
+        padding: 180px 30px 30px 30px;
+    }
+    .nav-list {
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+        padding: 20px 0;
+    }
+    .nav-item a {
+        font-size: 16px;
+        padding: 12px 20px;
+    }    
+}

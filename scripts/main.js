@@ -56,12 +56,48 @@ document.addEventListener("DOMContentLoaded", function() {
             redirectDelay: 2000 // Delay in milliseconds
         },
         "announcements.html": {
-            main: "<p>Hi there! Check out the latest announcements.</p>",
+            main: `<p>Hi there! Check out the latest announcements.</p>`,
             redirect: false
         },
         "contactUs.html": {
-            main: "<p>Hi there! Check out the latest announcements.</p>",
+            main: `<p>Hi there! Check out the latest announcements.</p>`,
             redirect: false
+        },
+        "privacy-policy.html": {
+            main: `
+                    <section>
+                        <h2>1. Introduction</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras venenatis euismod malesuada.</p>
+                    </section>
+                    <section>
+                        <h2>2. Information We Collect</h2>
+                        <p>Donec sollicitudin molestie malesuada. Nulla quis lorem ut libero malesuada feugiat. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        <ul>
+                            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+                            <li>Curabitur non nulla sit amet nisl tempus convallis quis ac lectus.</li>
+                            <li>Quisque velit nisi, pretium ut lacinia in, elementum id enim.</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>3. How We Use Your Information</h2>
+                        <p>Proin eget tortor risus. Cras ultricies ligula sed magna dictum porta. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi.</p>
+                        <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.</p>
+                    </section>
+                    <section>
+                        <h2>4. Sharing of Information</h2>
+                        <p>Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Nulla porttitor accumsan tincidunt. Donec sollicitudin molestie malesuada.</p>
+                        <p>Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Sed porttitor lectus nibh.</p>
+                    </section>
+                    <section>
+                        <h2>5. Data Security</h2>
+                        <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.</p>
+                        <p>Curabitur aliquet quam id dui posuere blandit.</p>
+                    </section>
+                    <section>
+                        <h2>6. Changes to This Privacy Policy</h2>
+                        <p>Pellentesque in ipsum id orci porta dapibus. Vivamus suscipit tortor eget felis porttitor volutpat. Curabitur aliquet quam id dui posuere blandit.</p>
+                    </section>
+            `, redirect: false
         }
     };
 
@@ -73,7 +109,5 @@ document.addEventListener("DOMContentLoaded", function() {
     if (mainElement) mainElement.innerHTML = main;
     
     // Redirect if specified in the content config
-    if (redirect) {
-        setTimeout(() => window.location = "index.html", redirectDelay);
-    }
+    if (redirect) setTimeout(() => window.location = "index.html", redirectDelay);
 });
