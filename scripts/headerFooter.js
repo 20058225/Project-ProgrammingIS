@@ -10,6 +10,8 @@ document.addEventListener("DOMContentLoaded", function() {
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
         <link rel="stylesheet" href="styles/style.css">
+        <link rel="stylesheet" href="styles/login.css">
+        <link rel="stylesheet" href="styles/modal.css">
         <link rel="stylesheet" href="styles/animation.css">
     `;
     document.head.insertAdjacentHTML("beforeend", headHTML);
@@ -21,13 +23,10 @@ document.addEventListener("DOMContentLoaded", function() {
             title: "Welcome to PubPal's Systems!",
             subtitle: "Here you find the best tools to manage your establishment."
         },
-        "login.html": {
-            title: "Login",
-            subtitle: "Login to your account."
+        "login.html": { 
         },
         "home.html": {
-            title: "Home",
-            subtitle: "Welcome back!"
+            title: "PubPal's Systems"
         },
         "user.html": {
             title: "User Dashboard",
@@ -82,6 +81,28 @@ document.addEventListener("DOMContentLoaded", function() {
                     <button onclick="btnGoTop()" id="btnGoTop" title="Go to top"><i class="fa-solid fa-arrow-up"></i></button>
         `;
         headerElement.insertAdjacentHTML("beforeend", headerHTML);
+    }
+    const headerHome = document.querySelector("section");
+    if (headerHome) {
+        const headerHTML = `
+                    <div class="header-wrapper">
+                        <div class="header-container">
+                            <div class="header-content">
+                            <div class="logo-container">
+                                <a href="#" onclick="openPage('index')"><img src="images/logo.png" alt="PubPal" class="icons" id="logo"></a>
+                            </div>
+                            </div> 
+                            <div>
+                                <nav class="header-menu">
+                                    <ul class="nav-list">
+                                        <li class="nav-item"><a href="#" onclick="openPage('index')">Exit</a></li>
+                                    </ul>
+                                </nav>  
+                            </div>                                         
+                        </div>
+                    <button onclick="btnGoTop()" id="btnGoTop" title="Go to top"><i class="fa-solid fa-arrow-up"></i></button>
+        `;
+        headerHome.insertAdjacentHTML("beforeend", headerHTML);
     }
 
     // Add Footer Section

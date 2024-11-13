@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", function() {
     // Show "Go to Top" button when scrolling down
+    snackBar(); 
+    
     window.onscroll = function() { 
         scrollFunction();
     };
@@ -62,9 +64,55 @@ document.addEventListener("DOMContentLoaded", function() {
                 dropdownContent.style.display = "none";
             }
         });
-    }  
+    }
 });
+function snackBar() {
+    var x = document.getElementById("snackbar");
+    x.className = "show";
+    setTimeout(function(){ 
+        x.className = x.className.replace("show", ""); 
+    }, 3000);
+}
 
+// Make showHidePwd a global function
+function showHidePwd() {
+    const pwd = document.getElementById("pwdLogin");
+    const pwdIcon = document.getElementById("pwdIcon");
+    if (pwd && pwdIcon) {
+        if (pwd.type === "password") {
+            pwd.type = "text";
+            pwdIcon.classList.replace("fa-eye-slash", "fa-eye");  // Update icon (using Font Awesome icons as an example)
+        } else {
+            pwd.type = "password";
+            pwdIcon.classList.replace("fa-eye", "fa-eye-slash");  // Update icon back to hidden
+        }
+    } else {
+        console.error("Password input or icon element is missing.");
+    }
+}
+window.addEventListener("beforeunload", function() {
+    document.querySelectorAll("input[type='text'], input[type='password']").forEach(input => {
+        input.value = ""; // Clear input fields
+    });
+});
 function openPage(pageName) {
     window.location = `${pageName}.html`;
 }
+function openModal(event) {
+    event.preventDefault();
+    document.getElementById('forgotPasswordModal').style.display = 'block';
+}
+
+function closeModal() {
+    document.getElementById('forgotPasswordModal').style.display = 'none';
+}
+
+// Close the modal if the user clicks outside of it
+window.onclick = function(event) {
+    const modal = document.getElementById('forgotPasswordModal');
+    if (event.target == modal) {
+        closeModal();
+    }
+};
+
+

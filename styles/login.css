@@ -1,0 +1,128 @@
+:root {
+    --primary-color: #2C3E50;
+    --secondary-color: #ECF0F1;
+    --accent-color-teal: #1ABC9C;
+    --accent-color-orange: #E67E22;
+    --text-primary: #333333;
+    --text-secondary: #555555;
+    --background-light: #F5E9DA;
+    --success-color: #2ECC71;
+}
+/* Styling for the password input field */
+.userPwd {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+    color: var(--text-primary);
+    background-color: var(--background-light);
+}
+.userPwd:focus {
+    border-color: var(--accent-color-teal);
+    outline: none;
+}
+.password-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+.password-container button {
+    position: absolute;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    font-size: 1.2em;
+    color: var(--text-secondary);
+}
+.password-container button:focus {
+    outline: none;
+}
+/* Styling for the Show/Hide button */
+#pwdshowHide {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    font-size: 18px;
+    color: var(--primary-color);
+    transition: color 0.3s ease;
+}
+#pwdshowHide:hover {
+    color: var(--accent-color-teal);
+}
+/* Styling for the eye icon */
+#pwdIcon {
+    font-size: 18px;
+    color: inherit;
+}
+/* Adjustments for form container */
+.header-flex-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+.header-flex-container h3 {
+    margin: 5px 0 0px 0px;
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    color: var(--primary-color);
+}
+.formLogin {
+    max-width: 400px;
+    margin: 0 auto;
+    background-color: var(--secondary-color);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.formLogin .forgot-password {
+    text-align: right;
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.formLogin .forgot-password a {
+    color: var(--text-secondary);
+    text-decoration: underline;
+}
+.btnForm {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+/* Styling for form buttons */
+.btn {
+    width: 48%;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    color: var(--secondary-color);
+}
+.btn[type="submit"] {
+    background-color: var(--accent-color-teal);
+}
+.btn[type="submit"]:hover {
+    background-color: #16a085; /* Darker shade of teal */
+}
+.btn[type="reset"] {
+    background-color: var(--accent-color-orange);
+}
+.btn[type="reset"]:hover {
+    background-color: #d35400; /* Darker shade of orange */
+}
+.formLogin #logo {
+    height: 30px;
+    width: auto;
+}

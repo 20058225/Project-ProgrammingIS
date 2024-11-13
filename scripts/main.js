@@ -25,24 +25,65 @@ document.addEventListener("DOMContentLoaded", function() {
                 </p><p>Sed semper, ante a ullamcorper tempor, dui purus ultricies urna, ut gravida mi augue vel mi. Morbi ultrices facilisis vestibulum. Ut scelerisque mauris eget leo lobortis, eu auctor magna condimentum. Nullam eget ultricies lorem, vel sagittis mi. Cras sodales non tellus quis vehicula. Duis in faucibus dui, a suscipit nibh. Praesent lorem neque, faucibus non nisi eget, malesuada placerat velit. Proin ultricies neque vel sapien faucibus cursus. Integer ac bibendum elit, ut elementum nisl. Nullam augue tellus, blandit at efficitur eu, condimentum sed ipsum. Sed fermentum molestie metus facilisis vestibulum. Aenean fringilla ac massa non blandit. Nam suscipit consequat consectetur. Vestibulum urna risus, convallis quis magna a, gravida aliquam sem. In faucibus felis et libero porta, vitae egestas leo rhoncus. Proin vel nunc cursus, porttitor dui nec, scelerisque ex.
                 </p><p>Curabitur convallis non lectus et rhoncus. Curabitur enim risus, efficitur eu gravida in, hendrerit nec ex. Pellentesque elementum consectetur diam a rhoncus. Ut dapibus dolor ut consequat rhoncus. Vivamus facilisis tortor pellentesque, pellentesque magna in, dignissim turpis. Sed at tempus sem. In hac habitasse platea dictumst. Curabitur ac justo non lectus dictum accumsan a vitae velit. Integer vel dui sit amet turpis aliquam tristique. Etiam quis rutrum velit. Vivamus pretium quis magna non ullamcorper. Mauris lobortis viverra orci in vulputate. Proin risus turpis, condimentum quis dignissim non, posuere id felis. Nulla facilisi.
                 </p>
-            `,
-            redirect: false
+            `, redirect: false
         },
         "login.html": {
-            main: `<form id="loginForm"><input type="text" placeholder="Username"><input type="password" placeholder="Password"><button type="submit">Login</button></form>`,
-            redirect: false
+            main: `
+                     <form class="formLogin" action="home.html">
+                        <div class="header-flex-container">
+                            <a href="#" onclick="openPage('index')"><img src="images/logo.png" alt="PubPal" class="icons" id="logo"></a>
+                            <h3>Login</h3>
+                        </div>
+                        <div class="divColumn">
+                            <div class="insertForm">
+                                <label for="username">Username:</label>
+                                <input class="userPwd" type="text" id="username" name="username" required autocomplete="current-username">
+                                <label for="pwdLogin">Password:</label>
+                                <div class="password-container">
+                                    <input class="userPwd" type="password" id="pwdLogin" name="pwdLogin" required>
+                                    <button type="button" id="pwdshowHide" onclick="showHidePwd()">
+                                        <i class="fa-regular fa-eye-slash" alt="Show/Hide Password" id="pwdIcon"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="btnForm">
+                                <input class="btn button-primary" type="submit" value="Submit">
+                                <input class="btn button-primary" type="reset" value="Reset">
+                            </div>
+                        </div>
+                        <div class="forgot-password"><a href="#" onclick="openModal(event)">Forgot Password?</a></div>
+                    </form>
+                    <!-- Forgot Password Modal -->
+                    <div id="forgotPasswordModal" class="modal">
+                        <div class="modal-content">
+                            <span class="close" onclick="closeModal()">&times;</span>
+                            <h3>Reset Your Password</h3>
+                            <p>Please enter your email address.</p>
+                            <form id="forgotPasswordForm">
+                                <input type="email" id="email" name="email" required placeholder="Email">
+                                <button type="submit" class="btn button-primary">Send Reset Link</button>
+                            </form>
+                        </div>
+                    </div>
+            `, redirect: false
         },
         "home.html": {
-            main: `<h2>Home</h2>
+            main: `
                     <p>Welcome to your dashboard. Start managing your bar inventory!</p>
-                  <p>Add class .disabled if a page for some reason is disabled:</p>
-                    <ul class="pagination">
-                        <li><a href="#">Beer</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li class="disabled"><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                    </ul>
+                    <p>Add class .disabled if a page for some reason is disabled:</p>
+                        <ul class="pagination">
+                            <li><a href="#">Common Items</a></li>
+                            <li><a href="#">Draughts</a></li>
+                            <li><a href="#">Bottles Beers</a></li>
+                            <li><a href="#">Wines</a></li>
+                            <li><a href="#">Cocktails/ Spritz</a></li>
+                                        <br>
+                            <li><a href="#">Spirits</a></li>
+                            <li><a href="#">Whiskey</a></li>
+                            <li><a href="#">Extras</a></li>
+                            <li><a href="#">Snacks</a></li>
+                            <li><a href="#">Minerals</a></li>
+                        </ul>
             `,
             redirect: false
         },
@@ -56,8 +97,10 @@ document.addEventListener("DOMContentLoaded", function() {
             redirectDelay: 2000 // Delay in milliseconds
         },
         "announcements.html": {
-            main: `<p>Hi there! Check out the latest announcements.</p>`,
-            redirect: false
+            main: `<p>Hi there! Check out the latest announcements.</p>
+            <h2>Coming Soon!</h2><div class="snippet"><div class="dot-falling"></div></div>`,
+            redirect: true, // Indicate whether this page should redirect
+            redirectDelay: 2000 // Delay in milliseconds
         },
         "contactUs.html": {
             main: `<p>Hi there! Check out the latest announcements.</p>`,

@@ -3,36 +3,37 @@
     <head></head>
     <body>
         <div class="container">
-            <header class="header"></header>
+            <header class="header" id="main-header"></header>
             <main class="main">
 
-            <form class="formLogin" action="home.html">
-                <div class="divColumn">
-                    <div class="insertForm floatLeft">
-                        <label for="username">Username:</label><br>
-                        <input class="userPwd" type="text" id="username" name="username" required><br>
-                        <label for="pwdLogin">Password:</label><br>
-                        <input class="userPwd" type="password" id="pwdLogin" name="pwdLogin" required><br>
+                <form class="formLogin" action="home.html">
+                    <div class="divColumn">
+                        <div class="insertForm floatLeft">
+                            <label for="username">Username:</label><br>
+                            <input class="userPwd" type="text" id="username" name="username" required><br>
+                            <label for="pwdLogin">Password:</label><br>
+                            <input class="userPwd" type="password" id="pwdLogin" name="pwdLogin" required><br>
+                        </div>
+                        <div class="floatRight">
+                            <button type="button" id="pwdshowHide" onclick="showHidePwd()">
+                                <i class="fa-regular fa-eye-slash" alt="Show/Hide Password" id="pwdIcon"></i>
+                            </button>                    
+                        </div>
                     </div>
-                    <div class="floatRight">
-                        <button type="button" id="pwdshowHide" onclick="showHidePwd()">
-                            <i class="fa-regular fa-eye-slash" alt="Show/Hide Password" id="pwdIcon"></i>
-                        </button>                    
+                    <div class="btnForm">
+                        <input class="btn" type="submit" value="Submit">
+                        <input class="btn" type="reset" value="Reset">
                     </div>
-                </div>
-                <div class="btnForm">
-                    <input class="btn" type="submit" value="Submit">
-                    <input class="btn" type="reset" value="Reset">
-                </div>
-              </form>
-            </main>
+                </form>
+                
+                </main>
             <footer class="footer"></footer>
         </div>
-
+        
         <!-- JavaScript Files -->
-        <script src="scripts/script.js"></script>   
+        <script src="scripts/script.js"></script> 
+        <script src="scripts/headerFooter.js"></script>     
         <script src="scripts/main.js"></script>   
-        <script src="scripts/tag.js"></script>   
 
         <!-- External Libraries -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

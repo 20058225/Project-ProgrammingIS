@@ -1,0 +1,10 @@
+.pagination li{
+    width: 120px;;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+    color: var(--text-primary);
+    background-color: var(--background-light);
+}
