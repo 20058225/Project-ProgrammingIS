@@ -1,26 +1,21 @@
 if ! command -v node &> /dev/null; then
-    echo "@@ Installing node..."
-    sudo install node
+    echo "@@ Node.js is required. Please install it from https://nodejs.org."
 else
-    echo "@@ node is already installed"
-fi
-if ! command -v npm &> /dev/null; then
-    echo "@@ Installing npm..."
-    sudo install npm
-else
-    echo "@@ npm is already installed"
+    echo "@@ Node.js is already installed."
 fi
 
-echo "@@ Starting npm"
+if ! command -v npm &> /dev/null; then
+    echo "@@ NPM is required. Please install it from https://nodejs.org."
+else
+    echo "@@ NPM is already installed."
+fi
+
+echo "@@ Initializing npm"
 npm init -y
 
-if ! command -v express fs &> /dev/null; then
-    echo "@@ Installing Express..."
-    npm install express fs
-else
-    echo "@@ express fs is already installed"
-fi
+echo "@@ Installing necessary packages"
+npm install express open fs
 
-echo "@@ Running server"
+echo "@@ Starting server"
 cd server
 node server.js

@@ -7,11 +7,14 @@ const PORT = 3000;
 app.use(express.static(path.join(__dirname, '..')));
 app.use('/scripts', express.static(path.join(__dirname, 'scripts')));
 
-// Other routes and middleware
-app.get('/', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '..', 'index.html'));
-});
-
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
     console.log(`Server running at http://localhost:${PORT}`);
+
+    // Dynamically import `open` and open the browser
+    try {
+        const { default: open } = await import('open');
+        open(`http://localhost:${PORT}/index.html`);
+    } catch (error) {
+        console.error("Failed to open the browser:", error);
+    }
 });
