@@ -1,5 +1,5 @@
 const fs = require('fs');
-const path = './users.json';
+const path = path.resolve(__dirname, '..', 'scripts', 'users.json');
 
 // Helper function to read users from JSON file
 function readUsers() {

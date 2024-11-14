@@ -303,3 +303,13 @@ button:hover {
     from {bottom: 30px; opacity: 1;}
     to {bottom: 0; opacity: 0;}
 }
+.order-container-area .item {
+    padding: 5px;
+    border-radius: 3px;
+    border: 5px;
+    height: 300px;
+}
+
+.order-container-area .item.selected {
+    background-color: yellow;
+}

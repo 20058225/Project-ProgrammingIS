@@ -7,6 +7,7 @@
     --text-secondary: #555555;
     --background-light: #F5E9DA;
     --success-color: #2ECC71;
+    --animation-color: #1ABC9C;
 }
 * {
     box-sizing: border-box;
@@ -115,7 +116,7 @@ html, body {
 main {
     flex: 1;
     width: 100%;
-    padding: 150px 20px 20px 20px;
+    padding: 165px 20px 20px 20px;
 }
 
 .footer {
@@ -140,21 +141,40 @@ main {
 #btnGoTop {
     display: none;
     position: fixed;
-    bottom: 20px;
+    bottom: 80px;
     right: 20px;
     z-index: 99;
     font-size: 18px;
-    background-color: #555;
+    background-color: var(--text-secondary);
     color: white;
     border: none;
     outline: none;
     cursor: pointer;
-    padding: 15px;
+    padding: 10px 15px;
     border-radius: 50%;
     transition: 0.3s;
 }
 #btnGoTop:hover {
-    background-color: #333;
+    background-color: var(--primary-color);
+}
+#btnChat {
+    display: block;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 99;
+    font-size: 18px;
+    background-color: var(--accent-color-orange);
+    color: white;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 10px 14px;
+    border-radius: 50%;
+    transition: 0.3s;
+}
+#btnChat:hover {
+    background-color: var(--accent-color-teal)
 }
 ul {
     list-style-type: none;
@@ -213,4 +233,166 @@ li.dropdown {
 }
 .dropdown:hover .dropdown-content {
     display: block;
+}
+
+
+.open-button {
+    background-color: #555;
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    opacity: 0.8;
+    position: fixed;
+    bottom: 23px;
+    right: 28px;
+    width: 280px;
+  }
+  
+  /* The popup chat - hidden by default */
+  .chat-popup {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    right: 15px;
+    border: 3px solid #f1f1f1;
+    z-index: 9;
+  }
+  
+  /* Add styles to the form container */
+  .form-container {
+    max-width: 300px;
+    padding: 10px;
+    background-color: white;
+  }
+  
+  /* Full-width textarea */
+  .form-container textarea {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    border: none;
+    background: #f1f1f1;
+    resize: none;
+    min-height: 200px;
+  }
+  
+  /* When the textarea gets focus, do something */
+  .form-container textarea:focus {
+    background-color: #ddd;
+    outline: none;
+  }
+  
+  /* Set a style for the submit/send button */
+  .form-container .btn {
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    width: 50%;
+    margin-bottom:10px;
+    opacity: 0.8;
+  }
+  
+  /* Add a red background color to the cancel button */
+  .form-container .cancel {
+    background-color: var(--accent-color-orange);
+  }
+  
+  /* Add some hover effects to buttons */
+  .form-container .btn:hover, .open-button:hover {
+    opacity: 1;
+    color: var(--text-primary);
+
+}
+#snackbarRegister, #snackbarChat {
+    visibility: hidden;
+    /*min-width: 250px;*/
+    margin-left: -125px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    top: 250px;
+    font-size: 17px;
+}
+#snackbarRegister.show, snackbarChat.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+
+
+                /*@@ ANIMATIONS @@*/
+.dot-falling {
+	position: relative;
+	left: -9070px;
+	width: 10px;
+	height: 10px;
+	border-radius: 5px;
+	background-color: var(--animation-color);
+	color: var(--animation-color);
+	box-shadow: 9999px 0 0 0 var(--animation-color);
+	animation: dot-falling 1s infinite linear;
+	animation-delay: 0.1s;
+}
+.dot-falling::before, .dot-falling::after {
+	content: "";
+	display: inline-block;
+	position: absolute;
+	top: 0;
+}
+.dot-falling::before {
+	width: 10px;
+	height: 10px;
+	border-radius: 5px;
+	background-color: var(--animation-color);
+	animation: dot-falling-before 1s infinite linear;
+	animation-delay: 0s;
+}
+.dot-falling::after {
+	width: 10px;
+	height: 10px;
+	border-radius: 5px;
+	background-color: var(--animation-color);
+	animation: dot-falling-after 1s infinite linear;
+	animation-delay: 0.2s;
+}
+@keyframes dot-falling {
+	0% {
+		box-shadow: 9999px -15px 0 0 rgba(152, 128, 255, 0);
+	}
+	25%, 50%, 75% {
+		box-shadow: 9999px 0 0 0 var(--animation-color);
+	}
+	100% {
+		box-shadow: 9999px 15px 0 0 rgba(152, 128, 255, 0);
+	}
+}
+@keyframes dot-falling-before {
+	0% {
+		box-shadow: 9984px -15px 0 0 rgba(152, 128, 255, 0);
+	}
+	25%, 50%, 75% {
+		box-shadow: 9984px 0 0 0 var(--animation-color);
+	}
+	100% {
+		box-shadow: 9984px 15px 0 0 rgba(152, 128, 255, 0);
+	}
+}
+@keyframes dot-falling-after {
+	0% {
+		box-shadow: 10014px -15px 0 0 rgba(152, 128, 255, 0);
+	}
+    25%, 50%, 75% {
+		box-shadow: 10014px 0 0 0 var(--animation-color);
+	}
+	100% {
+		box-shadow: 10014px 15px 0 0 rgba(152, 128, 255, 0);
+	}
 }

@@ -29,20 +29,57 @@ document.addEventListener("DOMContentLoaded", function() {
         },
         "login.html": {
             main: `
-                     <form class="formLogin" action="pos.html">
+                <section class="register column-thirty">
+                    <form class="formRegister">
+                        <div class="header-flex-container">
+                            <a href="#" onclick="openPage('index')"><img src="images/logo.png" alt="PubPal" class="icons" id="logo"></a>
+                            <h3>Register</h3>
+                        </div>
+                        <div class="divColumn">
+                            <div class="insertForm">
+                                <label for="nameRegister">Full name:</label>
+                                <input class="userPwd" type="text" id="nameRegister" name="name" required autocomplete="current-name">
+                                <label for="nameRegister">Email:</label>
+                                <input class="userPwd" type="text" id="usernameRegister" name="email" required autocomplete="current-username">
+
+                                <label for="pwdRegister">Password:</label>
+                                <div class="password-container">
+                                    <input class="userPwd" type="password" id="pwdRegister" name="pwdRegister" required>
+                                    <button type="button" onclick="showHidePwd('pwdRegister', 'pwdIconR')">
+                                        <i class="fa-regular fa-eye-slash" id="pwdIconR" alt="Show/Hide Password"></i>
+                                    </button>
+                                    
+                                    <input class="userPwd" type="password" id="pwdRegisterConfirm" name="pwdRegisterConfirm" required>
+                                    <button type="button" onclick="showHidePwd('pwdRegisterConfirm', 'pwdIconRC')">
+                                        <i class="fa-regular fa-eye-slash" id="pwdIconRC" alt="Show/Hide Password"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="btnForm">
+                                <input class="btn button-primary"  onclick="snackBar()" value="Create" >
+                                <input class="btn button-primary" type="reset" value="Cancel">
+                            </div>
+                        </div>
+                    </form>
+                    <div id="snackbarRegister">Registration completed successfully! 
+                    <img src="images/logo.png" alt="PubPal" class="icons" id="logo"></a>
+                    </div>
+                </section>
+                <section class="login column-thirty">
+                    <form class="formLogin" action="pos.html">
                         <div class="header-flex-container">
                             <a href="#" onclick="openPage('index')"><img src="images/logo.png" alt="PubPal" class="icons" id="logo"></a>
                             <h3>Login</h3>
                         </div>
                         <div class="divColumn">
                             <div class="insertForm">
-                                <label for="username">Username:</label>
-                                <input class="userPwd" type="text" id="username" name="username" required autocomplete="current-username">
+                                <label for="usernameLogin">Username:</label>
+                                <input class="userPwd" type="text" id="usernameLogin" name="username" required autocomplete="current-username">
                                 <label for="pwdLogin">Password:</label>
                                 <div class="password-container">
                                     <input class="userPwd" type="password" id="pwdLogin" name="pwdLogin" required>
-                                    <button type="button" id="pwdshowHide" onclick="showHidePwd()">
-                                        <i class="fa-regular fa-eye-slash" alt="Show/Hide Password" id="pwdIcon"></i>
+                                    <button type="button" onclick="showHidePwd('pwdLogin', 'pwdIcon')">
+                                        <i class="fa-regular fa-eye-slash" id="pwdIcon" alt="Show/Hide Password"></i>
                                     </button>
                                 </div>
                             </div>
@@ -53,6 +90,8 @@ document.addEventListener("DOMContentLoaded", function() {
                         </div>
                         <div class="forgot-password"><a href="#" onclick="openModal(event)">Forgot Password?</a></div>
                     </form>
+                </section>
+                <section class="login">
                     <!-- Forgot Password Modal -->
                     <div id="forgotPasswordModal" class="modal">
                         <div class="modal-content">
@@ -65,30 +104,21 @@ document.addEventListener("DOMContentLoaded", function() {
                             </form>
                         </div>
                     </div>
+                </section>
             `, redirect: false
         },
-        "home.html": {
+        "users.html": {
             main: `
-                    <p>Welcome to your dashboard. Start managing your bar inventory!</p>
-                    <p>Add class .disabled if a page for some reason is disabled:</p>
-                        <ul class="pagination">
-                            <li><a href="#">Common Items</a></li>
-                            <li><a href="#">Draughts</a></li>
-                            <li><a href="#">Bottles Beers</a></li>
-                            <li><a href="#">Wines</a></li>
-                            <li><a href="#">Cocktails/ Spritz</a></li>
-                                        <br>
-                            <li><a href="#">Spirits</a></li>
-                            <li><a href="#">Whiskey</a></li>
-                            <li><a href="#">Extras</a></li>
-                            <li><a href="#">Snacks</a></li>
-                            <li><a href="#">Minerals</a></li>
-                        </ul>
+                <h2>User Management</h2><button onclick="addUser()">Add User</button>
+                <h2>Manage Users</h2>
+                <input type="text" id="manageUsername" placeholder="Username">
+                <input type="password" id="managePassword" placeholder="Password">
+                <button onclick="clickAddUser()">Add User</button>
+                <button onclick="clickEditUser()">Edit User</button>
+                <button onclick="clickDeleteUser()">Delete User</button>
+                       
+            
             `,
-            redirect: false
-        },
-        "user.html": {
-            main: `<h2>User Management</h2><button onclick="addUser()">Add User</button>`,
             redirect: false
         },
         "customize.html": {
@@ -102,8 +132,33 @@ document.addEventListener("DOMContentLoaded", function() {
             redirect: true, // Indicate whether this page should redirect
             redirectDelay: 2000 // Delay in milliseconds
         },
-        "contactUs.html": {
-            main: `<p>Hi there! Check out the latest announcements.</p>`,
+        "contact-us.html": {
+            main: `
+                    <section class="column-thirty">
+                        <h2>Contact Us</h2>
+                        <form action="submit_contact.php" method="post">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required placeholder="Your Name">
+                            
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required placeholder="Your Email">
+                            
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="5" required placeholder="Your Message"></textarea>
+                            
+                            <button type="submit" class="submit-btn">Send Message</button>
+                        </form>
+                    </section>
+
+                    <!-- About Us Content (Right side) -->
+                    <section class="column-sixty">
+                        <h2>About PubPal Systems</h2>
+                        <p>Welcome to PubPal Systems, your go-to solution for managing and tracking bar drinks sales efficiently and effectively. Our system is designed to streamline the sales process, enhance customer experience, and simplify inventory management.</p>
+                        <p>Founded with a mission to support bar owners and managers, PubPal Systems offers customizable features that allow users to track sales, manage inventory, and adjust product offerings with ease. Whether you run a small local bar or a large pub, our platform adapts to your unique needs.</p>
+                        <p>We value customer satisfaction and continuous improvement. Our team is dedicated to providing exceptional service, ensuring that our platform is easy to use, and helping you achieve your business goals.</p>
+                        <p>Thank you for choosing PubPal Systems. We're here to support you in creating memorable experiences for your customers.</p>
+                    </section>        
+                    `,
             redirect: false
         },
         "privacy-policy.html": {

@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const filePath = path.join(__dirname, 'user.json');
+const filePath = path.resolve(__dirname, '..', 'scripts', 'users.json');
 
 // Get all users
 function getUsers(req, res) {

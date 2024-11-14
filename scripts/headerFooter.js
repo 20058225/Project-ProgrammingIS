@@ -12,7 +12,6 @@ document.addEventListener("DOMContentLoaded", function() {
         <link rel="stylesheet" href="styles/style.css">
         <link rel="stylesheet" href="styles/login.css">
         <link rel="stylesheet" href="styles/modal.css">
-        <link rel="stylesheet" href="styles/animation.css">
     `;
     document.head.insertAdjacentHTML("beforeend", headHTML);
 
@@ -40,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function() {
             title: "PubPal's News",
             subtitle: "Latest updates and information"
         },
-        "contactUs.html": {
+        "contact-us.html": {
             title: "Contact Us!",
             subtitle: "Feel free to reach out to us."
         },
@@ -72,13 +71,31 @@ document.addEventListener("DOMContentLoaded", function() {
                                         <li class="nav-item"><a href="#" onclick="openPage('index')">Home</a></li>
                                         <li class="nav-item"><a href="#" onclick="openPage('login')">Login</a></li>
                                         <li class="nav-item"><a href="#" onclick="openPage('announcements')">News</a></li>
-                                        <li class="nav-item"><a href="#" onclick="openPage('contactUs')">Book Demo</a></li>
-                                        <li class="nav-item"><a href="#" onclick="openPage('contactUs')">About</a></li>
+                                        <li class="nav-item"><a href="#" onclick="openPage('contact-us')">Book Demo</a></li>
+                                        <li class="nav-item"><a href="#" onclick="openPage('contact-us')">About</a></li>
                                     </ul>
                                 </nav>  
                             </div>                                         
                         </div>
                     <button onclick="btnGoTop()" id="btnGoTop" title="Go to top"><i class="fa-solid fa-arrow-up"></i></button>
+                    <button onclick="openChat()" id="btnChat" class="btnChat" title="Chat"><i class="fa-regular fa-comment-dots"></i></button>
+                    
+                    <div id="snackbarChat">Message sent successfully! 
+                    <img src="images/logo.png" alt="PubPal" class="icons" id="logo"></a>
+                    </div>
+                    <!--@@ CHAT @@-->
+                    <div class="chat-popup" id="chatPopup">
+                        <form class="form-container">
+                            <h1>Chat</h1>
+                            <label for="msg"><b>Message</b></label>
+                            <textarea id="msg" placeholder="Hey there! How I can help you today?" name="msg" required></textarea>
+                            <div class="btnForm">
+                                <button type="submit" class="btn" id="sendMessage" onclick="snackBar()" disabled>Send</button>
+                                <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+                            </div>
+                        </form>
+                    </div>
+
         `;
         headerElement.insertAdjacentHTML("beforeend", headerHTML);
     }
@@ -110,7 +127,7 @@ document.addEventListener("DOMContentLoaded", function() {
     if (footerElement) {
         const footerHTML = `
             <div>
-                <p>&copy; ${new Date().getFullYear()} My Website. All rights reserved.</p>
+                <p>&copy; ${new Date().getFullYear()} My Website. All rights reserved. Discover our <a href="#" onclick="openPage('privacy-policy')"><u>privacy policy</u></a>.</p>
                 <p>Brenda Lopes</p>
                 <a href="https://www.linkedin.com/in/llopesbrenda" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
                 <a href="https://github.com/20058225" target="_blank"><i class="fa-brands fa-github"></i></a>

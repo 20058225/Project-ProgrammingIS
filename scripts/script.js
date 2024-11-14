@@ -1,7 +1,39 @@
 document.addEventListener("DOMContentLoaded", function() {
-    // Show "Go to Top" button when scrolling down    
-    window.onscroll = function() { 
-        scrollFunction();
+    window.onscroll = function() { scrollFunction(); };
+    
+     // Open chat function
+     window.openChat = function() {
+        document.getElementById("chatPopup").style.display = "block";
+        document.getElementById("btnChat").style.display = "none";
+        
+        const messageInput = document.getElementById("msg");
+        const sendMessage = document.getElementById("sendMessage");
+
+        if (!messageInput) {
+            console.error("Message input element with id 'msg' is missing.");
+        }
+        if (!sendMessage) {
+            console.error("Send button element with id 'sendMessage' is missing.");
+        }
+        // Check if elements exist before adding event listener
+        if (messageInput && sendMessage) {
+            // Initially disable the "Send" button
+            sendMessage.disabled = true;
+            messageInput.addEventListener("input", function() {
+                sendMessage.disabled = messageInput.value.trim() === "";
+            });
+        } 
+        window.closeForm = function() {
+            document.getElementById("chatPopup").style.display = "none";
+            document.getElementById("btnChat").style.display = "block";
+            
+            // Reset form elements
+            if (messageInput && sendMessage) {
+                messageInput.value = "";    // Clear textarea
+                sendMessage.disabled = true; // Disable "Send" button
+            } 
+        };
+
     };
 
     function scrollFunction() {
@@ -29,12 +61,10 @@ document.addEventListener("DOMContentLoaded", function() {
                     header.classList.add("scrolled");
                     logo.classList.add("scrolled-logo");
                     headerContent.classList.add("scrolled");
-                    console.log("Header scrolled class added");
                 } else {
                     header.classList.remove("scrolled");
                     logo.classList.remove("scrolled-logo");
                     headerContent.classList.remove("scrolled");
-                    console.log("Header scrolled class removed");
                 }
             });
         } else {
@@ -65,17 +95,16 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
-// Make showHidePwd a global function
-function showHidePwd() {
-    const pwd = document.getElementById("pwdLogin");
-    const pwdIcon = document.getElementById("pwdIcon");
+function showHidePwd(inputId, iconId) {
+    const pwd = document.getElementById(inputId);
+    const pwdIcon = document.getElementById(iconId);
     if (pwd && pwdIcon) {
         if (pwd.type === "password") {
             pwd.type = "text";
-            pwdIcon.classList.replace("fa-eye-slash", "fa-eye");  // Update icon (using Font Awesome icons as an example)
+            pwdIcon.classList.replace("fa-eye-slash", "fa-eye"); // Update icon
         } else {
             pwd.type = "password";
-            pwdIcon.classList.replace("fa-eye", "fa-eye-slash");  // Update icon back to hidden
+            pwdIcon.classList.replace("fa-eye", "fa-eye-slash"); // Update icon back to hidden
         }
     } else {
         console.error("Password input or icon element is missing.");
@@ -105,5 +134,16 @@ window.onclick = function(event) {
         closeModal();
     }
 };
-
-
+function snackBar() {
+    var register = document.getElementById("snackbarRegister");
+    register.className = "show";
+    setTimeout(function() {
+        register.className = register.className.replace("show", ""); // Hide after x seconds
+    }, 900);
+    
+    var chat = document.getElementById("snackbarChat");
+    chat.className = "show";
+    setTimeout(function() {
+        chat.className = chat.className.replace("show", ""); // Hide after x seconds
+    }, 900);
+}

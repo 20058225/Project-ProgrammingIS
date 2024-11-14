@@ -7,7 +7,6 @@
 
     <title>POS PubPal</title>
     <link rel="stylesheet" href="styles/pos.css">
-    <link rel="stylesheet" href="styles/animation.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
@@ -15,7 +14,7 @@
         <div class="top-container">
             <div class="order-container">
                 <div class="itemsDescript">
-                    <textarea class="textarea" disabled></textarea>
+                    <div class="order-container-area"></div>
                     <button id="void-item" class="btndescript">Void Item</button>
                     <button id="down-button" class="btndescript"><i class="fa-solid fa-chevron-down"></i></button>
                     <button id="up-button" class="btndescript"><i class="fa-solid fa-chevron-up"></i></button>
@@ -61,7 +60,7 @@
                 <button class="nav-btn"><i class="fa-solid fa-print"></i>Print Receipt</button>
                 <button class="nav-btn"><i class="fa-regular fa-floppy-disk"></i>Save Check</button>
                 <button class="nav-btn"><i class="fa-solid fa-screwdriver-wrench"></i>Functions</button>
-                <button class="nav-btn"><i class="fa-solid fa-chevron-right"></i>System</button>
+                <button class="nav-btn" onclick="openPage('users')"><i class="fa-solid fa-chevron-right"></i>System</button>
             </div>
         </div>
     </div>

@@ -10,9 +10,17 @@ if ! command -v npm &> /dev/null; then
 else
     echo "@@ npm is already installed"
 fi
+
 echo "@@ Starting npm"
 npm init -y
-echo "@@ Installing Express"
-npm install express fs
+
+if ! command -v express fs &> /dev/null; then
+    echo "@@ Installing Express..."
+    npm install express fs
+else
+    echo "@@ express fs is already installed"
+fi
+
 echo "@@ Running server"
-node server3.js #CHANGE HERE
+cd server
+node server.js

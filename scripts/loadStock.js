@@ -87,16 +87,27 @@ function addToOrder(product) {
 
 // Display items and highlight the selected one
 function updateDisplay() {
-    const orderTextarea = document.querySelector('.itemsDescript .textarea');
-    if (!orderTextarea) {
-        console.error("Textarea element not found");
+    const orderContainer = document.querySelector('.itemsDescript .order-container');
+    if (!orderContainer) {
+        console.error("Container element not found");
         return;
     }
-    // Format items, highlighting the selected one
-    orderTextarea.value = items
-        .map((item, index) => (index === selectedItemIndex ? `[ ${item} ]` : item))
-        .join("\n");
+
+    orderContainer.innerHTML = '';
+
+    items.forEach((item, index) => {
+        const itemElement = document.createElement('div');
+        itemElement.textContent = item;
+        itemElement.className = 'item';
+        
+        if (index === selectedItemIndex) {
+            itemElement.classList.add('selected');
+        }
+
+        orderContainer.appendChild(itemElement);
+    });
 }
+
 
 // Page navigation
 function openPage(pageName) {
@@ -104,6 +115,7 @@ function openPage(pageName) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+    snackBar();
     const voidButton = document.getElementById("void-item");
     const upButton = document.getElementById("up-button");
     const downButton = document.getElementById("down-button");
@@ -164,3 +176,11 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
+
+function snackBar() {
+    var x = document.getElementById("snackbar");
+    x.className = "show";
+    setTimeout(function() {
+        x.className = x.className.replace("show", ""); // Hide after 3 seconds
+    }, 3000);
+}
