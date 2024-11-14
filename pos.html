@@ -6,7 +6,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
 
     <title>POS PubPal</title>
-    <link rel="stylesheet" href="pos.css">
+    <link rel="stylesheet" href="styles/pos.css">
     <link rel="stylesheet" href="styles/animation.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
@@ -16,9 +16,9 @@
             <div class="order-container">
                 <div class="itemsDescript">
                     <textarea class="textarea" disabled></textarea>
-                    <button class="btndescript">Void Item</button>
-                    <button class="btndescript"><i class="fa-solid fa-chevron-down"></i></button>
-                    <button class="btndescript"><i class="fa-solid fa-chevron-up"></i></button>
+                    <button id="void-item" class="btndescript">Void Item</button>
+                    <button id="down-button" class="btndescript"><i class="fa-solid fa-chevron-down"></i></button>
+                    <button id="up-button" class="btndescript"><i class="fa-solid fa-chevron-up"></i></button>
                 </div>
                 <div class="itemsAmount">
                     <label>Amount Due</label>
@@ -26,7 +26,7 @@
                 </div>
                 <div class="itemsSetUp">
                     <button class="setUp">Void Enture Check</button>
-                    <button class="setUp">Balance Inquiry</button>
+                    <button class="setUp">Multiples</button> <!--type a N number of drinks-->
                     <button class="setUp">No Sale</button>
                     <button class="setUp">Move To Table</button>
                 </div>
@@ -36,15 +36,16 @@
                     <!-- Products will be dynamically added here -->
                 </div>
                 <div class="filter-buttons" id="filterContainer">
-                    <button onclick="filterProducts('Draught')"><i class="fas fa-beer"></i> Draught</button>
-                    <button onclick="filterProducts('Draught00')"><i class="fas fa-beer"></i> Draught 00</button>
-                    <button onclick="filterProducts('Cider')"> Cider</button>
-                    <button onclick="filterProducts('Wine')"><i class="fa-solid fa-wine-glass-empty"></i> Wine</button>
-                    <button onclick="filterProducts('Cocktails')"><i class="fas fa-glass-martini-alt"></i>Cocktails Spirits</button>
-                    <button onclick="filterProducts('Minerals')"> Minerals</button>
-                    <button onclick="filterProducts('hotDrinks')"><i class="fa-solid fa-mug-hot"></i> Hot drinks</button>
-                    <button onclick="filterProducts('Snacks')"><i class="fa-solid fa-pizza-slice"></i> Snacks</button>
+                    <button class="Draught" onclick="filterProducts('Draught')"><i class="fas fa-beer"></i> Draught</button>
+                    <button class="Draught00" onclick="filterProducts('Draught00')"><i class="fas fa-beer"></i> Draught 00</button>
+                    <button class="Cider" onclick="filterProducts('Cider')"> Cider</button>
+                    <button class="Wine" onclick="filterProducts('Wine')"><i class="fa-solid fa-wine-glass-empty"></i> Wine</button>
+                    <button class="Cocktails" onclick="filterProducts('Cocktails')"><i class="fas fa-glass-martini-alt"></i> Cocktails Spirits</button>
+                    <button class="Minerals" onclick="filterProducts('Minerals')"> Minerals</button>
+                    <button class="hotDrinks" onclick="filterProducts('hotDrinks')"><i class="fa-solid fa-mug-hot"></i> Hot drinks</button>
+                    <button class="Snacks" onclick="filterProducts('Snacks')"><i class="fa-solid fa-pizza-slice"></i> Snacks</button>
                 </div>
+                
             </div>
         </div>
         <div class="menu-container">
@@ -54,8 +55,8 @@
                 <p><strong>Server:</strong> Rosa</p>
             </div>
             <div class="category navigation">
-                <button class="nav-btn"><i class="fa-solid fa-chevron-right"></i>Quit</button>
-                <button class="nav-btn">Add Name To Tab</button>
+                <button class="nav-btn" onclick="openPage('index')"><i class="fa-solid fa-xmark"></i>Quit</button>
+                <button class="nav-btn"><i class="fa-regular fa-pen-to-square"></i>Add Name To Tab</button>
                 <button class="nav-btn"><i class="fa-solid fa-flag-checkered"></i>Finish</button>
                 <button class="nav-btn"><i class="fa-solid fa-print"></i>Print Receipt</button>
                 <button class="nav-btn"><i class="fa-regular fa-floppy-disk"></i>Save Check</button>

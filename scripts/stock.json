@@ -6,12 +6,12 @@
         {
           "name": "Guinness",
           "price": 6.65,
-          "type": "Stout / lager / IPA"
+          "type": "Stout"
         },
         {
           "name": "Smithwick's",
           "price": 6.50,
-          "type": "Stout / lager / IPA"
+          "type": "Pale ale"
         },
         {
           "name": "Harp Lager",

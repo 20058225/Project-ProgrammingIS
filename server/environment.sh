@@ -15,4 +15,4 @@ npm init -y
 echo "@@ Installing Express"
 npm install express fs
 echo "@@ Running server"
-node server.js
+node server3.js #CHANGE HERE

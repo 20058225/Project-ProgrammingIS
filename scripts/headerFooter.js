@@ -70,9 +70,9 @@ document.addEventListener("DOMContentLoaded", function() {
                                 <nav class="header-menu">
                                     <ul class="nav-list">
                                         <li class="nav-item"><a href="#" onclick="openPage('index')">Home</a></li>
-                                        <li class="nav-item"><a href="#" onclick="openPage('contactUs')">Book Demo</a></li>
+                                        <li class="nav-item"><a href="#" onclick="openPage('login')">Login</a></li>
                                         <li class="nav-item"><a href="#" onclick="openPage('announcements')">News</a></li>
-                                        <li class="nav-item"><a href="#" onclick="openPage('contactUs')">Contact Us</a></li>
+                                        <li class="nav-item"><a href="#" onclick="openPage('contactUs')">Book Demo</a></li>
                                         <li class="nav-item"><a href="#" onclick="openPage('contactUs')">About</a></li>
                                     </ul>
                                 </nav>  

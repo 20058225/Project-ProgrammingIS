@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function() {
         },
         "login.html": {
             main: `
-                     <form class="formLogin" action="home.html">
+                     <form class="formLogin" action="pos.html">
                         <div class="header-flex-container">
                             <a href="#" onclick="openPage('index')"><img src="images/logo.png" alt="PubPal" class="icons" id="logo"></a>
                             <h3>Login</h3>
@@ -143,14 +143,11 @@ document.addEventListener("DOMContentLoaded", function() {
             `, redirect: false
         }
     };
-
-    // Check if the page content is defined for the current file
+            // Check if the page content is defined for the current file
     const { main = "", redirect = false, redirectDelay = 0 } = pageContent[currentFile] || {};
-
-    // Insert content into <main>
+            // Insert content into <main>
     const mainElement = document.querySelector("main");
     if (mainElement) mainElement.innerHTML = main;
-    
-    // Redirect if specified in the content config
+            // Redirect if specified in the content config
     if (redirect) setTimeout(() => window.location = "index.html", redirectDelay);
 });

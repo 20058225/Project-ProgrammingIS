@@ -1,8 +1,13 @@
 :root {
-    --primary-color: #2C3E50;
-    --accent-color: #1ABC9C;
-    --delete-color: #E74C3C;
-    --background-light: #ECF0F1;
+    --primary-color: #2C3E50;            /* Draught */
+    --secondary-color: #ECF0F1;
+    --accent-color-teal: #1ABC9C;        /* Cocktails & Spirits */
+    --accent-color-orange: #E67E22;      /* Bottles */
+    --text-primary: #333333;
+    --text-secondary: #555555;
+    --background-light: #F5E9DA;
+    --success-color: #2ECC71;
+    --wine-color: #8E44AD;               /* Wine */
 }
 body {
     font-family: Arial, sans-serif;
@@ -67,7 +72,8 @@ body {
     position: relative;
     display: flex;
     flex-direction: column;
-    height: 770px;
+    max-height: 770px; /* Adjust this as needed */
+    overflow: hidden;
     gap: 20px;
 }
 .category {
@@ -106,18 +112,18 @@ body {
     width: 100%;
 }
 .filter-buttons {
-    position: sticky;
-    bottom: 0;
     display: flex;
-    gap: 2px;
-    background-color: #fff;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 10px;
+    background-color: #f1f1f1;
 }
 .filter-buttons button {
     padding: 5px 10px;
     font-size: 15px;
     font-weight: bold;
     color: #fff;
-    background-color: #34495E;
+    background-color: var(--primary-color);
     border: none;
     border-radius: 8px;
     cursor: pointer;
@@ -174,7 +180,7 @@ button {
     padding: 20px;
     font-size: 16px;
     font-weight: bold;
-    color: #fff;
+    color: #8E44AD;
     border: none;
     border-radius: 8px;
     cursor: pointer;
@@ -182,12 +188,56 @@ button {
     width: auto;
     box-sizing: border-box;
 }
-.draught button { background-color: #2C3E50; }
-.bottles button { background-color: #E67E22; }
-.cocktails-spirits button { background-color: #1ABC9C; }
-.wine button { background-color: #8E44AD; }
-.navigation .nav-btn { background-color: #34495E; }
+/* Category-specific button styles */
 
+.filter-buttons button.Draught {
+    background-color: #ffa500; /* orange */
+}
+
+.filter-buttons button.Draught00 {
+    background-color: #5f9ea0; /* cadet blue */
+}
+
+.filter-buttons button.Cider {
+    background-color: #ff6347; /* tomato */
+}
+
+.filter-buttons button.Wine {
+    background-color: #b22222; /* firebrick */
+}
+
+.filter-buttons button.Cocktails {
+    background-color: #ff69b4; /* hot pink */
+}
+
+.filter-buttons button.Minerals {
+    background-color: #4682b4; /* steel blue */
+}
+
+.filter-buttons button.hotDrinks {
+    background-color: #8b4513; /* saddle brown */
+}
+
+.filter-buttons button.Snacks {
+    background-color: #daa520; /* goldenrod */
+}
+
+/* CSS file or within a <style> tag */
+.product-btn.Draught { background-color: #b5651d; }
+.product-btn.Draught00 { background-color: #a2a2a2; }
+.product-btn.Cider { background-color: #ffb347; }
+.product-btn.Wine { background-color: #7a1f44; }
+.product-btn.Whiskey { background-color: #cdaa7d; }
+.product-btn.Rum { background-color: #8b4513; }
+.product-btn.Cocktails { background-color: #ff6347; }
+.product-btn.Minerals { background-color: #87ceeb; }
+.product-btn.hotDrinks { background-color: #d2691e; }
+
+
+/* General button hover effect */
+.product-btn:hover {
+    opacity: 0.8;
+}
 button:hover {
     opacity: 0.8;
 }
@@ -203,16 +253,16 @@ button:hover {
     transform: translateX(-100%); /* Initially hidden */
     transition: transform 0.3s ease;
 }
-
+.selected {
+    background-color: lightblue;
+}
 .sidebar.open {
     transform: translateX(0); /* Visible when open */
 }
-
 .main-content {
     margin-left: 20px;
     padding: 20px;
 }
-
 #toggleSidebar {
     margin: 20px;
     padding: 10px;

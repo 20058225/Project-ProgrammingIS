@@ -1,7 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
-    // Show "Go to Top" button when scrolling down
-    snackBar(); 
-    
+    // Show "Go to Top" button when scrolling down    
     window.onscroll = function() { 
         scrollFunction();
     };
@@ -66,13 +64,6 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 });
-function snackBar() {
-    var x = document.getElementById("snackbar");
-    x.className = "show";
-    setTimeout(function(){ 
-        x.className = x.className.replace("show", ""); 
-    }, 3000);
-}
 
 // Make showHidePwd a global function
 function showHidePwd() {
