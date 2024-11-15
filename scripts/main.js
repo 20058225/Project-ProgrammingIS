@@ -125,15 +125,58 @@ document.addEventListener("DOMContentLoaded", function() {
             redirect: false
         },
         "customize.html": {
-            main: `<h2>Coming Soon!</h2><div class="snippet"><div class="dot-falling"></div></div>`,
+            main: `<p>Hi there!</p><h2>Coming Soon!</h2><div class="snippet"><div class="dot-falling"></div></div>`,
             redirect: true, // Indicate whether this page should redirect
             redirectDelay: 2000 // Delay in milliseconds
         },
         "announcements.html": {
-            main: `<p>Hi there! Check out the latest announcements.</p>
-            <h2>Coming Soon!</h2><div class="snippet"><div class="dot-falling"></div></div>`,
-            redirect: true, // Indicate whether this page should redirect
-            redirectDelay: 2000 // Delay in milliseconds
+            main: `<h3>Hi there! Check out the latest announcements.</h3>
+            <section class="announcement">
+                <h2>New Happy Hour Menu!</h2>
+                <p>We are excited to announce our new happy hour specials! Join us from 4-7 PM for discounts on selected drinks and appetizers. Cheers!</p>
+                <span class="date">Posted on: Nov 10, 2024</span>
+            </section>
+            <section class="announcement">
+                <h2>Live Music on Fridays</h2>
+                <p>Enjoy live music every Friday night! Local bands will be playing all your favorites from 8 PM onwards. See you there!</p>
+                <span class="date">Posted on: Nov 8, 2024</span>
+            </section>
+            <section class="announcement">
+                <h2>Upcoming Special Events</h2>
+                <p>Don't miss our Halloween Costume Contest on Oct 31! Exciting prizes for the best-dressed guests. Sign up in advance to secure your spot!</p>
+                <span class="date">Posted on: Oct 25, 2024</span>
+            </section>  
+            <section class="announcement">
+                <h2>New Product Launch</h2>
+                <p>We are excited to introduce our new product line. Stay tuned for more updates!</p>
+                <span class="date">Posted on: Oct 25, 2024</span>
+            </section>  
+            <section class="announcement">
+                <h2>Holiday Hours</h2>
+                <p>Our offices will be closed on national holidays. Please check the schedule for more details.</p>
+               <span class="date">Posted on: Nov 8, 2024</span>
+            </section>
+            <section class="announcement">
+                <h2>System Maintenance</h2>
+                <p>Scheduled maintenance will occur this Saturday from 2 AM to 4 AM. Service may be interrupted.</p>
+                <span class="date">Posted on: Nov 10, 2024</span>
+            </section>
+            <section class="announcement">
+                <h2>Holiday Hours</h2>
+                <p>Our offices will be closed on national holidays. Please check the schedule for more details.</p>
+               <span class="date">Posted on: Nov 8, 2024</span>
+            </section>
+            <section class="announcement">
+                <h2>System Maintenance</h2>
+                <p>Scheduled maintenance will occur this Saturday from 2 AM to 4 AM. Service may be interrupted.</p>
+                <span class="date">Posted on: Nov 10, 2024</span>
+            </section>
+            
+
+
+
+            `,
+            redirect: false,
         },
         "contact-us.html": {
             main: `

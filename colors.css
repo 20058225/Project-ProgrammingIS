@@ -1,0 +1,50 @@
+:root {
+    /* Main Theme Colors */
+    --primary-color: #2C3E50;            /* Draught */
+    --accent-color-teal: #1ABC9C;        /* Cocktails & Spirits */
+    --accent-color-orange: #E67E22;      /* Bottles */
+    --wine-color: #8E44AD;               /* Wine */
+
+    /* Additional Category Colors */
+    --cider-color: #D35400;              /* Cider */
+    --draught-00-color: #34495E;         /* Draught 00 (Non-Alcoholic) */
+    --mineral-color: #2980B9;            /* Minerals */
+    --hot-drinks-color: #E74C3C;         /* Hot Drinks */
+    --snacks-color: #F39C12;             /* Snacks */
+    --specialty-color: #16A085;          /* Specialty / Limited Edition */
+
+    /* Additional Colors */
+    --text-primary: #333333;
+    --text-secondary: #555555;
+    --background-light: #F5E9DA;
+    --success-color: #2ECC71;
+    --highlight-color: #3498DB;          /* General highlight or interactive */
+    --error-color: #E74C3C;              /* Error messages or alerts */
+}
+
+:root {
+    /* Main Theme Colors */
+    --primary-color: #2C3E50;          /* Dark Blue-Grey */
+    --secondary-color: #ECF0F1;        /* Light Grey */
+    --accent-color-teal: #1ABC9C;      /* Teal */
+    --accent-color-orange: #E67E22;    /* Bright Orange */
+
+    /* Additional Colors */
+    --text-primary: #333333;           /* Dark Text */
+    --text-secondary: #555555;         /* Medium Grey Text */
+    --background-light: #F5E9DA;       /* Light Beige */
+    --success-color: #2ECC71;          /* Green Success */
+    --warning-color: #F1C40F;          /* Yellow Warning */
+    --error-color: #E74C3C;            /* Red Error */
+    --info-color: #3498DB;             /* Light Blue Info */
+    
+    /* Shades and Gradients */
+    --background-dark: #1A252F;        /* Dark Background */
+    --highlight-light: rgba(236, 240, 241, 0.5);  /* Semi-transparent Light Highlight */
+    --highlight-dark: rgba(44, 62, 80, 0.5);      /* Semi-transparent Dark Highlight */
+
+    /* Button and Animation Colors */
+    --button-hover: #27AE60;           /* Darker Green */
+    --button-focus: #16A085;           /* Darker Teal */
+    --animation-color: #1ABC9C;        /* Consistent Animation Color */
+}

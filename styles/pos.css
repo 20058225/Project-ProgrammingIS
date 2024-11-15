@@ -1,14 +1,35 @@
 :root {
-    --primary-color: #2C3E50;            /* Draught */
+    --primary-color: #2C3E50;            
     --secondary-color: #ECF0F1;
-    --accent-color-teal: #1ABC9C;        /* Cocktails & Spirits */
-    --accent-color-orange: #E67E22;      /* Bottles */
+    --accent-color-teal: #1ABC9C;        
+    --accent-color-orange: #E67E22;      
     --text-primary: #333333;
     --text-secondary: #555555;
     --background-light: #F5E9DA;
     --success-color: #2ECC71;
-    --wine-color: #8E44AD;               /* Wine */
+    --wine-color: #8E44AD;               
 }
+/* Category-specific button styles */
+.filter-buttons button.Draught { background-color: #ffa500; }
+.filter-buttons button.Draught00 { background-color: #5f9ea0; }
+.filter-buttons button.Cider { background-color: #ff6347; }
+.filter-buttons button.Wine { background-color: #b22222; }
+.filter-buttons button.Cocktails { background-color: #ff69b4; }
+.filter-buttons button.Minerals { background-color: #4682b4; }
+.filter-buttons button.hotDrinks { background-color: #8b4513; }
+.filter-buttons button.Snacks { background-color: #daa520; }
+
+/* CSS file or within a <style> tag */
+.product-btn.Draught { background-color: #b5651d; }
+.product-btn.Draught00 { background-color: #a2a2a2; }
+.product-btn.Cider { background-color: #ffb347; }
+.product-btn.Wine { background-color: #7a1f44; }
+.product-btn.Whiskey { background-color: #cdaa7d; }
+.product-btn.Rum { background-color: #8b4513; }
+.product-btn.Cocktails { background-color: #ff6347; }
+.product-btn.Minerals { background-color: #87ceeb; }
+.product-btn.hotDrinks { background-color: #d2691e; }
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -188,51 +209,6 @@ button {
     width: auto;
     box-sizing: border-box;
 }
-/* Category-specific button styles */
-
-.filter-buttons button.Draught {
-    background-color: #ffa500; /* orange */
-}
-
-.filter-buttons button.Draught00 {
-    background-color: #5f9ea0; /* cadet blue */
-}
-
-.filter-buttons button.Cider {
-    background-color: #ff6347; /* tomato */
-}
-
-.filter-buttons button.Wine {
-    background-color: #b22222; /* firebrick */
-}
-
-.filter-buttons button.Cocktails {
-    background-color: #ff69b4; /* hot pink */
-}
-
-.filter-buttons button.Minerals {
-    background-color: #4682b4; /* steel blue */
-}
-
-.filter-buttons button.hotDrinks {
-    background-color: #8b4513; /* saddle brown */
-}
-
-.filter-buttons button.Snacks {
-    background-color: #daa520; /* goldenrod */
-}
-
-/* CSS file or within a <style> tag */
-.product-btn.Draught { background-color: #b5651d; }
-.product-btn.Draught00 { background-color: #a2a2a2; }
-.product-btn.Cider { background-color: #ffb347; }
-.product-btn.Wine { background-color: #7a1f44; }
-.product-btn.Whiskey { background-color: #cdaa7d; }
-.product-btn.Rum { background-color: #8b4513; }
-.product-btn.Cocktails { background-color: #ff6347; }
-.product-btn.Minerals { background-color: #87ceeb; }
-.product-btn.hotDrinks { background-color: #d2691e; }
-
 
 /* General button hover effect */
 .product-btn:hover {
@@ -303,12 +279,14 @@ button:hover {
     from {bottom: 30px; opacity: 1;}
     to {bottom: 0; opacity: 0;}
 }
+.order-container-area{
+    overflow-y: scroll; 
+    height:400px;
+}
 .order-container-area .item {
     padding: 5px;
     border-radius: 3px;
-    border: 5px;
-    height: 300px;
-}
+    border: 5px;}
 
 .order-container-area .item.selected {
     background-color: yellow;

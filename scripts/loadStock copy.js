@@ -57,25 +57,14 @@ function displayProducts(products) {
     const container = document.getElementById('productContainer');
     container.innerHTML = ''; // Clear previous products
 
-    if (!products || !Array.isArray(products)) {
-        console.error("Products array is missing or invalid:", products);
-        return;
-    }
-
     products.forEach(product => {
-        if (!product) {
-            console.warn(`Product at index ${index} is undefined or invalid:`, product);
-            return;
-        }
         const button = document.createElement('button');
-        button.textContent = product.name || "Unnamed Product";
+        button.textContent = `${product.name}`; 
+        //button.classList.add('product-btn');
 
-            // Add a fallback category class if `product.category` is missing
         const categoryClass = product.category ? product.category.toLowerCase().replace(/\s+/g, '-') : 'category';
         button.classList.add('product-btn', categoryClass);
-               
-        console.log(`Rendering product: ${product.name}, Category Class: ${categoryClass}`);
-
+                
         button.addEventListener('click', () => addToOrder(product));
         container.appendChild(button);
     });

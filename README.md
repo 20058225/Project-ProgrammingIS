@@ -32,6 +32,7 @@
 [x] Opens automatically in your browser 
 
 ## In process
+[ ] Button Commum Items
 [ ] Function register (create|edit|delete)    
 [ ] Function login (check login|password)   
 [ ] Filter by category showing product configuration colors  
