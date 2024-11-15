@@ -29,8 +29,9 @@ document.addEventListener("DOMContentLoaded", function() {
         },
         "login.html": {
             main: `
+                <!--@@ REGISTER -->
                 <section class="register column-thirty">
-                    <form class="formRegister">
+                    <div class="formRegister">
                         <div class="header-flex-container">
                             <a href="#" onclick="openPage('index')"><img src="images/logo.png" alt="PubPal" class="icons" id="logo"></a>
                             <h3>Register</h3>
@@ -56,17 +57,17 @@ document.addEventListener("DOMContentLoaded", function() {
                                 </div>
                             </div>
                             <div class="btnForm">
-                                <input class="btn button-primary"  onclick="snackBar()" value="Create" >
-                                <input class="btn button-primary" type="reset" value="Cancel">
+                                <button class="btn button-primary" onclick="snackbarRegister()">Submit</button>
+                                <button class="btn button-primary" type="reset">Reset</button>
                             </div>
                         </div>
-                    </form>
-                    <div id="snackbarRegister">Registration completed successfully! 
-                    <img src="images/logo.png" alt="PubPal" class="icons" id="logo"></a>
                     </div>
+                    <div class="snackbar" id="snackbarRegister">
+                        <img src="images/logo.png" alt="PubPal" class="icons" id="logo">Cadastro</div>
                 </section>
+                <!--@@ LOGIN -->
                 <section class="login column-thirty">
-                    <form class="formLogin" action="pos.html">
+                    <div class="formLogin" action="pos.html">
                         <div class="header-flex-container">
                             <a href="#" onclick="openPage('index')"><img src="images/logo.png" alt="PubPal" class="icons" id="logo"></a>
                             <h3>Login</h3>
@@ -84,12 +85,12 @@ document.addEventListener("DOMContentLoaded", function() {
                                 </div>
                             </div>
                             <div class="btnForm">
-                                <input class="btn button-primary" type="submit" value="Submit">
-                                <input class="btn button-primary" type="reset" value="Reset">
+                                <button class="btn button-primary" onclick="snackbarLogin">Submit</button>
+                                <button class="btn button-primary" type="reset">Reset</button>
                             </div>
                         </div>
                         <div class="forgot-password"><a href="#" onclick="openModal(event)">Forgot Password?</a></div>
-                    </form>
+                    </div>
                 </section>
                 <section class="login">
                     <!-- Forgot Password Modal -->
@@ -98,12 +99,16 @@ document.addEventListener("DOMContentLoaded", function() {
                             <span class="close" onclick="closeModal()">&times;</span>
                             <h3>Reset Your Password</h3>
                             <p>Please enter your email address.</p>
-                            <form id="forgotPasswordForm">
+                            <div id="forgotPasswordForm">
                                 <input type="email" id="email" name="email" required placeholder="Email">
-                                <button type="submit" class="btn button-primary">Send Reset Link</button>
-                            </form>
+                                <button type="button" class="btn button-primary" onclick="snackbarLink()">Send Reset Link</button>
+                            </div>
                         </div>
                     </div>
+                    <div class="snackbar" id="snackbarLink">
+                        <img src="images/logo.png" alt="PubPal" class="icons" id="logo">Login</div>
+                        <div class="snackbar" id="snackbarLogin">
+                        <img src="images/logo.png" alt="PubPal" class="icons" id="logo">Login</div>
                 </section>
             `, redirect: false
         },
@@ -116,8 +121,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 <button onclick="clickAddUser()">Add User</button>
                 <button onclick="clickEditUser()">Edit User</button>
                 <button onclick="clickDeleteUser()">Delete User</button>
-                       
-            
             `,
             redirect: false
         },
@@ -136,18 +139,23 @@ document.addEventListener("DOMContentLoaded", function() {
             main: `
                     <section class="column-thirty">
                         <h2>Contact Us</h2>
-                        <form action="submit_contact.php" method="post">
-                            <label for="name">Name</label>
-                            <input type="text" id="name" name="name" required placeholder="Your Name">
-                            
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" required placeholder="Your Email">
-                            
-                            <label for="message">Message</label>
-                            <textarea id="message" name="message" rows="5" required placeholder="Your Message"></textarea>
-                            
-                            <button type="submit" class="submit-btn">Send Message</button>
-                        </form>
+                        <div class="divColumn">
+                            <div class="insertForm">
+                                <label for="nameContact">Name:</label>
+                                <input class="userPwd" type="text" id="nameContact" name="name" required autocomplete="current-name">
+                                <label for="emailContact">Email:</label>
+                                <input class="userPwd" type="email" id="emailContact" name="email" required autocomplete="current-username">
+                                <label for="messageContact">Email:</label>
+                                <textarea class="userPwd" type="text" id="messageContact" name="message" required></textarea>
+                            </div>
+                            <div class="snackbar" id="snackbarContact">A consultant will be in contact with you shortly. We appreciate your interest!
+                                <img src="images/logo.png" alt="PubPal" class="icons" id="logo">
+                            </div>
+                            <div class="btnForm">
+                                <button class="btn button-primary" onclick="snackbarContact()">Submit</button>
+                                <button class="btn button-primary" type="reset">Reset</button>
+                            </div>
+                        </div>
                     </section>
 
                     <!-- About Us Content (Right side) -->

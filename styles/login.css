@@ -106,10 +106,10 @@
     transition: background-color 0.3s ease;
     color: var(--secondary-color);
 }
-.btn[type="submit"] {
+.btn[type="button"] {
     background-color: var(--accent-color-teal);
 }
-.btn[type="submit"]:hover {
+.btn[type="button"]:hover {
     background-color: #16a085; /* Darker shade of teal */
 }
 .btn[type="reset"] {
@@ -154,7 +154,7 @@
     margin: 10px 0;
 }
 
-.submit-btn {
+.button-btn {
     display: block;
     width: 100%;
     padding: 10px;
@@ -165,6 +165,6 @@
     cursor: pointer;
 }
 
-.submit-btn:hover {
+.button-btn:hover {
     background-color: #039e5e;
 }

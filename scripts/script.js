@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function() {
     window.onscroll = function() { scrollFunction(); };
     
      // Open chat function
-     window.openChat = function() {
+    window.openChat = function() {
         document.getElementById("chatPopup").style.display = "block";
         document.getElementById("btnChat").style.display = "none";
         
@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 sendMessage.disabled = messageInput.value.trim() === "";
             });
         } 
-        window.closeForm = function() {
+        window.closeChat = function() {
             document.getElementById("chatPopup").style.display = "none";
             document.getElementById("btnChat").style.display = "block";
             
@@ -134,16 +134,62 @@ window.onclick = function(event) {
         closeModal();
     }
 };
-function snackBar() {
-    var register = document.getElementById("snackbarRegister");
-    register.className = "show";
-    setTimeout(function() {
-        register.className = register.className.replace("show", ""); // Hide after x seconds
-    }, 900);
-    
-    var chat = document.getElementById("snackbarChat");
-    chat.className = "show";
-    setTimeout(function() {
-        chat.className = chat.className.replace("show", ""); // Hide after x seconds
-    }, 900);
+document.addEventListener("DOMContentLoaded", function() {
+    const messageInput = document.getElementById("msg");
+    const sendMessage = document.getElementById("sendMessage");
+
+    if (messageInput && sendMessage) {
+        sendMessage.disabled = true;
+        messageInput.addEventListener("input", function() {
+            sendMessage.disabled = messageInput.value.trim() === "";
+        });
+    }
+});
+
+function closeForm() { // Clear inputs
+    document.getElementById("chatPopup").style.display = "none";
+    document.getElementById("btnChat").style.display = "block";
+    const messageInput = document.getElementById("msg");
+    const sendMessage = document.getElementById("sendMessage");
+    if (messageInput && sendMessage) {
+        messageInput.value = "";
+        sendMessage.disabled = true;
+    }
+}
+function snackbarContact() { //@@ Shows on Contact Us and chat
+    const contact = document.getElementById("snackbarContact");
+    if (contact) {
+        contact.classList.add("show");
+        setTimeout(function() {
+            contact.classList.remove("show");
+        }, 1500);
+    }
+}
+function snackbarLogin() { //@@ Shows on Login
+    const login = document.getElementById("snackbarLogin");
+    if (login) {
+        login.classList.add("show");
+        setTimeout(function() {
+            login.classList.remove("show");
+        }, 1500);
+    }
+}
+function snackbarLink() { //@@ Shows on Forgot Password
+    const password = document.getElementById("snackbarLink");
+    if (password) {
+        password.classList.add("show");
+        closeModal();
+        setTimeout(function() {
+            password.classList.remove("show");
+        }, 1500);
+    }
+}
+function snackbarRegister() { //@@ Shows on Register
+    const register = document.getElementById("snackbarRegister");
+    if (register) {
+        register.classList.add("show");
+        setTimeout(function() {
+            register.classList.remove("show");
+        }, 1500);
+    }
 }

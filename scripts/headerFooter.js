@@ -23,11 +23,9 @@ document.addEventListener("DOMContentLoaded", function() {
             subtitle: "Here you find the best tools to manage your establishment."
         },
         "login.html": { 
+            subtitle: "Please register or log in with us."
         },
-        "home.html": {
-            title: "PubPal's Systems"
-        },
-        "user.html": {
+        "users.html": {
             title: "User Dashboard",
             subtitle: "Manage your profile here."
         },
@@ -80,20 +78,18 @@ document.addEventListener("DOMContentLoaded", function() {
                     <button onclick="btnGoTop()" id="btnGoTop" title="Go to top"><i class="fa-solid fa-arrow-up"></i></button>
                     <button onclick="openChat()" id="btnChat" class="btnChat" title="Chat"><i class="fa-regular fa-comment-dots"></i></button>
                     
-                    <div id="snackbarChat">Message sent successfully! 
-                    <img src="images/logo.png" alt="PubPal" class="icons" id="logo"></a>
+                    <div class="snackbar" id="snackbarContact">A consultant will be in contact with you shortly. We appreciate your interest!
+                        <img src="images/logo.png" alt="PubPal" class="icons" id="logo">
                     </div>
                     <!--@@ CHAT @@-->
-                    <div class="chat-popup" id="chatPopup">
-                        <form class="form-container">
-                            <h1>Chat</h1>
-                            <label for="msg"><b>Message</b></label>
-                            <textarea id="msg" placeholder="Hey there! How I can help you today?" name="msg" required></textarea>
-                            <div class="btnForm">
-                                <button type="submit" class="btn" id="sendMessage" onclick="snackBar()" disabled>Send</button>
-                                <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-                            </div>
-                        </form>
+                    <div class="chat-popup form-container" id="chatPopup">
+                        <h1>Chat</h1>
+                        <label for="msg"><b>Message</b></label>
+                        <textarea id="msg" placeholder="Hey there! How I can help you today?" name="msg" required></textarea>
+                        <div class="btnForm">
+                            <button type="button" class="btn" id="sendMessage" onclick="snackbarContact(), closeForm()" disabled>Submit</button>
+                            <button type="reset" class="btn cancel" onclick="closeForm()">Close</button>
+                        </div>
                     </div>
 
         `;

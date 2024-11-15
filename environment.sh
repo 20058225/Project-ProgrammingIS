@@ -1,11 +1,15 @@
+cd server
+
 if ! command -v node &> /dev/null; then
-    echo "@@ Node.js is required. Please install it from https://nodejs.org."
+    echo "@@ Node.js is required. 
+    install node.js
 else
     echo "@@ Node.js is already installed."
 fi
 
 if ! command -v npm &> /dev/null; then
-    echo "@@ NPM is required. Please install it from https://nodejs.org."
+    echo "@@ NPM is required. 
+    install npm.js
 else
     echo "@@ NPM is already installed."
 fi
@@ -17,5 +21,4 @@ echo "@@ Installing necessary packages"
 npm install express open fs
 
 echo "@@ Starting server"
-cd server
 node server.js
