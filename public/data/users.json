@@ -1,0 +1,9 @@
+[
+    {
+      "id": "0000",
+      "fullname": "Your Full Name",
+      "email": "yourname@dbs.ie",
+      "password": "password123",
+      "passwordConf": "password123"
+    }
+  ]

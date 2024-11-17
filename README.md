@@ -24,6 +24,7 @@
 [x] 
 [x] Amount due being calculated (addition and subtraction)  
 [x] Button Systems provide administrator access
+[x] Filter by category showing product configuration colors
 
 * Local infrastructure
 [x] The *.sh file creates an environment to run the project 
@@ -34,8 +35,8 @@
 ## In process
 [ ] Button Commum Items
 [ ] Function register (create|edit|delete)    
-[ ] Function login (check login|password)   
-[ ] Filter by category showing product configuration colors  
+[ ] Function login (check login|password)    
 [ ] Exhibit map of tables    
 [ ] Exhibit tables by colors (busy|avaliable)   
 [ ] Print receipt   
+[ ] Grouping products

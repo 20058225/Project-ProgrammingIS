@@ -3,6 +3,11 @@ let orderTotal = 0; // Global variable to keep track of the order total
 let items = []; // Array to store ordered items
 let selectedItemIndex = null; // Index of the currently selected item
 
+// Page navigation
+function openPage(pageName) {
+    window.location = `${pageName}.html`;
+}
+document.addEventListener("DOMContentLoaded", () => {
 // Function to load stock data from stock.json
 function loadStock() {
     fetch('./scripts/stock.json')
@@ -20,16 +25,11 @@ function renderCategories(categories) {
     const productContainer = document.getElementById("productContainer");
     productContainer.innerHTML = ""; // Clear previous content
 
-    if (!categories) {
-        console.error("Categories data is missing.");
-        return;
-    }
-
     categories.forEach(category => {
         const categoryDiv = document.createElement('div');
         categoryDiv.classList.add('category', category.name.toLowerCase());
 
-        const categoryHeading = document.createElement('h3');
+        const categoryHeading = document.createElement('h6');
         categoryHeading.textContent = category.name;
 
         // Add an event listener to the heading to filter products by this category when clicked
@@ -57,16 +57,34 @@ function displayProducts(products) {
     const container = document.getElementById('productContainer');
     container.innerHTML = ''; // Clear previous products
 
-    products.forEach(product => {
-        const button = document.createElement('button');
-        button.textContent = `${product.name}`; 
-        //button.classList.add('product-btn');
+    if (!products || !Array.isArray(products)) {
+        console.error("Products array is missing or invalid:", products);
+        return;
+    }
 
-        const categoryClass = product.category ? product.category.toLowerCase().replace(/\s+/g, '-') : 'category';
-        button.classList.add('product-btn', categoryClass);
-                
-        button.addEventListener('click', () => addToOrder(product));
-        container.appendChild(button);
+    products.forEach(product => {
+        if (!product || !product.name) {
+            console.warn(`Product at index ${index} is undefined or invalid:`, product);
+            return;
+        }
+        const button = document.createElement('button');
+
+        // Truncate product name if it exceeds 15 characters
+        let buttonText = product.name;
+        if (buttonText.length > 20) {
+            buttonText = buttonText.slice(0, 18) + "..";
+        }
+        button.textContent = buttonText;
+
+         // Add a fallback category class if `product.category` is missing
+    const categoryClass = product.category ? product.category.toLowerCase().replace(/\s+/g, '-') : 'category';
+    button.classList.add('product-btn', categoryClass);
+
+    // @@ Show the product being exhibited by the filter.
+        // console.log(`Rendering product: ${product.name}, Category Class: ${categoryClass}`);
+
+     button.addEventListener('click', () => addToOrder(product));
+     container.appendChild(button);
     });
 }
 
@@ -88,53 +106,42 @@ function addToOrder(product) {
     updateDisplay(); // Update display to show newly added item
 }
 
-// Display items and highlight the selected one
-function updateDisplay() {
-    const orderContainer = document.querySelector('.itemsDescript .order-container-area');
-    if (!orderContainer) {
-        console.error("Container element not found");
-        return;
-    }
 
-    orderContainer.innerHTML = '';
-
-    items.forEach((item, index) => {
-        const itemElement = document.createElement('div');
-        itemElement.textContent = item;
-        itemElement.className = 'item';
-        
-        if (index === selectedItemIndex) {
-            itemElement.classList.add('selected');
-        }
-
-        orderContainer.appendChild(itemElement);
-    });
-}
-
-
-// Page navigation
-function openPage(pageName) {
-    window.location = `${pageName}.html`;
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-    snackBar();
+    showSnackbar();
     const voidButton = document.getElementById("void-item");
     const upButton = document.getElementById("up-button");
     const downButton = document.getElementById("down-button");
 
     loadStock(); // Load stock data and initialize display
-
     // Function to display items and highlight the selected one
     function updateDisplay() {
-        const orderInput = document.querySelector('.itemsDescript .order-container-area');
-        if (!orderInput) {
-            console.error("Textarea element not found");
+        const orderContainer = document.querySelector('.itemsDescript .order-container-area');
+        if (!orderContainer) {
+            console.error("Order container element not found");
             return;
         }
-        orderInput.value = items
-            .map((item, index) => (index === selectedItemIndex ? `[ ${item} ]` : item))
-            .join("\n");
+            // Clear previous items
+        orderContainer.innerHTML = '';
+
+        // Render all items
+        items.forEach((item, index) => {
+            const itemDiv = document.createElement('div');
+            itemDiv.textContent = item;
+            itemDiv.className = 'item';
+
+            // Highlight the selected item
+            if (index === selectedItemIndex) {
+                itemDiv.classList.add('selected');
+            }
+
+            // Make the item clickable
+            itemDiv.addEventListener('click', () => {
+                selectedItemIndex = index; // Update the selected index
+                updateDisplay(); // Refresh the display to highlight the selected item
+            });
+
+            orderContainer.appendChild(itemDiv);
+        });
     }
 
     // Event listener for the "void" button to delete the selected item
@@ -174,17 +181,18 @@ document.addEventListener("DOMContentLoaded", () => {
     // Event listener for the "down" button to navigate down
     downButton.addEventListener("click", () => {
         if (selectedItemIndex < items.length - 1) {
-            console.log(downButton);
             selectedItemIndex++;
             updateDisplay();
         }
     });
+    
+    function showSnackbar() {
+        const snackbar = document.getElementById("snackbar");
+        if (!snackbar) return;
+        
+        snackbar.className = "show";
+        setTimeout(() => snackbar.className = "", 3000);
+    }
+
 });
 
-function snackBar() {
-    var x = document.getElementById("snackbar");
-    x.className = "show";
-    setTimeout(function() {
-        x.className = x.className.replace("show", ""); // Hide after 3 seconds
-    }, 3000);
-}

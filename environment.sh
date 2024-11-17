@@ -19,6 +19,7 @@ npm init -y
 
 echo "@@ Installing necessary packages"
 npm install express open fs
+npm install express body-parser bcrypt express-validator
 
 echo "@@ Starting server"
 node server.js

@@ -7,17 +7,23 @@
 </head>
 <body>
     <h2>Login</h2>
-    <input type="text" id="loginUsername" placeholder="Username">
-    <input type="password" id="loginPassword" placeholder="Password">
-    <button onclick="clickLogin()">Login</button>
+    <form id="loginForm">
+        <label for="loginUsername">Username:</label>
+        <input type="text" id="loginUsername" placeholder="Username" required>
+        <label for="loginPassword">Password:</label>
+        <input type="password" id="loginPassword" placeholder="Password" required>
+        <button type="submit">Login</button>
+    </form>
 
     <h2>Manage Users</h2>
-    <input type="text" id="manageUsername" placeholder="Username">
-    <input type="password" id="managePassword" placeholder="Password">
-    <button onclick="clickAddUser()">Add User</button>
-    <button onclick="clickEditUser()">Edit User</button>
-    <button onclick="clickDeleteUser()">Delete User</button>
+    <form id="addUserForm">
+        <label for="manageUsername">Username:</label>
+        <input type="text" id="manageUsername" placeholder="Username" required>
+        <label for="managePassword">Password:</label>
+        <input type="password" id="managePassword" placeholder="Password" required>
+        <button type="submit">Add User</button>
+    </form>
 
-    
+    <script src="/scripts/userManager.js"></script>
 </body>
 </html>

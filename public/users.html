@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #messageBox {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header" id="main-header"></header>
+        
+    <h1>User Management System</h1>
+
+    <h2>Manage Users</h2>
+    <div class="form-group">
+        <label for="manageUsername">Username</label>
+        <input type="text" id="manageUsername" placeholder="Enter username">
+    </div>
+    <div class="form-group">
+        <label for="managePassword">Password</label>
+        <input type="password" id="managePassword" placeholder="Enter password">
+    </div>
+    <div>
+        <button onclick="handleAddUser()">Add User</button>
+        <button onclick="handleEditUser()">Edit User</button>
+        <button onclick="handleDeleteUser()">Delete User</button>
+    </div>
+
+    <h2>Login</h2>
+    <div class="form-group">
+        <label for="loginUsername">Username</label>
+        <input type="text" id="loginUsername" placeholder="Enter username">
+    </div>
+    <div class="form-group">
+        <label for="loginPassword">Password</label>
+        <input type="password" id="loginPassword" placeholder="Enter password">
+    </div>
+    <button onclick="clickLogin()">Login</button>
+
+    <div id="messageBox"></div>
+
+    
+    <!-- JavaScript Files -->
+    <script src="scripts/script.js"></script>             
+    <script src="scripts/registerLogin.js"></script>   
+    <script src="scripts/headerFooter.js"></script>     
+    <script src="scripts/main.js"></script>   
+
+    <!-- External Libraries -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+</body>
+</html>
