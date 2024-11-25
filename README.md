@@ -15,7 +15,7 @@
 [x] Windows with a timer    
 [x] Modal   
 [x] Snackbar  
-[x] Function login (check login|password) 
+[x] Function login (check login|password)   
 [ ] Function register (create|edit|delete)    
   
 * POS   
