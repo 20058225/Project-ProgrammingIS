@@ -112,6 +112,11 @@ app.get('/searchUser', async (req, res) => {
     }
 });
 
+// Fallback to serve index.html for unknown routes
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
 // Start Server
 const PORT = process.env.PORT;
 app.listen(PORT, () => {

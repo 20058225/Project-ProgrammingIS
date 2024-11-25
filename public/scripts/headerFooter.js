@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         <link rel="stylesheet" href="styles/style.css">
         <link rel="stylesheet" href="styles/modal.css">
-        <link rel="stylesheet" href="styles/login.css">
+        <link rel="stylesheet" href="styles/crud.css">
     `;
     document.head.insertAdjacentHTML("beforeend", headHTML);
 
