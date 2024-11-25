@@ -28,9 +28,9 @@ else
 fi
 
 echo "@@ Installing necessary packages 2"
-if ! command -v express body-parser bcrypt express-validator &> /dev/null; then
-    echo "@@ express body-parser bcrypt express-validator are required." 
-    npm install express body-parser bcrypt express-validator
+if ! command -v express body-parser express-validator &> /dev/null; then
+    echo "@@ express body-parser express-validator are required." 
+    npm install express body-parser express-validator
 else
     echo "@@ express open fs are already installed."
 fi
@@ -41,6 +41,48 @@ if ! command -v cors &> /dev/null; then
     npm install cors
 else
     echo "@@ ecors is already installed."
+fi
+
+echo "@@ Installing body-parser"
+if ! command -v body-parser &> /dev/null; then
+    echo "@@ body-parser is required." 
+    npm install body-parser
+else
+    echo "@@ body-parser is already installed."
+fi
+
+echo "@@ Installing dotenv"
+if ! command -v dotenv &> /dev/null; then
+    echo "@@ dotenv is required." 
+    npm install dotenv
+else
+    echo "@@ dotenv is already installed."
+fi
+
+echo "@@ Installing nodemon"
+if ! command -v nodemon &> /dev/null; then
+    echo "@@ nodemon is required." 
+    npm install --save-dev nodemon
+else
+    echo "@@ dotenv is already installed."
+fi
+
+echo "@@ Installing eslint"
+if ! command -v eslint &> /dev/null; then
+    echo "@@ eslint is required." 
+    npm install --save-dev eslint
+else
+    echo "@@ eslint is already installed."
+fi
+
+echo "@@ Installing MySql"
+if ! command -v mysql &> /dev/null; then
+    echo "@@ mysql is required." 
+    npm install mysql
+    npm install mysql2
+    sudo apt install -y mysql-client
+else
+    echo "@@ MySql is already installed."
 fi
 
 echo "@@ Starting server"

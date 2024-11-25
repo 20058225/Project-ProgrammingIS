@@ -1,12 +1,6 @@
 model
 styles
-scripts
 server
-ToDo/create.html
-public/test
-public/users2.html
-public/scripts/userManager copy.js
-public/scripts/chatModal copy.js
+public/scripts/scripts copy.js
 .env
-LinuxEnv.sh
 *.sh
