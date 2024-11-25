@@ -156,7 +156,7 @@ document.addEventListener("DOMContentLoaded", function() {
             redirect: true, // Indicate whether this page should redirect
             redirectDelay: 2000 // Delay in milliseconds
         },
-        "announcements.html": {
+        "news.html": {
             main: `<h3>Hi there! Check out the latest announcements.</h3>
             <section class="announcement">
                 <h2>New Happy Hour Menu!</h2>
