@@ -19,21 +19,21 @@
 * POS   
 [x] Querying JSON as database    
 [x] Filter for category
-[x] Buttons move up and down on selected products
+[x] Buttons move up and down on selected products  
 [x] Delete item button in order products     
-[x] 
+[x]   
 [x] Amount due being calculated (addition and subtraction)  
-[x] Button Systems provide administrator access
+[x] Button Systems provide administrator access  
 [x] Filter by category showing product configuration colors
 
-* Local infrastructure
-[x] The *.sh file creates an environment to run the project 
-[x] Files are being created inside the server's folder 
-[x] Node, npm, open and express automatically installed 
-[x] Opens automatically in your browser 
+* Local infrastructure  
+[x] The *.sh file creates an environment to run the project   
+[x] Files are being created inside the server's folder   
+[x] Node, npm, open and express automatically installed   
+[x] Opens automatically in your browser   
 
 ## In process
-[ ] Button Commum Items
+[ ] Button Commum Items  
 [ ] Function register (create|edit|delete)    
 [ ] Function login (check login|password)    
 [ ] Exhibit map of tables    
