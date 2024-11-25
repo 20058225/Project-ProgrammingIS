@@ -20,7 +20,7 @@
   
 * POS   
 [x] Querying JSON as database    
-[x] Filter for category
+[x] Filter for category  
 [x] Buttons move up and down on selected products  
 [x] Delete item button in order products      
 [x] Amount due being calculated (addition and subtraction)  
@@ -35,6 +35,6 @@
 ## In process
 [ ] Button Commum Items  
 [ ] Exhibit map of tables    
-[ ] Exhibit tables by colors (busy|avaliable)   
+[ ] Exhibit tables by colors (busy | avaliable)   
 [ ] Print receipt   
 [ ] Grouping products
