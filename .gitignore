@@ -2,3 +2,4 @@ server
 public/scripts/scripts copy.js
 .env
 *.sh
+public/scripts/userManager.js
