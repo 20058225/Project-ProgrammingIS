@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function() {
             title: "Coming Soon",
             subtitle: "Stay tuned for updates."
         },
-        "announcements.html": {
+        "news.html": {
             title: "PubPal's News",
             subtitle: "Latest updates and information"
         },
@@ -68,8 +68,8 @@ document.addEventListener("DOMContentLoaded", function() {
                                     <ul class="nav-list">
                                         <li class="nav-item"><a href="#" onclick="openPage('index')">Home</a></li>
                                         <li class="nav-item"><a href="#" onclick="openPage('login')">Login</a></li>
-                                        <li class="nav-item"><a href="#" onclick="openPage('announcements')">News</a></li>
-                                        <li class="nav-item"><a href="#" onclick="openPage('contact-us')">Book Demo</a></li>
+                                        <li class="nav-item"><a href="#" onclick="openPage('news')">News</a></li>
+                                        <li class="nav-item"><a href="#" onclick="openPage('customize')">Customize</a></li>
                                         <li class="nav-item"><a href="#" onclick="openPage('contact-us')">About</a></li>
                                     </ul>
                                 </nav>  
