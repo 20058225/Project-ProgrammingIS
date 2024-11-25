@@ -10,8 +10,8 @@ document.addEventListener("DOMContentLoaded", function() {
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
         <link rel="stylesheet" href="styles/style.css">
-        <link rel="stylesheet" href="styles/registerLogin.css">
         <link rel="stylesheet" href="styles/modal.css">
+        <link rel="stylesheet" href="styles/login.css">
     `;
     document.head.insertAdjacentHTML("beforeend", headHTML);
 
@@ -78,47 +78,21 @@ document.addEventListener("DOMContentLoaded", function() {
                     <button onclick="btnGoTop()" id="btnGoTop" title="Go to top"><i class="fa-solid fa-arrow-up"></i></button>
                     <button onclick="openChat()" id="btnChat" class="btnChat" title="Chat"><i class="fa-regular fa-comment-dots"></i></button>
                     
-                    <div class="snackbar" id="snackbarContact">A consultant will be in contact with you shortly. We appreciate your interest!
-                        <img src="images/logo.png" alt="PubPal" class="icons" id="logo">
-                    </div>
                     <!--@@ CHAT @@-->
                     <div class="chat-popup form-container" id="chatPopup">
                         <h1>Chat</h1>
                         <label for="msg"><b>Message</b></label>
                         <textarea id="msg" placeholder="Hey there! How I can help you today?" name="msg" required></textarea>
                         <div class="btnForm">
-                            <button type="button" class="btn" id="sendMessage" onclick="snackbarContact(), closeForm()" disabled>Submit</button>
+                            <button type="button" class="btn" id="sendMessage" onclick="showSnackbar(), closeForm()" disabled>Submit</button>
                             <button type="reset" class="btn cancel" onclick="closeForm()">Close</button>
                         </div>
                     </div>
-
         `;
         headerElement.insertAdjacentHTML("beforeend", headerHTML);
     }
-    /*const headerHome = document.querySelector("section");
-    if (headerHome) {
-        const headerHTML = `
-                    <div class="header-wrapper">
-                        <div class="header-container">
-                            <div class="header-content">
-                            <div class="logo-container">
-                                <a href="#" onclick="openPage('index')"><img src="images/logo.png" alt="PubPal" class="icons" id="logo"></a>
-                            </div>
-                            </div> 
-                            <div>
-                                <nav class="header-menu">
-                                    <ul class="nav-list">
-                                        <li class="nav-item"><a href="#" onclick="openPage('index')">Exit</a></li>
-                                    </ul>
-                                </nav>  
-                            </div>                                         
-                        </div>
-                    <button onclick="btnGoTop()" id="btnGoTop" title="Go to top"><i class="fa-solid fa-arrow-up"></i></button>
-        `;
-        headerHome.insertAdjacentHTML("beforeend", headerHTML);
-    }*/
 
-    // Add Footer Section
+    // @@ Add Footer Section
     const footerElement = document.querySelector(".footer");
     if (footerElement) {
         const footerHTML = `
@@ -134,7 +108,7 @@ document.addEventListener("DOMContentLoaded", function() {
         footerElement.insertAdjacentHTML("beforeend", footerHTML);
     }
 
-    // "Go to Top" Button Functionality
+    // @@ "Go to Top" Button Functionality
     const btnGoTop = document.getElementById("btnGoTop");
     window.onscroll = function() { 
         if (btnGoTop) {

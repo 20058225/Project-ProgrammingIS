@@ -6,6 +6,7 @@ ToDo/create.html
 public/test
 public/users2.html
 public/scripts/userManager copy.js
-winEnv.sh
-linuxEnv.sh
 public/scripts/chatModal copy.js
+.env
+LinuxEnv.sh
+*.sh

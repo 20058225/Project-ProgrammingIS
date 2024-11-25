@@ -1,4 +1,6 @@
-cd server
+cd Project-ProgrammingIS
+
+sudo apt update
 
 if ! command -v node &> /dev/null; then
     echo "@@ Node.js is required." 
