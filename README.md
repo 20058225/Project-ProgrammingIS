@@ -14,7 +14,9 @@
 [x] Chat    
 [x] Windows with a timer    
 [x] Modal   
-[x] Snackbar    
+[x] Snackbar  
+[x] Function login (check login|password) 
+[ ] Function register (create|edit|delete)    
   
 * POS   
 [x] Querying JSON as database    
@@ -26,6 +28,7 @@
 [x] Button Systems provide administrator access  
 [x] Filter by category showing product configuration colors
 
+<<<<<<< Updated upstream
 * Local infrastructure  
 [x] The *.sh file creates an environment to run the project   
 [x] Files are being created inside the server's folder   
@@ -36,6 +39,16 @@
 [ ] Button Commum Items  
 [ ] Function register (create|edit|delete)    
 [ ] Function login (check login|password)    
+=======
+* Local infrastructure
+[x] The *.sh file creates an environment to run the project 
+[x] Files are being created inside the server's folder 
+[x] Node, npm, open and express automatically installed 
+[x] Opens automatically in a default browser 
+
+## In process
+[ ] Button Commum Items    
+>>>>>>> Stashed changes
 [ ] Exhibit map of tables    
 [ ] Exhibit tables by colors (busy|avaliable)   
 [ ] Print receipt   

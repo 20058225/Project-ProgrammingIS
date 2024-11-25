@@ -32,10 +32,15 @@
 .filter-buttons button.top-sellers, .top-sellers { color: #fff; background-color: var(--top-sellers-color); }
 
 body {
+    box-sizing: border-box;
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #F4F4F4;
+    display: flex; /* Enable Flexbox */
+    justify-content: center; /* Horizontally center */
+    align-items: center; /* Vertically center */
+    height: 100vh; /* Full viewport height */
 }
 .main-container {
     display: flex;
@@ -343,10 +348,12 @@ button:hover {
   }
   
   .number-buttons button {
-    width: 40px;
+    /*width: 40px;*/
     height: 40px;
     font-size: 18px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
   }
   
   .modal-footer {
@@ -358,7 +365,8 @@ button:hover {
   .modal-footer input {
     width: 50px;
     text-align: center;
-    font-size: 18px;
+    font-weight:bold;
+    font-size: 30px;
     border: 1px solid #ddd;
   }
   

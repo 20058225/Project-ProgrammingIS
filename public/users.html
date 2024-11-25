@@ -1,88 +1,84 @@
-<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Management System</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-        }
-        input {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 10px;
-            box-sizing: border-box;
-        }
-        button {
-            padding: 10px 15px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-        #messageBox {
-            margin-top: 20px;
-            font-weight: bold;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <header class="header" id="main-header"></header>
+    <head></head>
+    <body>
+        <div class="container">
+            <header class="header" id="main-header"></header>
+            <main class="main double-column"><!--@@ REGISTER -->
+                <section class="register column-thirty">
+                    <div class="formRegister">
+                        <div class="header-flex-container">
+                            <a href="#" onclick="openPage('index')"><img src="images/logo.png" alt="PubPal" class="icons" id="logo"></a>
+                            <h3>Register</h3>
+                        </div>
+                        <div class="divColumn">
+                            <div class="insertForm">
+                                <label for="nameRegister">Full name:</label>
+                                <input class="userPwd" type="text" id="nameRegister" name="name" autocomplete="current-name" required>
+                                <label for="nameRegister">Email:</label>
+                                <input class="userPwd" type="text" id="usernameRegister" name="email" autocomplete="current-username" required>
+
+                                <label for="pwdRegister">Password:</label>
+                                <div class="password-container">
+                                    <input class="userPwd" type="password" id="pwdRegister" name="pwdRegister" required>
+                                    <button type="button" onclick="showHidePwd('pwdRegister', 'pwdIconR')">
+                                        <i class="fa-regular fa-eye-slash" id="pwdIconR" alt="Show/Hide Password"></i>
+                                    </button>
+                                    
+                                    <input class="userPwd" type="password" id="pwdRegisterConfirm" name="pwdRegisterConfirm" required>
+                                    <button type="button" onclick="showHidePwd('pwdRegisterConfirm', 'pwdIconRC')">
+                                        <i class="fa-regular fa-eye-slash" id="pwdIconRC" alt="Show/Hide Password"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="btnForm">
+                                <button class="btn button-primary" onclick="addUser()">Submit</button>
+                                <button class="btn button-primary" type="reset" onclick="cleanInput()">Reset</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="login column-thirty">
+                    <div class="formRegister">
+                        <div class="header-flex-container">
+                            <a href="#" onclick="openPage('index')"><img src="images/logo.png" alt="PubPal" class="icons" id="logo"></a>
+                            <h3>Search</h3>
+                        </div>
+                        <input type="text" class="userPwd" id="searchUser" placeholder="Search by name or email">
+                        <button class="btn" id="searchUserButton">Search</button>
+                        </div>
+                    <div id="searchResults" class="search-results"></div>
+                        <!-- Hidden Edit Form -->
+                    <div id="editFormContainer" class="edit-form-container" style="display: none;">
+                        <form id="editForm">
+                            <div class="inputEditForm">
+                                <label for="editName">Full Name:</label>
+                                <input type="text" id="editName" name="editName" required><br>
+
+                                <label for="editEmail">Email:</label>
+                                <input type="email" id="editEmail" name="editEmail" required><br>
+                            </div>
+                            <div class="btnEditForm">
+                                <button type="button" class="btnEdit" onclick="saveChanges()">Save</button>
+                                <button type="reset" class="btnEdit" onclick="closeEditForm()">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+                <div id="snackbarId" class="snackbar"></div>
+            </main>
+            <footer class="footer"></footer>
+        </div>
         
-    <h1>User Management System</h1>
+        <!-- JavaScript Files -->
+        <script src="scripts/registerLogin.js"></script>   
+        <script src="scripts/scripts.js"></script>   
+        <script src="scripts/functions.js"></script>   
+        <script src="scripts/headerFooter.js"></script>     
 
-    <h2>Manage Users</h2>
-    <div class="form-group">
-        <label for="manageUsername">Username</label>
-        <input type="text" id="manageUsername" placeholder="Enter username">
-    </div>
-    <div class="form-group">
-        <label for="managePassword">Password</label>
-        <input type="password" id="managePassword" placeholder="Enter password">
-    </div>
-    <div>
-        <button onclick="handleAddUser()">Add User</button>
-        <button onclick="handleEditUser()">Edit User</button>
-        <button onclick="handleDeleteUser()">Delete User</button>
-    </div>
-
-    <h2>Login</h2>
-    <div class="form-group">
-        <label for="loginUsername">Username</label>
-        <input type="text" id="loginUsername" placeholder="Enter username">
-    </div>
-    <div class="form-group">
-        <label for="loginPassword">Password</label>
-        <input type="password" id="loginPassword" placeholder="Enter password">
-    </div>
-    <button onclick="clickLogin()">Login</button>
-
-    <div id="messageBox"></div>
-
-    
-    <!-- JavaScript Files -->
-    <script src="scripts/script.js"></script>             
-    <script src="scripts/registerLogin.js"></script>   
-    <script src="scripts/headerFooter.js"></script>     
-    <script src="scripts/main.js"></script>   
-
-    <!-- External Libraries -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
-</body>
+        <!-- External Libraries -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    </body>
 </html>

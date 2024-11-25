@@ -7,18 +7,31 @@ let selectedItemIndex = null; // Index of the currently selected item
 function openPage(pageName) {
     window.location = `${pageName}.html`;
 }
-
+document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("top-sellers").addEventListener("click", () => filterProducts("top-sellers"));
+    document.getElementById("Draught").addEventListener("click", () => filterProducts("Draught"));
+    document.getElementById("Draught00").addEventListener("click", () => filterProducts("Draught00"));
+    document.getElementById("Cider").addEventListener("click", () => filterProducts("Cider"));
+    document.getElementById("Wine").addEventListener("click", () => filterProducts("Wine"));
+    document.getElementById("Cocktails").addEventListener("click", () => filterProducts("Cocktails"));
+    document.getElementById("Spirits").addEventListener("click", () => filterProducts("Spirits"));
+    document.getElementById("Minerals").addEventListener("click", () => filterProducts("Minerals"));
+    document.getElementById("hotDrinks").addEventListener("click", () => filterProducts("hotDrinks"));
+    document.getElementById("Snacks").addEventListener("click", () => filterProducts("Snacks"));
+});
 document.addEventListener("DOMContentLoaded", () => {
     // Function to load stock data from stock.json
     function loadStock() {
-        fetch('/data/stock.json')
+        fetch('./data/stock.json')
             .then(response => response.json())
             .then(data => {
                 stock = data; // Save data to the global stock variable
                 renderCategories(stock.categories); // Render category structure
+                            
+                // Call filterProducts after stock is loaded
                 filterProducts("Draught"); // Display Draught products by default
             })
-            .catch(error => console.error('Error loading stock.json:', error));
+            .catch(error => console.error('Error loading ./data/stock.json:', error));
     }
 
     // Function to render category structure without showing products
@@ -45,13 +58,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Function to filter products by a selected category
     function filterProducts(categoryName) {
+        if (!stock || !stock.categories) {
+            console.error("Stock data is not available or invalid.");
+            return;
+        }    
         const category = stock.categories.find(cat => cat.name === categoryName);
         if (category) {
             displayProducts(category.products);
         } else {
             console.error(`Category "${categoryName}" not found.`);
         }
-    }
+    }     // Attach to the global window object
+    window.filterProducts = filterProducts;
+    
 
     // Function to display products within a specific category
     function displayProducts(products) {
@@ -168,90 +187,83 @@ document.addEventListener("DOMContentLoaded", () => {
 
         updateDisplay();
     });
-
-// Open the modal when quantity selection is needed
         // Initialize items and selected index
-        let items = []; // Array to store item names and prices
-        let selectedItemIndex = null; // To track the currently selected item
-       
+    let items = []; // Array to store item names and prices
+    let selectedItemIndex = null; // To track the currently selected item
+    
 
         // Open the modal when quantity selection is needed
-        function openQuantityModal() {
-            const modal = document.getElementById("quantityModal");
-            const quantityInput = document.getElementById("selectedQuantity");
-            quantityInput.value = "0"; // Reset input
-            modal.style.display = "block";
-        }
+    function openQuantityModal() {
+        const modal = document.getElementById("quantityModal");
+        const quantityInput = document.getElementById("selectedQuantity");
+        quantityInput.value = "0"; // Reset input
+        modal.style.display = "block";
+    }
 
         // Close the modal
-        function closeQuantityModal() {
-            const modal = document.getElementById("quantityModal");
-            modal.style.display = "none";
-        }
+    function closeQuantityModal() {
+        const modal = document.getElementById("quantityModal");
+        modal.style.display = "none";
+    }
 
         // Handle number button clicks
-        document.querySelectorAll(".num-btn").forEach(button => {
-            button.addEventListener("click", event => {
-                const value = event.target.dataset.value;
-                const quantityInput = document.getElementById("selectedQuantity");
-                quantityInput.value = value; // Update the input
-            });
+    document.querySelectorAll(".num-btn").forEach(button => {
+        button.addEventListener("click", event => {
+            const value = event.target.dataset.value;
+            const quantityInput = document.getElementById("selectedQuantity");
+            quantityInput.value = value; // Update the input
         });
+    });
 
         // Confirm the selected quantity
-        document.getElementById("confirmQuantity").addEventListener("click", () => {
-            const quantityInput = parseInt(document.getElementById("selectedQuantity").value, 10);
+    document.getElementById("confirmQuantity").addEventListener("click", () => {
+        const quantityInput = parseInt(document.getElementById("selectedQuantity").value, 10);
 
-            if (isNaN(quantityInput) || quantityInput <= 0) {
-                alert("Please select a valid quantity!");
-                return;
-            }
-
-            multiplySelectedItem(quantityInput);
-            closeQuantityModal();
-        });
-
-        // Close the modal when "Cancel" is clicked
-        document.getElementById("closeModal").addEventListener("click", closeQuantityModal);
-
-        // Multiply the selected item
-        function multiplySelectedItem(quantity) {
-            if (selectedItemIndex === null || items.length === 0) {
-                alert("Please select an item first!");
-                return;
-            }
-
-            const selectedItem = items[selectedItemIndex];
-            const itemPrice = parseFloat(selectedItem.split("€")[1].trim());
-            const itemName = selectedItem.split(" - €")[0].trim();
-
-            for (let i = 0; i < quantity; i++) {
-                items.push(`${itemName} - €${itemPrice.toFixed(2)}`);
-            }
-
-            console.log(items); // For testing purposes
-            updateDisplay(); // Update the display 
+        if (isNaN(quantityInput) || quantityInput <= 0) {
+            alert("Please select a valid quantity!");
+            return;
         }
 
-        // Attach event to "Multiples" button
-        document.getElementById("multiply-item").addEventListener("click", () => {
-            if (selectedItemIndex === null || items.length === 0) {
-                alert("Please select an item first!");
-            } else {
-                openQuantityModal();
-            }
-        });
+        multiplySelectedItem(quantityInput);
+        closeQuantityModal();
+    });
 
-        // Example: Update display function
-        function updateDisplay() {
-            console.log("Updated items: ", items);
-            // Your display logic here
+    // Close the modal when "Cancel" is clicked
+    document.getElementById("closeModal").addEventListener("click", closeQuantityModal);
+
+    // Multiply the selected item
+    function multiplySelectedItem(quantity) {
+        if (selectedItemIndex === null || items.length === 0) {
+            alert("Please select an item first!");
+            return;
         }
 
+        const selectedItem = items[selectedItemIndex];
+        const itemPrice = parseFloat(selectedItem.split("€")[1].trim());
+        const itemName = selectedItem.split(" - €")[0].trim();
 
+        for (let i = 0; i < quantity; i++) {
+            items.push(`${itemName} - €${itemPrice.toFixed(2)}`);
+        }
 
+        console.log(items); // For testing purposes
+        updateDisplay(); // Update the display 
+    }
 
+    // Attach event to "Multiples" button
+    document.getElementById("multiply-item").addEventListener("click", () => {
+        if (selectedItemIndex === null || items.length === 0) {
+            alert("Please select an item first!");
+        } else {
+            openQuantityModal();
+        }
+    });
 
+    // Example: Update display function
+    function updateDisplay() {
+        console.log("Updated items: ", items);
+        // Your display logic here
+    }
 
     // Update display
     function updateDisplay() {

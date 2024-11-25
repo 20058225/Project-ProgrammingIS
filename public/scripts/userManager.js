@@ -1,8 +1,15 @@
-const fs = require('fs').promises;
+const express = require('express');
+const bodyParser = require('body-parser');
 const path = require('path');
+const fs = require('fs').promises;
+const cors = require('cors');
+const app = express();
+const PORT = 3000;
 
-const filePath = path.resolve(__dirname, '..', 'scripts', 'users.json');
-
+app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, '..', 'public')));
+app.use('/data', express.static(path.join(__dirname, '..', 'public', 'data')));
+app.use(cors());
 // Helper function to read users from JSON file
 async function readUsers() {
     try {

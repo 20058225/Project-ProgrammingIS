@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function() {
                             <div class="insertForm">
                                 <label for="nameRegister">Full name:</label>
                                 <input class="userPwd" type="text" id="nameRegister" name="name" required autocomplete="current-name">
-                                <label for="nameRegister">Email:</label>
+                                <label for="usernameRegister">Email:</label>
                                 <input class="userPwd" type="text" id="usernameRegister" name="email" required autocomplete="current-username">
 
                                 <label for="pwdRegister">Password:</label>
@@ -57,13 +57,11 @@ document.addEventListener("DOMContentLoaded", function() {
                                 </div>
                             </div>
                             <div class="btnForm">
-                                <button class="btn button-primary" onclick="handleAddUser(), snackbarRegister()">Submit</button>
-                                <button class="btn button-primary" type="reset">Reset</button>
+                                <button class="btn button-primary" onclick="addUser()">Submit</button>
+                                <button class="btn button-primary" type="reset" onclick="cleanInput()">Reset</button>
                             </div>
                         </div>
                     </div>
-                    <div class="snackbar" id="snackbarRegister">
-                        <img src="images/logo.png" alt="PubPal" class="icons" id="logo">Cadastro</div>
                 </section>
                 <!--@@ LOGIN -->
                 <section class="login column-thirty">
@@ -85,15 +83,15 @@ document.addEventListener("DOMContentLoaded", function() {
                                 </div>
                             </div>
                             <div class="btnForm">
-                                <button class="btn button-primary" onclick="clickLogin(), snackbarLogin()">Submit</button>
-                                <button class="btn button-primary" type="reset">Reset</button>
+                                <button class="btn button-primary" onclick="clickLogin()">Submit</button>
+                                <button class="btn button-primary" type="reset" onclick="cleanInput()">Reset</button>
                             </div>
                         </div>
                         <div class="forgot-password"><a href="#" onclick="openModal(event)">Forgot Password?</a></div>
                     </div>
                 </section>
                 <section class="login">
-                    <!-- Forgot Password Modal -->
+                    <!--@@ Forgot Password Modal -->
                     <div id="forgotPasswordModal" class="modal">
                         <div class="modal-content">
                             <span class="close" onclick="closeModal()">&times;</span>
@@ -101,27 +99,55 @@ document.addEventListener("DOMContentLoaded", function() {
                             <p>Please enter your email address.</p>
                             <div id="forgotPasswordForm">
                                 <input type="email" id="email" name="email" required placeholder="Email">
-                                <button type="button" class="btn button-primary" onclick="snackbarLink()">Send Reset Link</button>
+                                <button type="button" class="btn button-primary" onclick="showSnackbar()">Send Reset Link</button>
                             </div>
                         </div>
                     </div>
-                        <div id="messageBox"></div>
-                    <div class="snackbar" id="snackbarLink">
-                        <img src="images/logo.png" alt="PubPal" class="icons" id="logo">Login</div>
-                        <div class="snackbar" id="snackbarLogin">
-                        <img src="images/logo.png" alt="PubPal" class="icons" id="logo">Login</div>
                 </section>
+                <div id="snackbarId" class="snackbar"></div>
             `, redirect: false
         },
         "users.html": {
             main: `
-                <h2>User Management</h2><button onclick="addUser()">Add User</button>
-                <h2>Manage Users</h2>
-                <input type="text" id="manageUsername" placeholder="Username">
-                <input type="password" id="managePassword" placeholder="Password">
-                <button onclick="clickAddUser()">Add User</button>
-                <button onclick="clickEditUser()">Edit User</button>
-                <button onclick="clickDeleteUser()">Delete User</button>
+                <!--@@ REGISTER -->
+                <section class="register column-thirty">
+                    <div class="formRegister">
+                        <div class="header-flex-container">
+                            <a href="#" onclick="openPage('index')"><img src="images/logo.png" alt="PubPal" class="icons" id="logo"></a>
+                            <h3>Register</h3>
+                        </div>
+                        <div class="divColumn">
+                            <div class="insertForm">
+                                <label for="nameRegister">Full name:</label>
+                                <input class="userPwd" type="text" id="nameRegister" name="name" required autocomplete="current-name">
+                                <label for="nameRegister">Email:</label>
+                                <input class="userPwd" type="text" id="usernameRegister" name="email" required autocomplete="current-username">
+
+                                <label for="pwdRegister">Password:</label>
+                                <div class="password-container">
+                                    <input class="userPwd" type="password" id="pwdRegister" name="pwdRegister" required>
+                                    <button type="button" onclick="showHidePwd('pwdRegister', 'pwdIconR')">
+                                        <i class="fa-regular fa-eye-slash" id="pwdIconR" alt="Show/Hide Password"></i>
+                                    </button>
+                                    
+                                    <input class="userPwd" type="password" id="pwdRegisterConfirm" name="pwdRegisterConfirm" required>
+                                    <button type="button" onclick="showHidePwd('pwdRegisterConfirm', 'pwdIconRC')">
+                                        <i class="fa-regular fa-eye-slash" id="pwdIconRC" alt="Show/Hide Password"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="btnForm">
+                                <button class="btn button-primary" onclick="addUser()">Submit</button>
+                                <button class="btn button-primary" type="reset" onclick="cleanInput()">Reset</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="login column-thirty">
+                    <input type="text" id="searchUser">
+                    <button id="searchUserButton">Search</button>
+                </section>
+                <div id="snackbarId" class="snackbar"></div>
             `,
             redirect: false
         },
@@ -172,10 +198,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 <p>Scheduled maintenance will occur this Saturday from 2 AM to 4 AM. Service may be interrupted.</p>
                 <span class="date">Posted on: Nov 10, 2024</span>
             </section>
-            
-
-
-
             `,
             redirect: false,
         },
@@ -192,12 +214,9 @@ document.addEventListener("DOMContentLoaded", function() {
                                 <label for="messageContact">Email:</label>
                                 <textarea class="userPwd" type="text" id="messageContact" name="message" required></textarea>
                             </div>
-                            <div class="snackbar" id="snackbarContact">A consultant will be in contact with you shortly. We appreciate your interest!
-                                <img src="images/logo.png" alt="PubPal" class="icons" id="logo">
-                            </div>
                             <div class="btnForm">
-                                <button class="btn button-primary" onclick="snackbarContact()">Submit</button>
-                                <button class="btn button-primary" type="reset">Reset</button>
+                                <button class="btn button-primary" onclick="showSnackbar()">Submit</button>
+                                <button class="btn button-primary" type="reset" onclick="cleanInput()">Reset</button>
                             </div>
                         </div>
                     </section>

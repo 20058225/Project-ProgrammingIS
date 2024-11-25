@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function() {
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
         <link rel="stylesheet" href="styles/style.css">
-        <link rel="stylesheet" href="styles/login.css">
+        <link rel="stylesheet" href="styles/registerLogin.css">
         <link rel="stylesheet" href="styles/modal.css">
     `;
     document.head.insertAdjacentHTML("beforeend", headHTML);
@@ -26,8 +26,8 @@ document.addEventListener("DOMContentLoaded", function() {
             subtitle: "Please register or log in with us."
         },
         "users.html": {
-            title: "User Dashboard",
-            subtitle: "Manage your profile here."
+            title: "User Management System",
+            subtitle: "Manage all profiles here."
         },
         "customize.html": {
             title: "Coming Soon",
@@ -95,7 +95,7 @@ document.addEventListener("DOMContentLoaded", function() {
         `;
         headerElement.insertAdjacentHTML("beforeend", headerHTML);
     }
-    const headerHome = document.querySelector("section");
+    /*const headerHome = document.querySelector("section");
     if (headerHome) {
         const headerHTML = `
                     <div class="header-wrapper">
@@ -116,7 +116,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     <button onclick="btnGoTop()" id="btnGoTop" title="Go to top"><i class="fa-solid fa-arrow-up"></i></button>
         `;
         headerHome.insertAdjacentHTML("beforeend", headerHTML);
-    }
+    }*/
 
     // Add Footer Section
     const footerElement = document.querySelector(".footer");
