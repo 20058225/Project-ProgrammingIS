@@ -117,35 +117,59 @@ document.addEventListener("DOMContentLoaded", function() {
                             <h3>Register</h3>
                         </div>
                         <div class="divColumn">
-                            <div class="insertForm">
-                                <label for="nameRegister">Full name:</label>
-                                <input class="userPwd" type="text" id="nameRegister" name="name" required autocomplete="current-name">
-                                <label for="nameRegister">Email:</label>
-                                <input class="userPwd" type="text" id="usernameRegister" name="email" required autocomplete="current-username">
+                            <form id="addUserForm">
+                                <label for="manageUserName">Full name:</label>
+                                <input class="userPwd" type="text" id="manageUserName" name="name" required>
+                                <label for="manageUserEmail">Email:</label>
+                                <input class="userPwd" type="text" id="manageUserEmail" name="email" required>
 
-                                <label for="pwdRegister">Password:</label>
+                                <label for="managePassword">Password:</label>
                                 <div class="password-container">
-                                    <input class="userPwd" type="password" id="pwdRegister" name="pwdRegister" required>
+                                    <input class="userPwd" type="password" id="managePassword" name="pwdRegister" required>
                                     <button type="button" onclick="showHidePwd('pwdRegister', 'pwdIconR')">
                                         <i class="fa-regular fa-eye-slash" id="pwdIconR" alt="Show/Hide Password"></i>
                                     </button>
                                     
-                                    <input class="userPwd" type="password" id="pwdRegisterConfirm" name="pwdRegisterConfirm" required>
+                                    <input class="userPwd" type="password" id="managePasswordConf" name="pwdRegisterConfirm" required>
                                     <button type="button" onclick="showHidePwd('pwdRegisterConfirm', 'pwdIconRC')">
                                         <i class="fa-regular fa-eye-slash" id="pwdIconRC" alt="Show/Hide Password"></i>
                                     </button>
                                 </div>
-                            </div>
+                            </form>
                             <div class="btnForm">
-                                <button class="btn button-primary" onclick="addUser()">Submit</button>
+                                <button class="btn button-primary" type="submit">Submit</button>
                                 <button class="btn button-primary" type="reset" onclick="cleanInput()">Reset</button>
                             </div>
                         </div>
                     </div>
                 </section>
+                <!--@@ SEARCH -->
                 <section class="login column-thirty">
-                    <input type="text" id="searchUser">
-                    <button id="searchUserButton">Search</button>
+                    <div class="formRegister">
+                        <div class="header-flex-container">
+                            <a href="#" onclick="openPage('index')"><img src="images/logo.png" alt="PubPal" class="icons" id="logo"></a>
+                            <h3>Search</h3>
+                        </div>
+                        <input type="text" class="userPwd" id="searchUser" placeholder="Search by name or email">
+                        <button class="btn" id="searchUserButton">Search</button>
+                        </div>
+                    <div id="searchResults" class="search-results"></div>
+                        <!-- Hidden Edit Form -->
+                    <div id="editFormContainer" class="edit-form-container" style="display: none;">
+                        <form id="editForm">
+                            <div class="inputEditForm">
+                                <label for="editName">Full Name:</label>
+                                <input type="text" id="editName" name="editName" required><br>
+
+                                <label for="editEmail">Email:</label>
+                                <input type="email" id="editEmail" name="editEmail" required><br>
+                            </div>
+                            <div class="btnEditForm">
+                                <button type="button" class="btnEdit" onclick="saveChanges()">Save</button>
+                                <button type="reset" class="btnEdit" onclick="closeEditForm()">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
                 </section>
                 <div id="snackbarId" class="snackbar"></div>
             `,
