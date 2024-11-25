@@ -38,6 +38,11 @@ addUserForm.addEventListener('submit', (event) => {
     const password = document.getElementById('managePassword').value;
     const passwordConf = document.getElementById('managePasswordConf').value;
 
+    if (!username || !email || !password || !passwordConf) {
+        showSnackbar('All fields are required.', 'error');
+        return;
+    }
+
     addUser({ username, email, password, passwordConf });
 });
 
