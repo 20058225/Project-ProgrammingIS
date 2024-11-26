@@ -46,12 +46,12 @@ document.addEventListener("DOMContentLoaded", function() {
                                 <label for="managePassword">Password:</label>
                                 <div class="password-container">
                                     <input class="userPwd" type="password" id="managePassword" name="pwdRegister" required>
-                                    <button type="button" onclick="showHidePwd('pwdRegister', 'pwdIconR')">
+                                    <button type="button" onclick="showHidePwd('managePassword', 'pwdIconR')">
                                         <i class="fa-regular fa-eye-slash" id="pwdIconR" alt="Show/Hide Password"></i>
                                     </button>
                                     
                                     <input class="userPwd" type="password" id="managePasswordConf" name="pwdRegisterConfirm" required>
-                                    <button type="button" onclick="showHidePwd('pwdRegisterConfirm', 'pwdIconRC')">
+                                    <button type="button" onclick="showHidePwd('managePasswordConf', 'pwdIconRC')">
                                         <i class="fa-regular fa-eye-slash" id="pwdIconRC" alt="Show/Hide Password"></i>
                                     </button>
                                 </div>
@@ -77,7 +77,7 @@ document.addEventListener("DOMContentLoaded", function() {
                                 <label for="pwdLogin">Password:</label>
                                 <div class="password-container">
                                     <input class="userPwd" type="password" id="loginPassword" name="pwdLogin" required>
-                                    <button type="button" onclick="showHidePwd('pwdLogin', 'pwdIcon')">
+                                    <button type="button" onclick="showHidePwd('loginPassword', 'pwdIcon')">
                                         <i class="fa-regular fa-eye-slash" id="pwdIcon" alt="Show/Hide Password"></i>
                                     </button>
                                 </div>
@@ -104,7 +104,6 @@ document.addEventListener("DOMContentLoaded", function() {
                         </div>
                     </div>
                 </section>
-                <div id="snackbarId" class="snackbar"></div>
             `, redirect: false
         },
         "users.html": {
