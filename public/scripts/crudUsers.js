@@ -37,22 +37,31 @@ addUserForm.addEventListener('submit', (event) => {
 });
 
 // @@ Handle update user
-const updateUser = async ({ id, username, email, password }) => {
+const updateUser = async ({ id, username, email, password } = {}) => {
+    const updates = {};
+    if (username) updates.userFullName = username;
+    if (email) updates.userEmail = email;
+    if (password) updates.userPassword = password;
+
+    // Check if there are any updates to send
+    if (Object.keys(updates).length === 0) {
+        showSnackbar('No fields to update.');
+        return;
+    }
+
     try {
-        const response = await fetch('/updateUser', {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ id, username, email, password }),
+        const response = await fetch(`/updateUser/${id}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(updates),
         });
 
-        if (!response.ok) { throw new Error(await response.text()); }
+        if (!response.ok) throw new Error(await response.text());
 
-        alert(await response.text()); // Success message
+        showSnackbar('User updated successfully'); // Success message
     } catch (error) {
         console.error('Error updating user:', error);
-        alert('Failed to update user.');
+        showSnackbar('Failed to update user: ' + error.message);
     }
 };
 // @@ Attach event listener to the update form

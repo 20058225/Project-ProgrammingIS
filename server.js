@@ -87,40 +87,47 @@ app.post('/getUser', async (req, res) => {
         if (connection) connection.release();
     }
 });
-// Endpoint to Update a User
-app.put('/updateUser', async (req, res) => {
-    const { id, username, email, password } = req.body;
-    if (!id || (!username && !email && !password)) {
-        return res.status(400).send('User ID and at least one field to update are required.');
+// Endpoint to update specific fields using PATCH
+app.patch('/updateUser/:id', async (req, res) => {
+    const { id } = req.params;
+    const { userFullName, userEmail, userPassword } = req.body;
+
+    let updates = [];
+    let params = [];
+
+    if (userFullName) {
+        updates.push('userFullName = ?');
+        params.push(userFullName);
     }
-    let connection;
+    
+    if (userEmail) {
+        updates.push('userEmail = ?');
+        params.push(userEmail);
+    }
+
+    if (userPassword) {
+        updates.push('userPassword = ?');
+        params.push(userPassword);
+    }
+
+    if (updates.length === 0) {
+        return res.status(400).send('No fields provided for update.');
+    }
+
+    params.push(id); // Add id for WHERE clause
+
     try {
-        connection = await pool.promise().getConnection();
-        const [result] = await connection.execute(
-            `
-            UPDATE users
-            SET 
-                userFullName = COALESCE(?, userFullName),
-                userEmail = COALESCE(?, userEmail),
-                userPassword = COALESCE(?, userPassword)
-            WHERE userID = ?
-            `,
-            [username || null, email || null, password || null, id]
-        );
+        const query = `UPDATE users SET ${updates.join(', ')} WHERE userID = ?`;
+        const [result] = await promisePool.execute(query, params);
 
         if (result.affectedRows > 0) {
             res.send('User updated successfully.');
-            console.log('User updated successfully.');
         } else {
             res.status(404).send('User not found.');
-            console.log('User not found.');
         }
     } catch (err) {
-        console.error(err.message);
-        console.log(err.message);
+        console.error('Database error:', err);
         res.status(500).send('Error updating user.');
-    } finally {
-        if (connection) connection.release();
     }
 });
 // @@ Endpoint to Search a User
@@ -165,7 +172,7 @@ app.delete('/deleteUser/:userID', async (req, res) => {
 });
 
 // @@ Fallback to serve index.html for unknown routes
-app.get('*', (req, res) => {
+app.get((req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 app.use((req, res, next) => {
