@@ -62,13 +62,9 @@ function openPage(pageName) {
 function showSnackbar(message, type, snackbarId = "snackbar") {
     const snackbar = document.getElementById(snackbarId);
 
-    if (!snackbar) {
-        console.error("Snackbar element not found!");
-        return;
-    }
+    if (!snackbar) { console.error("Snackbar element not found!"); return; }
 
     snackbar.innerHTML = message;
-    //snackbar.style.backgroundColor = type === "success" ? "#2ECC71" : "#E74C3C";
     snackbar.classList.add("show");
 
     setTimeout(() => {

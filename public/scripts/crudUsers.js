@@ -96,15 +96,43 @@ const openForm = (user) => {
     document.getElementById('updatePassword').value = ''; // For security, don't populate password
     document.getElementById('editFormContainer').style.display = 'block';
 };
-// Modify your search result display function to include an edit button
+// Function to handle user search
+const searchUser = async () => {
+    const searchId = document.getElementById('searchUserID').value;
+    const searchName = document.getElementById('searchFullName').value;
+    
+    try {
+        let url = '/searchUser?';
+        if (searchId) url += `q=${searchId}`;
+        else if (searchName) url += `q=${encodeURIComponent(searchName)}`;
+        else {
+            showSnackbar('Please enter a User ID or Full Name to search.');
+            return;
+        }
+
+        const response = await fetch(url);
+        if (!response.ok) throw new Error('Search failed');
+        
+        const users = await response.json();
+        displaySearchResults(users);
+    } catch (error) {
+        console.error('Error searching users:', error);
+        showSnackbar('Error searching users: ' + error.message);
+    }
+};
+// Function to display search results
 const displaySearchResults = (users) => {
     const resultDiv = document.getElementById('searchResult');
     resultDiv.innerHTML = '';
+    if (users.length === 0) {
+        resultDiv.innerHTML = '<p>No users found.</p>';
+        return;
+    }
     users.forEach(user => {
         const userDiv = document.createElement('div');
         userDiv.innerHTML = `
             <p>ID: ${user.userID}, Name: ${user.userFullName}, Email: ${user.userEmail}</p>
-            <button onclick="openForm(${JSON.stringify(user)})">Edit</button>
+            <button onclick='openForm(${JSON.stringify(user)})'>Edit</button>
         `;
         resultDiv.appendChild(userDiv);
     });
