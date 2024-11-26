@@ -73,10 +73,10 @@ document.addEventListener("DOMContentLoaded", function() {
                         <form id="loginForm" class="divColumn">
                             <div class="insertForm">
                                 <label for="userFullName">Username:</label>
-                                <input class="userPwd" type="text" id="userFullName" name="username" required>
+                                <input class="userPwd" type="text" id="userFullName" required>
                                 <label for="userPassword">Password:</label>
                                 <div class="password-container">
-                                    <input class="userPwd" type="password" id="userPassword" name="pwdLogin" required>
+                                    <input class="userPwd" type="password" id="userPassword" required>
                                     <button type="button" onclick="showHidePwd('userPassword', 'pwdIcon')">
                                         <i class="fa-regular fa-eye-slash" id="pwdIcon" alt="Show/Hide Password"></i>
                                     </button>
