@@ -61,6 +61,7 @@ app.post('/addUser', async (req, res) => {
 // Endpoint to Login with a User
 app.post('/getUser', async (req, res) => {
     const { username, password } = req.body;
+    console.log('Request Body:', req.body);
     if (!username || !password) {
         return res.status(400).send('Username and password are required.');
     }

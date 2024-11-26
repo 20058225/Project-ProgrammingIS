@@ -49,10 +49,7 @@ const loginUser = async ({ username, password }) => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({
-                userFullName: username,
-                userPassword: password,
-            }),
+            body: JSON.stringify({ username, password }),
         });
 
         if (!response.ok) {
