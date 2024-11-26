@@ -21,7 +21,7 @@ const addUser = async ({ username, email, password, passwordConf }) => {
         }
         
         const data = await response.text();
-        alert(data); // Display success message
+        showSnackbar(data); // Display success message
     } catch (error) {
         console.error('Error adding user:', error);
         showSnackbar('Error adding user: ' + error.message);
@@ -58,10 +58,11 @@ const loginUser = async ({ username, password }) => {
         }
 
         const successMessage = await response.text();
-        alert(successMessage); // Display success message
+        showSnackbar('Login successful!', 'success'); // Display success message
+        window.location.href = 'pos.html'; // Redirect to pos.html
     } catch (error) {
         console.error('Error logging in:', error);
-        alert(error.message);
+        showSnackbar(error.message);
     }
 };
 // Handle form submission
