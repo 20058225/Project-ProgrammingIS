@@ -28,8 +28,7 @@ const addUser = async ({ username, email, password, passwordConf }) => {
         showSnackbar('Error adding user: ' + error.message);
     }
 };
-
-// Handle form submission
+// @@ Handle form submission
 const addUserForm = document.getElementById('addUserForm');
 addUserForm.addEventListener('submit', (event) => {
     event.preventDefault();
@@ -42,38 +41,34 @@ addUserForm.addEventListener('submit', (event) => {
     addUser({ username, email, password, passwordConf });
 });
 
-// @@ Handle login
-const loginUser = async ({ username, password }) => {
+// @@ Handle update user
+const updateUser = async ({ id, username, email, password }) => {
     try {
-        const response = await fetch('/getUser', {
-            method: 'POST',
+        const response = await fetch('/updateUser', {
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ username, password }),
+            body: JSON.stringify({ id, username, email, password }),
         });
 
-        if (!response.ok) {
-            const errorText = await response.text();
-            throw new Error(errorText);
-        }
+        if (!response.ok) { throw new Error(await response.text()); }
 
-        const successMessage = await response.text();
-        showSnackbar('Login successful!', 'success'); // Display success message
-        window.location.href = 'pos.html'; // Redirect to pos.html
+        alert(await response.text()); // Success message
     } catch (error) {
-        console.error('Error logging in:', error);
-        showSnackbar(error.message);
-        cleanInput();
+        console.error('Error updating user:', error);
+        alert('Failed to update user.');
     }
 };
-// Handle form submission
-const loginForm = document.getElementById('loginForm');
-loginForm.addEventListener('submit', (event) => {
+
+// Attach event listener to the update form
+document.getElementById('updateUserForm').addEventListener('submit', (event) => {
     event.preventDefault();
 
-    const username = document.getElementById('loginUsername').value;
-    const password = document.getElementById('loginPassword').value;
+    const id = document.getElementById('updateUserId').value;
+    const username = document.getElementById('updateUsername').value;
+    const email = document.getElementById('updateEmail').value;
+    const password = document.getElementById('updatePassword').value;
 
-    loginUser({ username, password });
+    updateUser({ id, username, email, password });
 });

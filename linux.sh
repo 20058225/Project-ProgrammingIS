@@ -1,13 +1,18 @@
+git clone https://github.com/20058225/Project-ProgrammingIS
+cd Project-ProgrammingIS
+
+sudo apt update
+
 if ! command -v node &> /dev/null; then
     echo "@@ Node.js is required." 
-    install node.js
+    sudo apt install -y nodejs
 else
     echo "@@ Node.js is already installed."
 fi
 
 if ! command -v npm &> /dev/null; then
     echo "@@ NPM is required." 
-    install npm.js
+    sudo apt install -y npm
 else
     echo "@@ NPM is already installed."
 fi
@@ -24,9 +29,9 @@ else
 fi
 
 echo "@@ Installing necessary packages 2"
-if ! command -v express body-parser bcrypt express-validator &> /dev/null; then
-    echo "@@ express body-parser bcrypt express-validator are required." 
-    npm install express body-parser bcrypt express-validator
+if ! command -v express body-parser express-validator &> /dev/null; then
+    echo "@@ express body-parser express-validator are required." 
+    npm install express body-parser express-validator
 else
     echo "@@ express open fs are already installed."
 fi
@@ -38,17 +43,6 @@ if ! command -v cors &> /dev/null; then
 else
     echo "@@ ecors is already installed."
 fi
-
-echo "@@ Installing MySql"
-if ! command -v mysql &> /dev/null; then
-    echo "@@ mysql is required." 
-    npm install mysql
-    npm install mysql2
-    sudo apt install -y mysql-client
-else
-    echo "@@ MySql is already installed."
-fi
-
 
 echo "@@ Installing body-parser"
 if ! command -v body-parser &> /dev/null; then
@@ -80,6 +74,16 @@ if ! command -v eslint &> /dev/null; then
     npm install --save-dev eslint
 else
     echo "@@ eslint is already installed."
+fi
+
+echo "@@ Installing MySql"
+if ! command -v mysql &> /dev/null; then
+    echo "@@ mysql is required." 
+    npm install mysql
+    npm install mysql2
+    sudo apt install -y mysql-client
+else
+    echo "@@ MySql is already installed."
 fi
 
 echo "@@ Starting server"
