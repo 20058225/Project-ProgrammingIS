@@ -131,11 +131,11 @@ const displaySearchResults = (users) => {
         return;
     }
     users.forEach(user => {
-        //const userDiv = document.createElement('div');
+        const userDiv = document.createElement('div');
         userDiv.innerHTML = `
             <p>ID: ${user.userID}, Name: ${user.userFullName}, Email: ${user.userEmail}</p>
             <button onclick='openForm(${JSON.stringify(user)})'>Edit</button>
         `;
-        //resultDiv.appendChild(userDiv);
+        resultDiv.appendChild(userDiv);
     });
 };
