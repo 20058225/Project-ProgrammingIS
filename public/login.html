@@ -5,16 +5,89 @@
         <div class="container">
             <header class="header" id="main-header"></header>
             <main class="main double-column">
-                <!-- Main content goes here -->               
+                <!--@@ REGISTER -->
+                <section class="register column-thirty">
+                    <form id="addUserForm" class="formRegister">
+                        <div class="header-flex-container">
+                            <a href="#" onclick="openPage('index')"><img src="images/logo.png" alt="PubPal" class="icons" id="logo"></a>
+                            <h3>Register</h3>
+                        </div>
+                        <div class="divColumn">
+                            <div class="classAddUserForm">
+                                <label for="manageUsername">Full name:</label>
+                                <input class="userPwd" type="text" id="manageUsername" required>
+                                <label for="manageUseremail">Email:</label>
+                                <input class="userPwd" type="text" id="manageUseremail" required>
+
+                                <label for="managePassword">Password:</label>
+                                <div class="password-container">
+                                    <input class="userPwd" type="password" id="managePassword" required>
+                                    <button type="button" onclick="showHidePwd('managePassword', 'pwdIconR')">
+                                        <i class="fa-regular fa-eye-slash" id="pwdIconR" alt="Show/Hide Password"></i>
+                                    </button>
+                                    
+                                    <input class="userPwd" type="password" id="managePasswordConf" required>
+                                    <button type="button" onclick="showHidePwd('managePasswordConf', 'pwdIconRC')">
+                                        <i class="fa-regular fa-eye-slash" id="pwdIconRC" alt="Show/Hide Password"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="btnForm">
+                                <button class="btn button-primary" type="submit">Submit</button>
+                                <button class="btn button-primary" type="reset" onclick="cleanInput()">Reset</button>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+                <!--@@ LOGIN -->
+                <section class="login column-thirty">
+                    <div class="formLogin">
+                        <div class="header-flex-container">
+                            <a href="#" onclick="openPage('index')"><img src="images/logo.png" alt="PubPal" class="icons" id="logo"></a>
+                            <h3>Login</h3>
+                        </div>
+                        <form id="loginForm" class="divColumn">
+                            <div class="insertForm">
+                                <label for="loginUsername">Username:</label>
+                                <input class="userPwd" type="text" id="loginUsername" required>
+                                <label for="loginPassword">Password:</label>
+                                <div class="password-container">
+                                    <input class="userPwd" type="password" id="loginPassword" required>
+                                    <button type="button" onclick="showHidePwd('loginPassword', 'pwdIcon')">
+                                        <i class="fa-regular fa-eye-slash" id="pwdIcon" alt="Show/Hide Password"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="btnForm">
+                                <button class="btn button-primary" type="submit">Submit</button>
+                                <button class="btn button-primary" type="reset" onclick="cleanInput()">Reset</button>
+                            </div>
+                        </form>
+                        <div class="forgot-password"><a href="#" onclick="openModal(event)">Forgot Password?</a></div>
+                    </div>
+                </section>
+                <section class="login">
+                    <!--@@ Forgot Password Modal -->
+                    <div id="forgotPasswordModal" class="modal">
+                        <div class="modal-content">
+                            <span class="close" onclick="closeModal()">&times;</span>
+                            <h3>Reset Your Password</h3>
+                            <p>Please enter your email address.</p>
+                            <div id="forgotPasswordForm">
+                                <input type="email" id="email" name="email" required placeholder="Email">
+                                <button type="button" class="btn button-primary" onclick="closeModal(), showSnackbarContact()">Send Reset Link</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>                
             </main>
             <footer class="footer"></footer>
         </div>
         <!-- JavaScript Files -->
         <script src="scripts/scripts.js"></script> 
         <script src="scripts/crudLogin.js"></script> 
-        <script src="scripts/headerFooter.js"></script>  
-        <script src="scripts/main.js"></script>   
-   
+        <script src="scripts/headerFooter.js"></script>     
+
         <!-- External Libraries -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"></script>
