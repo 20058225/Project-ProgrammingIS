@@ -7,3 +7,5 @@ package.json
 *.sh
 app.log
 winEnv.sh
+server copy.js
+public/scripts/crud copy.js

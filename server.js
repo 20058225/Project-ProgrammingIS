@@ -14,13 +14,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // MySQL Configuration
-const pool = mysql.createPool({
-    host: process.env.DB_SERVER,
+const dbConfig = {
+    host: process.env.DB_HOST,
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
-    port: process.env.DB_PORT || 3306
-});
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
+};
 
 // Test connection
 pool.getConnection((err, connection) => {
@@ -36,34 +38,37 @@ const promisePool = pool.promise(); // Use promise-based queries
 
 // Endpoint to Add a User
 app.post('/addUser', async (req, res) => {
-    const { userFullName, userEmail, userPassword } = req.body;
-    if (!userFullName || !userEmail || !userPassword) {
+    const { username, email, password } = req.body;
+    if (!username || !email || !password) {
         return res.status(400).send('Username, email, and password are required.');
     }
     try {
-        const [result] = await promisePool.execute(
+        const connection = await mysql.createConnection(dbConfig);
+        const [result] = await connection.execute(
             'INSERT INTO users (userFullName, userEmail, userPassword) VALUES (?, ?, ?)',
-            [userFullName, userEmail, userPassword]
+            [username, email, password]
         );
-        res.status(200).send('User added successfully.');
+        await connection.end();
+        res.send('User added successfully.');
         console.log('User added successfully.');
     } catch (err) {
-        console.error("Database Error:", err);
+        console.error("Database Error:",err.message);
         res.status(500).send('Error saving user to the database.');
     }
 });
-
 // Endpoint to Login with a User
 app.post('/getUser', async (req, res) => {
-    const { userFullName, userPassword } = req.body;
-    if (!userFullName || !userPassword) {
+    const { username, password } = req.body;
+    if (!username || !password) {
         return res.status(400).send('Username and password are required.');
     }
     try {
-        const [rows] = await promisePool.execute(
+        const connection = await mysql.createConnection(dbConfig);
+        const [rows] = await connection.execute(
             'SELECT * FROM users WHERE userFullName = ? AND userPassword = ?',
-            [userFullName, userPassword]
+            [username, password]
         );
+        await connection.end();
 
         if (rows.length > 0) {
             res.status(200).json({ message: 'Login successful.', user: rows[0] });
@@ -73,19 +78,19 @@ app.post('/getUser', async (req, res) => {
             console.log('Invalid username or password.');
         }
     } catch (err) {
-        console.error('Error querying the database:', err);
+        console.error('Error querying the database:', err.message);
         res.status(500).send('Error checking the user in the database.');
     }
 });
-
 // Endpoint to Update a User
 app.put('/updateUser', async (req, res) => {
-    const { userID, userFullName, userEmail, userPassword } = req.body;
-    if (!userID || (!userFullName && !userEmail && !userPassword)) {
+    const { id, username, email, password } = req.body;
+    if (!id || (!username && !email && !password)) {
         return res.status(400).send('User ID and at least one field to update are required.');
     }
     try {
-        const [result] = await promisePool.execute(
+        const connection = await mysql.createConnection(dbConfig);
+        const [result] = await connection.execute(
             `
             UPDATE users
             SET 
@@ -94,8 +99,9 @@ app.put('/updateUser', async (req, res) => {
                 userPassword = COALESCE(?, userPassword)
             WHERE userID = ?
             `,
-            [userFullName || null, userEmail || null, userPassword || null, userID]
+            [username || null, email || null, password || null, id]
         );
+        await connection.end();
 
         if (result.affectedRows > 0) {
             res.send('User updated successfully.');
@@ -110,7 +116,6 @@ app.put('/updateUser', async (req, res) => {
         res.status(500).send('Error updating user.');
     }
 });
-
 // Endpoint to Search a User
 app.get('/searchUser', async (req, res) => {
     const searchTerm = req.query.q;
@@ -126,7 +131,6 @@ app.get('/searchUser', async (req, res) => {
         res.status(500).send('Error searching users.');
     }
 });
-
 app.delete('/deleteUser/:userID', async (req, res) => {
     const { userID } = req.params;
     try {
@@ -146,12 +150,10 @@ app.delete('/deleteUser/:userID', async (req, res) => {
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
-
 app.use((req, res, next) => {
     console.log(`Incoming request: ${req.method} ${req.url}`, req.body);
     next();
 });
-
 // Start Server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

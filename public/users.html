@@ -5,7 +5,77 @@
         <div class="container">
             <header class="header" id="main-header"></header>
             <main class="main double-column">
-                <!-- Main content goes here -->
+                <!--@@ REGISTER -->
+                <section class="register column-thirty">
+                    <form id="addUserForm" class="formRegister">
+                        <div class="header-flex-container">
+                            <a href="#" onclick="openPage('index')"><img src="images/logo.png" alt="PubPal" class="icons" id="logo"></a>
+                            <h3>Register</h3>
+                        </div>
+                        <div class="divColumn">
+                            <div class="classAddUserForm">
+                                <label for="manageUsername">Full name:</label>
+                                <input class="userPwd" type="text" id="manageUsername" required>
+                                <label for="manageUseremail">Email:</label>
+                                <input class="userPwd" type="text" id="manageUseremail" required>
+
+                                <label for="managePassword">Password:</label>
+                                <div class="password-container">
+                                    <input class="userPwd" type="password" id="managePassword" required>
+                                    <button type="button" onclick="showHidePwd('managePassword', 'pwdIconR')">
+                                        <i class="fa-regular fa-eye-slash" id="pwdIconR" alt="Show/Hide Password"></i>
+                                    </button>
+                                    
+                                    <input class="userPwd" type="password" id="managePasswordConf" required>
+                                    <button type="button" onclick="showHidePwd('managePasswordConf', 'pwdIconRC')">
+                                        <i class="fa-regular fa-eye-slash" id="pwdIconRC" alt="Show/Hide Password"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="btnForm">
+                                <button class="btn button-primary" type="submit">Submit</button>
+                                <button class="btn button-primary" type="reset" onclick="cleanInput()">Reset</button>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+                <!--@@ SEARCH -->
+                <section class="login column-thirty">
+                    <form id="searchUserForm" class="formRegister">
+                        <div class="header-flex-container">
+                            <a href="#" onclick="openPage('index')"><img src="images/logo.png" alt="PubPal" class="icons" id="logo"></a>
+                            <h3>Search</h3>
+                        </div>
+                        <input type="number" id="searchUserID" placeholder="User ID"> 
+                        <input type="text" id="searchFullName" placeholder="Full Name">
+                        <button class="btn button-primary" type="submit">Search</button>
+                        <button class="btn button-primary" type="reset" onclick="cleanInput()">Reset</button>
+                    </form>
+                    <div id="searchResult" class="search-results"></div>
+                        <!-- Hidden Edit Form -->
+                    <div id="editFormContainer" class="edit-form-container" style="display: none;">
+                        <form id="editForm">
+                            <div class="inputEditForm">
+                                <label for="updateUserId">User ID:</label>
+                                <input type="number" id="updateUserId" placeholder="User ID" required>
+                                
+                                <label for="updateUsername">New Username:</label>
+                                <input type="text" id="updateUsername" placeholder="New Username"><br>
+
+                                <label for="updateEmail">New Email:</label>
+                                <input type="email" id="updateEmail" placeholder="New Email"><br>
+
+                                <label for="updatePassword">New Password:</label>
+                                <input type="password" id="updatePassword" placeholder="New Password"><br>
+                            </div>
+                            <div class="btnEditForm">
+                                <button type="button" class="btnEdit" type="submit">Save</button>
+                                <button type="reset" class="btnEdit" onclick="closeEditForm()">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+                <div id="snackbarId" class="snackbar"></div>                
             </main>
             <footer class="footer"></footer>
         </div>
@@ -13,7 +83,6 @@
         <script src="scripts/scripts.js"></script> 
         <script src="scripts/crud.js"></script> 
         <script src="scripts/headerFooter.js"></script>     
-        <script src="scripts/main.js"></script>   
 
         <!-- External Libraries -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
