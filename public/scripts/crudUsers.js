@@ -35,7 +35,6 @@ addUserForm.addEventListener('submit', (event) => {
 
     addUser({ username, email, password, passwordConf });
 });
-
 // @@ Handle update user
 const updateUser = async ({ id, username, email, password } = {}) => {
     const updates = {};

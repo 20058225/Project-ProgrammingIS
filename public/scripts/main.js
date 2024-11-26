@@ -27,6 +27,160 @@ document.addEventListener("DOMContentLoaded", function() {
                 </p>
             `, redirect: false
         },
+        "login.html": {
+            main: `
+            <!--@@ REGISTER -->
+                <section class="register column-thirty">
+                    <form id="addUserForm" class="formRegister">
+                        <div class="header-flex-container">
+                            <a href="#" onclick="openPage('index')"><img src="images/logo.png" alt="PubPal" class="icons" id="logo"></a>
+                            <h3>Register</h3>
+                        </div>
+                        <div class="divColumn">
+                            <div class="classAddUserForm">
+                                <label for="manageUsername">Full name:</label>
+                                <input class="userPwd" type="text" id="manageUsername" required>
+                                <label for="manageUseremail">Email:</label>
+                                <input class="userPwd" type="text" id="manageUseremail" required>
+
+                                <label for="managePassword">Password:</label>
+                                <div class="password-container">
+                                    <input class="userPwd" type="password" id="managePassword" required>
+                                    <button type="button" onclick="showHidePwd('managePassword', 'pwdIconR')">
+                                        <i class="fa-regular fa-eye-slash" id="pwdIconR" alt="Show/Hide Password"></i>
+                                    </button>
+                                    
+                                    <input class="userPwd" type="password" id="managePasswordConf" required>
+                                    <button type="button" onclick="showHidePwd('managePasswordConf', 'pwdIconRC')">
+                                        <i class="fa-regular fa-eye-slash" id="pwdIconRC" alt="Show/Hide Password"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="btnForm">
+                                <button class="btn button-primary" type="submit">Submit</button>
+                                <button class="btn button-primary" type="reset" onclick="cleanInput()">Reset</button>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+                <!--@@ LOGIN -->
+                <section class="login column-thirty">
+                    <div class="formLogin">
+                        <div class="header-flex-container">
+                            <a href="#" onclick="openPage('index')"><img src="images/logo.png" alt="PubPal" class="icons" id="logo"></a>
+                            <h3>Login</h3>
+                        </div>
+                        <form id="loginForm" class="divColumn">
+                            <div class="insertForm">
+                                <label for="loginUsername">Username:</label>
+                                <input class="userPwd" type="text" id="loginUsername" required>
+                                <label for="loginPassword">Password:</label>
+                                <div class="password-container">
+                                    <input class="userPwd" type="password" id="loginPassword" required>
+                                    <button type="button" onclick="showHidePwd('loginPassword', 'pwdIcon')">
+                                        <i class="fa-regular fa-eye-slash" id="pwdIcon" alt="Show/Hide Password"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="btnForm">
+                                <button class="btn button-primary" type="submit">Submit</button>
+                                <button class="btn button-primary" type="reset" onclick="cleanInput()">Reset</button>
+                            </div>
+                        </form>
+                        <div class="forgot-password"><a href="#" onclick="openModal(event)">Forgot Password?</a></div>
+                    </div>
+                </section>
+                <section class="login">
+                    <!--@@ Forgot Password Modal -->
+                    <div id="forgotPasswordModal" class="modal">
+                        <div class="modal-content">
+                            <span class="close" onclick="closeModal()">&times;</span>
+                            <h3>Reset Your Password</h3>
+                            <p>Please enter your email address.</p>
+                            <div id="forgotPasswordForm">
+                                <input type="email" id="email" name="email" required placeholder="Email">
+                                <button type="button" class="btn button-primary" onclick="closeModal(), showSnackbarContact()">Send Reset Link</button>
+                            </div>
+                        </div>
+                    </div>
+                </section> 
+            `,redirect: false
+        },
+        "users": {
+            main: `
+            <!--@@ REGISTER -->
+                <section class="register column-thirty">
+                    <form id="addUserForm" class="formRegister">
+                        <div class="header-flex-container">
+                            <a href="#" onclick="openPage('index')"><img src="images/logo.png" alt="PubPal" class="icons" id="logo"></a>
+                            <h3>Register</h3>
+                        </div>
+                        <div class="divColumn">
+                            <div class="classAddUserForm">
+                                <label for="manageUsername">Full name:</label>
+                                <input class="userPwd" type="text" id="manageUsername" required>
+                                <label for="manageUseremail">Email:</label>
+                                <input class="userPwd" type="text" id="manageUseremail" required>
+
+                                <label for="managePassword">Password:</label>
+                                <div class="password-container">
+                                    <input class="userPwd" type="password" id="managePassword" required>
+                                    <button type="button" onclick="showHidePwd('managePassword', 'pwdIconR')">
+                                        <i class="fa-regular fa-eye-slash" id="pwdIconR" alt="Show/Hide Password"></i>
+                                    </button>
+                                    
+                                    <input class="userPwd" type="password" id="managePasswordConf" required>
+                                    <button type="button" onclick="showHidePwd('managePasswordConf', 'pwdIconRC')">
+                                        <i class="fa-regular fa-eye-slash" id="pwdIconRC" alt="Show/Hide Password"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="btnForm">
+                                <button class="btn button-primary" type="submit">Submit</button>
+                                <button class="btn button-primary" type="reset" onclick="cleanInput()">Reset</button>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+                <!--@@ SEARCH -->
+                <section class="login column-thirty">
+                    <form id="searchUserForm" class="formRegister" onsubmit="event.preventDefault(); searchUser();">
+                        <div class="header-flex-container">
+                            <a href="#" onclick="openPage('index')"><img src="images/logo.png" alt="PubPal" class="icons" id="logo"></a>
+                            <h3>Search</h3>
+                        </div>
+                        <input class="userPwd" type="number" id="searchUserID" placeholder="User ID"> 
+                        <input class="userPwd" type="text" id="searchFullName" placeholder="Full Name">
+                        <button class="btn button-primary" type="submit" onclick="searchUser()">Search</button>
+                        <button class="btn button-primary" type="reset" onclick="cleanInput()">Reset</button>
+                    </form>
+                    <div id="searchResult" class="search-results"></div>
+                        <!-- Hidden Edit Form -->
+                    <div id="editFormContainer" class="edit-form-container" style="display: none;">
+                        <form id="updateUserForm">
+                            <div class="inputEditForm">
+                                <label for="updateUserId">User ID:</label>
+                                <input type="number" id="updateUserId" placeholder="User ID" disabled>
+                                
+                                <label for="updateUsername">New Username:</label>
+                                <input type="text" id="updateUsername" placeholder="New Username"><br>
+
+                                <label for="updateEmail">New Email:</label>
+                                <input type="email" id="updateEmail" placeholder="New Email"><br>
+
+                                <label for="updatePassword">New Password:</label>
+                                <input type="password" id="updatePassword" placeholder="New Password"><br>
+                            </div>
+                            <div class="btnEditForm">
+                                <button type="button" class="btnEdit" onclick="updateUser()">Save</button>
+                                <button type="button" class="btnEdit" onclick="closeEditForm()">Cancel</button>
+                                <button type="button" class="btnDelete" onclick="deleteUser()">Delete User</button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+            `,redirect: false
+        },
         "customize.html": {
             main: `<p>Hi there!</p><h2>Coming Soon!</h2><div class="snippet"><div class="dot-falling"></div></div>`,
             redirect: true, // Indicate whether this page should redirect
