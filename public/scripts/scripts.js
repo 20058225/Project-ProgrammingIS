@@ -49,6 +49,12 @@ window.openChat = function() {
     };
 
 };
+// Function to close edit form
+const closeForm = () => {
+    document.getElementById('editFormContainer').style.display = 'none';
+    document.getElementById('searchUserForm').reset();
+    document.getElementById('searchResult').innerHTML = '';
+};
 
 function openPage(pageName) {
     window.location = `${pageName}.html`;

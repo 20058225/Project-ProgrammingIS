@@ -9,9 +9,7 @@ const addUser = async ({ username, email, password, passwordConf }) => {
         // Make a request to the backend API to add a user
         const response = await fetch('/addUser', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username, email, password })
         });
 
@@ -47,16 +45,11 @@ const loginUser = async ({ username, password }) => {
     try {
         const response = await fetch('/getUser', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ username, password }),
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, password })
         });
 
-        if (!response.ok) {
-            const errorText = await response.text();
-            throw new Error(errorText);
-        }
+        if (!response.ok) { const errorText = await response.text(); throw new Error(errorText); }
 
         const successMessage = await response.text();
         showSnackbar('Login successful!', 'success'); // Display success message

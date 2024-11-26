@@ -8,17 +8,12 @@ const addUser = async ({ username, email, password, passwordConf }) => {
         }
         // Make a request to the backend API to add a user
         const response = await fetch('/addUser', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            method: 'POST', 
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username, email, password })
         });
 
-        if (!response.ok) {
-            const errorText = await response.text();
-            throw new Error(errorText);
-        }
+        if (!response.ok) { const errorText = await response.text(); throw new Error(errorText); }
         
         const data = await response.text();
         showSnackbar(data); // Display success message
@@ -80,25 +75,21 @@ const deleteUser = async () => {
     if (!confirm('Are you sure you want to delete this user?')) { return; }
 
     try {
-        const response = await fetch(`/deleteUser/${userId}`, {
-            method: 'DELETE',
-        });
+        const response = await fetch(`/deleteUser/${userId}`, 
+            { method: 'DELETE' });
 
         if (!response.ok) { const errorText = await response.text(); throw new Error(errorText); }
 
         const successMessage = await response.text();
         showSnackbar(successMessage);
-        closeEditForm();
-        // Optionally, refresh the search results or clear the form
-        document.getElementById('searchUserForm').reset();
-        document.getElementById('searchResult').innerHTML = '';
+        closeForm();
     } catch (error) {
         console.error('Error deleting user:', error);
         showSnackbar('Error deleting user: ' + error.message);
     }
 };
 // Function to open edit form and populate it with user data
-const openEditForm = (user) => {
+const openForm = (user) => {
     document.getElementById('updateUserId').value = user.userID;
     document.getElementById('updateUsername').value = user.userFullName;
     document.getElementById('updateEmail').value = user.userEmail;
@@ -113,7 +104,7 @@ const displaySearchResults = (users) => {
         const userDiv = document.createElement('div');
         userDiv.innerHTML = `
             <p>ID: ${user.userID}, Name: ${user.userFullName}, Email: ${user.userEmail}</p>
-            <button onclick="openEditForm(${JSON.stringify(user)})">Edit</button>
+            <button onclick="openForm(${JSON.stringify(user)})">Edit</button>
         `;
         resultDiv.appendChild(userDiv);
     });
