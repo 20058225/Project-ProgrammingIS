@@ -84,8 +84,8 @@ document.addEventListener("DOMContentLoaded", function() {
                         <label for="msg"><b>Message</b></label>
                         <textarea id="msg" placeholder="Hey there! How I can help you today?" name="msg" required></textarea>
                         <div class="btnForm">
-                            <button type="button" class="btn" id="sendMessage" onclick="showSnackbar(), closeForm()" disabled>Submit</button>
-                            <button type="reset" class="btn cancel" onclick="closeForm()">Close</button>
+                            <button type="button" class="btn" id="sendMessage" onclick="showSnackbar(), closeChat()" disabled>Submit</button>
+                            <button type="reset" class="btn cancel" onclick="closeChat()">Close</button>
                         </div>
                     </div>
         `;

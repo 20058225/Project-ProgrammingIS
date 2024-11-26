@@ -45,7 +45,6 @@ function closeChat() {
     if (messageInput) messageInput.value = ""; // Clear input
 }
 
-
 function openPage(pageName) {
     window.location = `${pageName}.html`;
 }

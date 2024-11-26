@@ -29,6 +29,40 @@ document.addEventListener("DOMContentLoaded", function() {
         },
         "login.html": {
             main: `
+                <!--@@ REGISTER -->
+                <section class="register column-thirty">
+                    <form id="addUserForm" class="formRegister">
+                        <div class="header-flex-container">
+                            <a href="#" onclick="openPage('index')"><img src="images/logo.png" alt="PubPal" class="icons" id="logo"></a>
+                            <h3>Register</h3>
+                        </div>
+                        <div class="divColumn">
+                            <div class="addUserForm">
+                                <label for="manageUserName">Full name:</label>
+                                <input class="userPwd" type="text" id="manageUserName" name="name" required>
+                                <label for="manageUserEmail">Email:</label>
+                                <input class="userPwd" type="text" id="manageUserEmail" name="email" required>
+
+                                <label for="managePassword">Password:</label>
+                                <div class="password-container">
+                                    <input class="userPwd" type="password" id="managePassword" name="pwdRegister" required>
+                                    <button type="button" onclick="showHidePwd('pwdRegister', 'pwdIconR')">
+                                        <i class="fa-regular fa-eye-slash" id="pwdIconR" alt="Show/Hide Password"></i>
+                                    </button>
+                                    
+                                    <input class="userPwd" type="password" id="managePasswordConf" name="pwdRegisterConfirm" required>
+                                    <button type="button" onclick="showHidePwd('pwdRegisterConfirm', 'pwdIconRC')">
+                                        <i class="fa-regular fa-eye-slash" id="pwdIconRC" alt="Show/Hide Password"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="btnForm">
+                                <button class="btn button-primary" type="submit">Submit</button>
+                                <button class="btn button-primary" type="reset" onclick="cleanInput()">Reset</button>
+                            </div>
+                        </div>
+                    </form>
+                </section>
                 <!--@@ LOGIN -->
                 <section class="login column-thirty">
                     <form id="loginForm" class="formLogin" action="pos.html">
@@ -77,13 +111,13 @@ document.addEventListener("DOMContentLoaded", function() {
             main: `
                 <!--@@ REGISTER -->
                 <section class="register column-thirty">
-                    <div class="formRegister">
+                    <form id="addUserForm" class="formRegister">
                         <div class="header-flex-container">
                             <a href="#" onclick="openPage('index')"><img src="images/logo.png" alt="PubPal" class="icons" id="logo"></a>
                             <h3>Register</h3>
                         </div>
                         <div class="divColumn">
-                            <form id="addUserForm">
+                            <div class="addUserForm">
                                 <label for="manageUserName">Full name:</label>
                                 <input class="userPwd" type="text" id="manageUserName" name="name" required>
                                 <label for="manageUserEmail">Email:</label>
@@ -92,22 +126,22 @@ document.addEventListener("DOMContentLoaded", function() {
                                 <label for="managePassword">Password:</label>
                                 <div class="password-container">
                                     <input class="userPwd" type="password" id="managePassword" name="pwdRegister" required>
-                                    <button type="button" onclick="showHidePwd('pwdRegister', 'pwdIconR')">
+                                    <button type="button" onclick="showHidePwd('managePassword', 'pwdIconR')">
                                         <i class="fa-regular fa-eye-slash" id="pwdIconR" alt="Show/Hide Password"></i>
                                     </button>
                                     
                                     <input class="userPwd" type="password" id="managePasswordConf" name="pwdRegisterConfirm" required>
-                                    <button type="button" onclick="showHidePwd('pwdRegisterConfirm', 'pwdIconRC')">
+                                    <button type="button" onclick="showHidePwd('managePasswordConf', 'pwdIconRC')">
                                         <i class="fa-regular fa-eye-slash" id="pwdIconRC" alt="Show/Hide Password"></i>
                                     </button>
                                 </div>
-                            </form>
+                            </div>
                             <div class="btnForm">
                                 <button class="btn button-primary" type="submit">Submit</button>
                                 <button class="btn button-primary" type="reset" onclick="cleanInput()">Reset</button>
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </section>
                 <!--@@ SEARCH -->
                 <section class="login column-thirty">

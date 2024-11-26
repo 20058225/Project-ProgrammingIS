@@ -61,18 +61,20 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 function showHidePwd(inputId, iconId) {
-    const input = document.getElementById(inputId);
-    const icon = document.getElementById(iconId);
-
-    if (input.type === 'password') {
-        input.type = 'text';
-        icon.classList.replace('fa-eye-slash', 'fa-eye');
+    const pwd = document.getElementById(inputId);
+    const pwdIcon = document.getElementById(iconId);
+    if (pwd && pwdIcon) {
+        if (pwd.type === "password") {
+            pwd.type = "text";
+            pwdIcon.classList.replace("fa-eye-slash", "fa-eye"); // Update icon
+        } else {
+            pwd.type = "password";
+            pwdIcon.classList.replace("fa-eye", "fa-eye-slash"); // Update icon back to hidden
+        }
     } else {
-        input.type = 'password';
-        icon.classList.replace('fa-eye', 'fa-eye-slash');
+        console.error("Password input or icon element is missing.");
     }
 }
-
 window.addEventListener("beforeunload", function() {
     document.querySelectorAll("input[type='text'], input[type='password']").forEach(input => {
         input.value = ""; // Clear input fields
