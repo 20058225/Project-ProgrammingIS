@@ -100,19 +100,21 @@ const openForm = (user) => {
 const searchUser = async () => {
     const searchId = document.getElementById('searchUserID').value;
     const searchName = document.getElementById('searchFullName').value;
-    
-    try {
-        let url = '/searchUser?';
-        if (searchId) url += `q=${searchId}`;
-        else if (searchName) url += `q=${encodeURIComponent(searchName)}`;
-        else {
-            showSnackbar('Please enter a User ID or Full Name to search.');
-            return;
-        }
 
-        const response = await fetch(url);
+    if (!searchId && !searchName) {
+        showSnackbar('Please enter a User ID or Full Name to search.');
+        return;
+    }
+
+    try {
+        const response = await fetch('/searchUser', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ userId: searchId, fullName: searchName }),
+        });
+
         if (!response.ok) throw new Error('Search failed');
-        
+
         const users = await response.json();
         displaySearchResults(users);
     } catch (error) {

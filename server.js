@@ -124,18 +124,29 @@ app.put('/updateUser', async (req, res) => {
     }
 });
 // @@ Endpoint to Search a User
-app.get('/searchUser', async (req, res) => {
-    const searchTerm = req.query.q;
+app.post('/searchUser', async (req, res) => {
+    const { userId, fullName } = req.body;
+    let query = 'SELECT * FROM users WHERE';
+    const params = [];
+
+    if (userId) {
+        query += ' userID = ?';
+        params.push(userId);
+    }
+    
+    if (fullName) {
+        if (params.length > 0) query += ' OR'; // If there's already a condition, add OR
+        query += ' userFullName LIKE ?';
+        params.push(`%${fullName}%`);
+    }
+
     try {
-        const [rows] = await promisePool.execute(
-            'SELECT * FROM users WHERE userFullName LIKE ? OR userId = ?',
-            [`%${searchTerm}%`, searchTerm]
-        );
+        const [rows] = await promisePool.execute(query, params);
         res.json(rows);
     } catch (err) {
         console.error('Database error:', err);
         res.status(500).send('Error searching users.');
-    } 
+    }
 });
 // @@ Endpoint to Delete a User
 app.delete('/deleteUser/:userID', async (req, res) => {
@@ -160,6 +171,14 @@ app.get('*', (req, res) => {
 app.use((req, res, next) => {
     console.log(`Incoming request: ${req.method} ${req.url}`, req.body);
     next();
+});
+process.on('SIGINT', () => {
+    console.log('Closing MySQL pool...');
+    pool.end((err) => {
+        if (err) console.error('Error closing MySQL pool:', err);
+        else console.log('MySQL pool closed.');
+        process.exit(0);
+    });
 });
 // Start Server
 const PORT = process.env.PORT || 3000;

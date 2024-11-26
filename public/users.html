@@ -41,7 +41,7 @@
                 </section>
                 <!--@@ SEARCH -->
                 <section class="login column-thirty">
-                    <form id="searchUserForm" class="formRegister">
+                    <form id="searchUserForm" class="formRegister" onsubmit="event.preventDefault(); searchUser();">
                         <div class="header-flex-container">
                             <a href="#" onclick="openPage('index')"><img src="images/logo.png" alt="PubPal" class="icons" id="logo"></a>
                             <h3>Search</h3>

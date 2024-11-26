@@ -7,3 +7,4 @@ package.json
 app.log
 server copy.js
 public/scripts/crud copy.js
+app.js
