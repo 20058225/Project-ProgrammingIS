@@ -22,6 +22,7 @@ const addUser = async ({ username, email, password, passwordConf }) => {
         
         const data = await response.text();
         showSnackbar(data); // Display success message
+        cleanInput();
     } catch (error) {
         console.error('Error adding user:', error);
         showSnackbar('Error adding user: ' + error.message);
