@@ -29,7 +29,7 @@ const addUser = async ({ username, email, password, passwordConf }) => {
     }
 };
 // Handle form submission
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function() {
     // Handle user registration
     const addUserForm = document.getElementById('addUserForm');
     if (addUserForm) {
@@ -47,7 +47,6 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error('Form with ID "addUserForm" not found.');
     }
 });
-
 
 // @@ Handle login
 const loginUser = async ({ username, password }) => {
