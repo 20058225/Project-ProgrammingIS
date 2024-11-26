@@ -1,4 +1,9 @@
 server
 .env
-*.sh
 public/scripts/userManager.js
+/node_modules
+package-lock.json
+package.json
+*.sh
+app.log
+winEnv.sh

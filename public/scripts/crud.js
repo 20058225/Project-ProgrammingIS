@@ -1,106 +1,87 @@
-document.addEventListener('DOMContentLoaded', function () {
-    // @@ Handle Register
-    const addUser = async ({ username, email, password, passwordConf }) => {
-        try {
-            // Check if passwords match
-            if (password !== passwordConf) {
-                showSnackbar('Passwords do not match!', 'error');
-                return;
-            }
-
-            // Make a request to the backend API to add a user
-            const response = await fetch('/addUser', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ username, email, password })
-            });
-
-            if (!response.ok) {
-                const errorText = await response.text();
-                throw new Error(errorText);
-            }
-            
-            const data = await response.text();
-            showSnackbar(data); // Display success message
-        } catch (error) {
-            console.error('Error adding user:', error);
-            showSnackbar('Error adding user: ' + error.message);
-        }
-    };
-     // Ensure the addUserForm exists before attaching event listener // Handle user registration
-    const addUserForm = document.getElementById('addUserForm');
-    if (addUserForm) {
-        addUserForm.addEventListener('submit', (event) => {
-            event.preventDefault();
-
-            const username = document.getElementById('manageUserName').value;
-            const email = document.getElementById('manageUserEmail').value;
-            const password = document.getElementById('managePassword').value;
-            const passwordConf = document.getElementById('managePasswordConf').value;
-
-            addUser({ username, email, password, passwordConf });
+// @@ Handle Register
+const addUser = async ({ userFullName, userEmail, userPassword, userPasswordConf }) => {
+    // Check if passwords match
+    if (userPassword !== userPasswordConf) {
+        showSnackbar('Passwords do not match!', 'error');
+        return;
+    }    
+    try {
+        // Make a request to the backend API to add a user
+        const response = await fetch('/addUser', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ userFullName, userEmail, userPassword })
         });
-    } else {
-        console.error('Form with ID "addUserForm" not found.');
+
+        if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(errorText);
+        }
+        
+        const data = await response.text();
+        showSnackbar(data); // Display success message
+    } catch (error) {
+        console.error('Error adding user:', error);
+        showSnackbar('Error adding user: ' + error.message);
     }
+};
+// @@ Handle login
+const loginUser = async ({ userFullName, userPassword }) => {
+    try {
+        const response = await fetch('/getUser', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ userFullName, userPassword })
+        });
 
-    // @@ Handle login
-    const loginUser = async ({ username, password }) => {
-        try {
-            const response = await fetch('/getUser', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ username, password })
-            });
+        if (!response.ok) throw new Error(await response.text());
 
-            if (!response.ok) throw new Error(await response.text());
+        showSnackbar('Login successful!', 'success'); // Display success message
+        window.location.href = 'pos.html'; // Redirect to pos.html
+    } catch (error) {
+        console.error('Error logging in:', error);
+        showSnackbar(error.message, 'error');
+    }
+};
+// @@ Handle Search
+const searchUser = async (query) => {
+    const resultsContainer = document.getElementById('searchResults');
+    try {
+        const response = await fetch(`/searchUser?q=${encodeURIComponent(query)}`);
+        if (!response.ok) throw new Error(await response.text());
 
-            showSnackbar('Login successful!', 'success'); // Display success message
-            window.location.href = 'pos.html'; // Redirect to pos.html
-        } catch (error) {
-            console.error('Error logging in:', error);
-            showSnackbar(error.message, 'error');
-        }
-    };
-    // Handle form submission
-    const loginForm = document.getElementById('loginForm');
-    loginForm.addEventListener('submit', (event) => {
-        event.preventDefault();
-
-        const username = document.getElementById('loginUserName').value;
-        const password = document.getElementById('loginPassword').value;
-
-        if (!username || !password) {
-            showSnackbar('Username and password are required.', 'error');
-            return;
-        }
-
-        loginUser({ username, password });
-    });
-
-    // @@ Handle Search
-    document.getElementById('searchUserButton').addEventListener('click', async () => {
-        const query = document.getElementById('searchUser').value;
-        const resultsContainer = document.getElementById('searchResults');
-
-        try {
-            const response = await fetch(`/searchUser?q=${encodeURIComponent(query)}`);
-            if (!response.ok) {
-                const errorText = await response.text(); // Read error text
-                throw new Error(errorText || `HTTP Error: ${response.status}`);
-            }
-
-            const users = await response.json(); // Parse JSON only if response is OK
-            resultsContainer.innerHTML = users
+        const users = await response.json();
+        resultsContainer.innerHTML = users
             .map(user => `<div>${user.userFullName} - ${user.userEmail}</div>`)
             .join('');
-        } catch (error) {
-            console.error('Error fetching search results:', error);
-            showSnackbar(error.message);
-        }
-    });
-});
+    } catch (error) {
+        console.error('Error searching user:', error);
+        showSnackbar(error.message, 'error');
+    }
+};
+// @@ Update user
+const updateUser = async (userID, { userFullName, userEmail, userPassword }) => {
+    try {
+        const response = await fetch(`/updateUser`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ userID, userFullName, userEmail, userPassword })
+        });
+        if (!response.ok) throw new Error(await response.text());
+        showSnackbar('User updated successfully.', 'success');
+    } catch (error) {
+        console.error('Error updating user:', error);
+        showSnackbar(error.message, 'error');
+    }
+};
+// @@ Delete user
+const deleteUser = async (userID) => {
+    try {
+        const response = await fetch(`/deleteUser/${userID}`, { method: 'DELETE' });
+        if (!response.ok) throw new Error(await response.text());
+        showSnackbar('User deleted successfully.', 'success');
+    } catch (error) {
+        console.error('Error deleting user:', error);
+        showSnackbar(error.message, 'error');
+    }
+};

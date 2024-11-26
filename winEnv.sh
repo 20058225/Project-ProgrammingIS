@@ -1,5 +1,3 @@
-cd server
-
 if ! command -v node &> /dev/null; then
     echo "@@ Node.js is required." 
     install node.js
@@ -39,6 +37,49 @@ if ! command -v cors &> /dev/null; then
     npm install cors
 else
     echo "@@ ecors is already installed."
+fi
+
+echo "@@ Installing MySql"
+if ! command -v mysql &> /dev/null; then
+    echo "@@ mysql is required." 
+    npm install mysql
+    npm install mysql2
+    sudo apt install -y mysql-client
+else
+    echo "@@ MySql is already installed."
+fi
+
+
+echo "@@ Installing body-parser"
+if ! command -v body-parser &> /dev/null; then
+    echo "@@ body-parser is required." 
+    npm install body-parser
+else
+    echo "@@ body-parser is already installed."
+fi
+
+echo "@@ Installing dotenv"
+if ! command -v dotenv &> /dev/null; then
+    echo "@@ dotenv is required." 
+    npm install dotenv
+else
+    echo "@@ dotenv is already installed."
+fi
+
+echo "@@ Installing nodemon"
+if ! command -v nodemon &> /dev/null; then
+    echo "@@ nodemon is required." 
+    npm install --save-dev nodemon
+else
+    echo "@@ dotenv is already installed."
+fi
+
+echo "@@ Installing eslint"
+if ! command -v eslint &> /dev/null; then
+    echo "@@ eslint is required." 
+    npm install --save-dev eslint
+else
+    echo "@@ eslint is already installed."
 fi
 
 echo "@@ Starting server"

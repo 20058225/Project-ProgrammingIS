@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function() {
         },
         "login.html": {
             main: `
-                <!--@@ REGISTER -->
+            <!--@@ REGISTER -->
                 <section class="register column-thirty">
                     <form id="addUserForm" class="formRegister">
                         <div class="header-flex-container">
@@ -37,21 +37,21 @@ document.addEventListener("DOMContentLoaded", function() {
                             <h3>Register</h3>
                         </div>
                         <div class="divColumn">
-                            <div class="addUserForm">
-                                <label for="manageUserName">Full name:</label>
-                                <input class="userPwd" type="text" id="manageUserName" name="name" required>
-                                <label for="manageUserEmail">Email:</label>
-                                <input class="userPwd" type="text" id="manageUserEmail" name="email" required>
+                            <div class="classAddUserForm">
+                                <label for="userFullName">Full name:</label>
+                                <input class="userPwd" type="text" id="userFullName" name="name" required>
+                                <label for="userEmail">Email:</label>
+                                <input class="userPwd" type="text" id="userEmail" name="email" required>
 
-                                <label for="managePassword">Password:</label>
+                                <label for="userPassword">Password:</label>
                                 <div class="password-container">
-                                    <input class="userPwd" type="password" id="managePassword" name="pwdRegister" required>
-                                    <button type="button" onclick="showHidePwd('managePassword', 'pwdIconR')">
+                                    <input class="userPwd" type="password" id="userPassword" name="pwdRegister" required>
+                                    <button type="button" onclick="showHidePwd('userPassword', 'pwdIconR')">
                                         <i class="fa-regular fa-eye-slash" id="pwdIconR" alt="Show/Hide Password"></i>
                                     </button>
                                     
-                                    <input class="userPwd" type="password" id="managePasswordConf" name="pwdRegisterConfirm" required>
-                                    <button type="button" onclick="showHidePwd('managePasswordConf', 'pwdIconRC')">
+                                    <input class="userPwd" type="password" id="userPasswordConf" name="pwdRegisterConfirm" required>
+                                    <button type="button" onclick="showHidePwd('userPasswordConf', 'pwdIconRC')">
                                         <i class="fa-regular fa-eye-slash" id="pwdIconRC" alt="Show/Hide Password"></i>
                                     </button>
                                 </div>
@@ -65,19 +65,19 @@ document.addEventListener("DOMContentLoaded", function() {
                 </section>
                 <!--@@ LOGIN -->
                 <section class="login column-thirty">
-                    <form id="loginForm" class="formLogin" action="pos.html">
+                    <div class="formLogin">
                         <div class="header-flex-container">
                             <a href="#" onclick="openPage('index')"><img src="images/logo.png" alt="PubPal" class="icons" id="logo"></a>
                             <h3>Login</h3>
                         </div>
-                        <div class="divColumn">
+                        <form id="loginForm" class="divColumn">
                             <div class="insertForm">
-                                <label for="usernameLogin">Username:</label>
-                                <input class="userPwd" type="text" id="loginUserName" name="username" required>
-                                <label for="pwdLogin">Password:</label>
+                                <label for="userFullName">Username:</label>
+                                <input class="userPwd" type="text" id="userFullName" name="username" required>
+                                <label for="userPassword">Password:</label>
                                 <div class="password-container">
-                                    <input class="userPwd" type="password" id="loginPassword" name="pwdLogin" required>
-                                    <button type="button" onclick="showHidePwd('loginPassword', 'pwdIcon')">
+                                    <input class="userPwd" type="password" id="userPassword" name="pwdLogin" required>
+                                    <button type="button" onclick="showHidePwd('userPassword', 'pwdIcon')">
                                         <i class="fa-regular fa-eye-slash" id="pwdIcon" alt="Show/Hide Password"></i>
                                     </button>
                                 </div>
@@ -86,9 +86,9 @@ document.addEventListener("DOMContentLoaded", function() {
                                 <button class="btn button-primary" type="submit">Submit</button>
                                 <button class="btn button-primary" type="reset" onclick="cleanInput()">Reset</button>
                             </div>
-                        </div>
+                        </form>
                         <div class="forgot-password"><a href="#" onclick="openModal(event)">Forgot Password?</a></div>
-                    </form>
+                    </div>
                 </section>
                 <section class="login">
                     <!--@@ Forgot Password Modal -->
@@ -103,7 +103,7 @@ document.addEventListener("DOMContentLoaded", function() {
                             </div>
                         </div>
                     </div>
-                </section>
+                </section>                
             `, redirect: false
         },
         "users.html": {
@@ -116,27 +116,27 @@ document.addEventListener("DOMContentLoaded", function() {
                             <h3>Register</h3>
                         </div>
                         <div class="divColumn">
-                            <div class="addUserForm">
-                                <label for="manageUserName">Full name:</label>
-                                <input class="userPwd" type="text" id="manageUserName" name="name" required>
-                                <label for="manageUserEmail">Email:</label>
-                                <input class="userPwd" type="text" id="manageUserEmail" name="email" required>
+                            <div class="classAddUserForm">
+                                <label for="userFullName">Full name:</label>
+                                <input class="userPwd" type="text" id="userFullName" name="name" required>
+                                <label for="userEmail">Email:</label>
+                                <input class="userPwd" type="text" id="userEmail" name="email" required>
 
-                                <label for="managePassword">Password:</label>
+                                <label for="userPassword">Password:</label>
                                 <div class="password-container">
-                                    <input class="userPwd" type="password" id="managePassword" name="pwdRegister" required>
-                                    <button type="button" onclick="showHidePwd('managePassword', 'pwdIconR')">
+                                    <input class="userPwd" type="password" id="userPassword" name="pwdRegister" required>
+                                    <button type="button" onclick="showHidePwd('userPassword', 'pwdIconR')">
                                         <i class="fa-regular fa-eye-slash" id="pwdIconR" alt="Show/Hide Password"></i>
                                     </button>
                                     
-                                    <input class="userPwd" type="password" id="managePasswordConf" name="pwdRegisterConfirm" required>
-                                    <button type="button" onclick="showHidePwd('managePasswordConf', 'pwdIconRC')">
+                                    <input class="userPwd" type="password" id="userPasswordConf" name="pwdRegisterConfirm" required>
+                                    <button type="button" onclick="showHidePwd('userPasswordConf', 'pwdIconRC')">
                                         <i class="fa-regular fa-eye-slash" id="pwdIconRC" alt="Show/Hide Password"></i>
                                     </button>
                                 </div>
                             </div>
                             <div class="btnForm">
-                                <button class="btn button-primary" type="submit">Submit</button>
+                                <button class="btn button-primary" type="submit" onclick="addUserForm()">Submit</button>
                                 <button class="btn button-primary" type="reset" onclick="cleanInput()">Reset</button>
                             </div>
                         </div>
@@ -144,7 +144,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 </section>
                 <!--@@ SEARCH -->
                 <section class="login column-thirty">
-                    <div class="formRegister">
+                    <form class="formRegister">
                         <div class="header-flex-container">
                             <a href="#" onclick="openPage('index')"><img src="images/logo.png" alt="PubPal" class="icons" id="logo"></a>
                             <h3>Search</h3>
@@ -153,7 +153,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         <button class="btn button-primary" id="searchUserButton">Search</button>
                         <button class="btn button-primary" type="reset" onclick="cleanInput()">Reset</button>
                         </div>
-                    <div id="searchResults" class="search-results"></div>
+                    <form id="searchResults" class="search-results"></div>
                         <!-- Hidden Edit Form -->
                     <div id="editFormContainer" class="edit-form-container" style="display: none;">
                         <form id="editForm">
