@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", function() {
             btn.style.display = (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) ? "block" : "none";
         }
     }
-
     // Smooth scroll to top on button click
     window.btnGoTop = function() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -15,7 +14,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // JavaScript to toggle the "scrolled" class on scroll
     setTimeout(() => {
-        // JavaScript to toggle the "scrolled" class on scroll
         const header = document.getElementById("main-header");
         const logo = document.getElementById("logo");
         const headerContent = document.querySelector(".header-content");
@@ -32,9 +30,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     headerContent.classList.remove("scrolled");
                 }
             });
-        } else {
-            console.error("One or more header elements are missing.");
-        }
+        } else { console.error("One or more header elements are missing."); }
 
         if (!header) console.error("Header element (#main-header) is missing.");
         if (!logo) console.error("Logo element (#logo) is missing.");
@@ -80,14 +76,15 @@ window.addEventListener("beforeunload", function() {
         input.value = ""; // Clear input fields
     });
 });
-function openPage(pageName) {
-    window.location = `${pageName}.html`;
-}
+function openPage(pageName) { window.location = `${pageName}.html`; }
 
-function cleanInput() {// Clear inputs from reset button (onclick="cleanInput()")
-    document.querySelectorAll("input[type='text'], input[type='password']").forEach(input => {
+function cleanInput() { // Clear inputs from reset button (onclick="cleanInput()")
+    document.querySelectorAll("input[type='text'], input[type='email'], input[type='password']").forEach(input => {
         input.value = ""; // Clear input fields
     });
+    document.querySelectorAll("textarea[type='text']").forEach(textarea => {
+        textarea.value = ""; // Clear input fields
+    });    
 }
 function showSnackbar(message, /*type,*/ snackbarId = 'snackbar') {
     createSnackbar(snackbarId); // Ensure snackbar exists

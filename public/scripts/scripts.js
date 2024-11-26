@@ -75,11 +75,12 @@ function showSnackbar(message, type, snackbarId = "snackbar") {
 }
 
 function showSnackbarContact() {
+    cleanInput();
     showSnackbar('E-mail sent successful', 'success');
 }
 
 function cleanInput() {// Clear inputs from reset button (onclick="cleanInput()")
-    document.querySelectorAll("input[type='text'], input[type='password']").forEach(input => {
+    document.querySelectorAll("input[type='text'], input[type='email'], textarea[type='text'], input[type='password']").forEach(input => {
         input.value = ""; // Clear input fields
     });
 }

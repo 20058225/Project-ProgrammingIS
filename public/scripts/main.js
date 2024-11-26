@@ -238,7 +238,7 @@ document.addEventListener("DOMContentLoaded", function() {
                                 <textarea class="userPwd" type="text" id="messageContact" name="message" required></textarea>
                             </div>
                             <div class="btnForm">
-                                <button class="btn button-primary" onclick="showSnackbar()">Submit</button>
+                                <button class="btn button-primary" onclick="showSnackbarContact()">Submit</button>
                                 <button class="btn button-primary" type="reset" onclick="cleanInput()">Reset</button>
                             </div>
                         </div>
