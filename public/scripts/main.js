@@ -150,7 +150,8 @@ document.addEventListener("DOMContentLoaded", function() {
                             <h3>Search</h3>
                         </div>
                         <input type="text" class="userPwd" id="searchUser" placeholder="Search by name or email">
-                        <button class="btn" id="searchUserButton">Search</button>
+                        <button class="btn button-primary" id="searchUserButton">Search</button>
+                        <button class="btn button-primary" type="reset" onclick="cleanInput()">Reset</button>
                         </div>
                     <div id="searchResults" class="search-results"></div>
                         <!-- Hidden Edit Form -->
@@ -231,9 +232,9 @@ document.addEventListener("DOMContentLoaded", function() {
                         <div class="divColumn">
                             <div class="insertForm">
                                 <label for="nameContact">Name:</label>
-                                <input class="userPwd" type="text" id="nameContact" name="name" required autocomplete="current-name">
+                                <input class="userPwd" type="text" id="nameContact" name="name" required>
                                 <label for="emailContact">Email:</label>
-                                <input class="userPwd" type="email" id="emailContact" name="email" required autocomplete="current-username">
+                                <input class="userPwd" type="email" id="emailContact" name="email" required>
                                 <label for="messageContact">Email:</label>
                                 <textarea class="userPwd" type="text" id="messageContact" name="message" required></textarea>
                             </div>
