@@ -44,14 +44,6 @@ else
     echo "@@ ecors is already installed."
 fi
 
-echo "@@ Installing body-parser"
-if ! command -v body-parser &> /dev/null; then
-    echo "@@ body-parser is required." 
-    npm install body-parser
-else
-    echo "@@ body-parser is already installed."
-fi
-
 echo "@@ Installing dotenv"
 if ! command -v dotenv &> /dev/null; then
     echo "@@ dotenv is required." 

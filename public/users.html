@@ -54,7 +54,7 @@
                     <div id="searchResult" class="search-results"></div>
                         <!-- Hidden Edit Form -->
                     <div id="editFormContainer" class="edit-form-container" style="display: none;">
-                        <form id="editForm">
+                        <form id="updateUserForm">
                             <div class="inputEditForm">
                                 <label for="updateUserId">User ID:</label>
                                 <input type="number" id="updateUserId" placeholder="User ID" required>
@@ -69,13 +69,14 @@
                                 <input type="password" id="updatePassword" placeholder="New Password"><br>
                             </div>
                             <div class="btnEditForm">
-                                <button type="button" class="btnEdit" type="submit">Save</button>
-                                <button type="reset" class="btnEdit" onclick="closeEditForm()">Cancel</button>
+                                <button type="button" class="btnEdit" onclick="updateUser()">Save</button>
+                                <button type="button" class="btnEdit" onclick="closeEditForm()">Cancel</button>
+                                <button type="button" class="btnDelete" onclick="deleteUser()">Delete User</button>
                             </div>
                         </form>
                     </div>
                 </section>
-                <div id="snackbarId" class="snackbar"></div>                
+                <!--<div id="snackbarId" class="snackbar"></div>-->
             </main>
             <footer class="footer"></footer>
         </div>
