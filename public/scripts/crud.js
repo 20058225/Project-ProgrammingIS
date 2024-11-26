@@ -3,7 +3,7 @@ const addUser = async ({ username, email, password, passwordConf }) => {
     try {
         // Check if passwords match
         if (password !== passwordConf) {
-            showSnackbar('Passwords do not match!');
+            showSnackbar('Passwords do not match!', 'error');
             return;
         }
 

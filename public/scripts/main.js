@@ -99,7 +99,7 @@ document.addEventListener("DOMContentLoaded", function() {
                             <p>Please enter your email address.</p>
                             <div id="forgotPasswordForm">
                                 <input type="email" id="email" name="email" required placeholder="Email">
-                                <button type="button" class="btn button-primary" onclick="showSnackbar()">Send Reset Link</button>
+                                <button type="button" class="btn button-primary" onclick="closeModal(), showSnackbarContact()">Send Reset Link</button>
                             </div>
                         </div>
                     </div>
