@@ -64,6 +64,7 @@ const loginUser = async ({ username, password }) => {
     } catch (error) {
         console.error('Error logging in:', error);
         showSnackbar(error.message);
+        cleanInput();
     }
 };
 // Handle form submission
