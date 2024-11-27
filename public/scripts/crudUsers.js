@@ -49,6 +49,7 @@ const updateUser = async ({ id, username, email, password } = {}) => {
     }
 
     try {
+        console.log('Sending update request:', { id, updates });
         const response = await fetch(`/updateUser/${id}`, {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
@@ -56,6 +57,7 @@ const updateUser = async ({ id, username, email, password } = {}) => {
         });
 
         if (!response.ok) throw new Error(await response.text());
+        console.log('Update response:', result);
 
         showSnackbar('User updated successfully'); // Success message
         closeForm();

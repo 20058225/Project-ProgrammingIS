@@ -92,6 +92,8 @@ app.patch('/updateUser/:id', async (req, res) => {
     const { id } = req.params;
     const { userFullName, userEmail, userPassword } = req.body;
 
+    console.log('Received update request:', { id, body: req.body });
+
     let updates = [];
     let params = [];
 
@@ -118,11 +120,15 @@ app.patch('/updateUser/:id', async (req, res) => {
 
     try {
         const query = `UPDATE users SET ${updates.join(', ')} WHERE userID = ?`;
+        console.log('Executing query:', query, 'with params:', params);
+
         const [result] = await promisePool.execute(query, params);
 
         if (result.affectedRows > 0) {
             res.send('User updated successfully.');
+            console.log('User updated successfully');
         } else {
+            console.log('User not found');
             res.status(404).send('User not found.');
         }
     } catch (err) {
