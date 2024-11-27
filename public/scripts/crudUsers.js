@@ -38,17 +38,18 @@ addUserForm.addEventListener('submit', (event) => {
 // @@ Handle update user
 const updateUser = async ({ id, username, email, password } = {}) => {
     const updates = {};
-    if (username) updates.userFullName = username;
-    if (email) updates.userEmail = email;
-    if (password) updates.userPassword = password;
-
-    console.log('Updates object:', updates);
+    if (username) updates.username = username;
+    if (email) updates.email = email;
+    if (password) updates.password = password;
 
     // Check if there are any updates to send
     if (Object.keys(updates).length === 0) {
         showSnackbar('No fields to update.');
         return;
     }
+
+    const result = await response.text();
+    console.log('Update response:', result);
 
     try {
         console.log('Sending update request:', { id, updates });
