@@ -175,7 +175,7 @@ document.addEventListener("DOMContentLoaded", function() {
                             <div class="btnEditForm">
                                 <button type="button" class="btnEdit" onclick="updateUser()">Save</button>
                                 <button type="button" class="btnEdit" onclick="closeForm()">Cancel</button>
-                                <button type="button" class="btnDelete" onclick="deleteUser()">Delete</button>
+                                <button type="button" class="btnEdit btnDelete" onclick="deleteUser()">Delete</button>
                             </div>
                         </form>
                     </div>
