@@ -58,6 +58,7 @@ const updateUser = async ({ id, username, email, password } = {}) => {
         if (!response.ok) throw new Error(await response.text());
 
         showSnackbar('User updated successfully'); // Success message
+        closeForm();
     } catch (error) {
         console.error('Error updating user:', error);
         showSnackbar('Failed to update user: ' + error.message);
@@ -141,8 +142,8 @@ const displaySearchResults = (users) => {
     users.forEach(user => {
         const userDiv = document.createElement('div');
         userDiv.innerHTML = `
-            <p>ID: ${user.userID}, Name: ${user.userFullName}, Email: ${user.userEmail}</p>
-            <button onclick='openForm(${JSON.stringify(user)})'>Edit</button>
+            <span>ID: ${user.userID}, Name: ${user.userFullName}, Email: ${user.userEmail}</span>
+            <button class="btnEdit" onclick='openForm(${JSON.stringify(user)})'>Edit</button>
         `;
         resultDiv.appendChild(userDiv);
     });

@@ -159,6 +159,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     <div id="editFormContainer" class="edit-form-container" style="display: none;">
                         <form id="updateUserForm">
                             <div class="inputEditForm">
+                                <h4>Update User</h4>
                                 <label for="updateUserId">User ID:</label>
                                 <input type="number" id="updateUserId" placeholder="User ID" disabled>
                                 
@@ -173,8 +174,8 @@ document.addEventListener("DOMContentLoaded", function() {
                             </div>
                             <div class="btnEditForm">
                                 <button type="button" class="btnEdit" onclick="updateUser()">Save</button>
-                                <button type="button" class="btnEdit" onclick="closeEditForm()">Cancel</button>
-                                <button type="button" class="btnDelete" onclick="deleteUser()">Delete User</button>
+                                <button type="button" class="btnEdit" onclick="closeForm()">Cancel</button>
+                                <button type="button" class="btnDelete" onclick="deleteUser()">Delete</button>
                             </div>
                         </form>
                     </div>
