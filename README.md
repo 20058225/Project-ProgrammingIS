@@ -16,7 +16,7 @@
 [x] Modal   
 [x] Snackbar  
 [x] Function login (check login|password)   
-[ ] Function register (create|edit|delete)    
+[x] Function register (create|edit|delete)    
   
 * POS   
 [x] Querying JSON as database    
