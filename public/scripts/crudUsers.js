@@ -38,18 +38,15 @@ addUserForm.addEventListener('submit', (event) => {
 // @@ Handle update user
 const updateUser = async ({ id, username, email, password } = {}) => {
     const updates = {};
-    if (username) updates.username = username;
-    if (email) updates.email = email;
-    if (password) updates.password = password;
+    if (username) updates.userFullName = username;
+    if (email) updates.userEmail = email;
+    if (password) updates.userPassword = password;
 
     // Check if there are any updates to send
     if (Object.keys(updates).length === 0) {
         showSnackbar('No fields to update.');
         return;
     }
-
-    const result = await response.text();
-    console.log('Update response:', result);
 
     try {
         console.log('Sending update request:', { id, updates });
@@ -60,6 +57,8 @@ const updateUser = async ({ id, username, email, password } = {}) => {
         });
 
         if (!response.ok) throw new Error(await response.text());
+        
+        const result = await response.text();
         console.log('Update response:', result);
 
         showSnackbar('User updated successfully'); // Success message
@@ -70,22 +69,7 @@ const updateUser = async ({ id, username, email, password } = {}) => {
     }
 };
 // Function to update all fields using PUT
-const updateUserFull = async ({ id, username, email, password }) => {
-    try {
-        const response = await fetch(`/updateUser/${id}`, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ id, username, email, password }),
-        });
 
-        if (!response.ok) throw new Error(await response.text());
-
-        alert('User updated successfully'); // Success message
-    } catch (error) {
-        console.error('Error updating user:', error);
-        alert('Failed to update user: ' + error.message);
-    }
-};
 // @@ Attach event listener to the update form
 document.getElementById('updateUserForm').addEventListener('submit', (event) => {
     event.preventDefault();

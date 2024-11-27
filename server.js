@@ -136,28 +136,7 @@ app.patch('/updateUser/:id', async (req, res) => {
         res.status(500).send('Error updating user.');
     }
 });
-// Endpoint to update all fields using PUT
-app.put('/updateUser/:id', async (req, res) => {
-    const { id, username, email, password } = req.body;
 
-    if (!id || !username || !email || !password) {
-        return res.status(400).send('All fields are required.');
-    }
-
-    try {
-        const query = `UPDATE users SET userFullName = ?, userEmail = ?, userPassword = ? WHERE userID = ?`;
-        const [result] = await promisePool.execute(query, [username, email, password, id]);
-
-        if (result.affectedRows > 0) {
-            res.send('User updated successfully.');
-        } else {
-            res.status(404).send('User not found.');
-        }
-    } catch (err) {
-        console.error('Database error:', err);
-        res.status(500).send('Error updating user.');
-    }
-});
 // @@ Endpoint to Search a User
 app.post('/searchUser', async (req, res) => {
     const { userId, fullName } = req.body;
