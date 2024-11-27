@@ -36,7 +36,12 @@ addUserForm.addEventListener('submit', (event) => {
     addUser({ username, email, password, passwordConf });
 });
 // @@ Handle update user
-const updateUser = async ({ id, username, email, password } = {}) => {
+const updateUser = async () => {
+    const id = document.getElementById('updateUserId').value;
+    const username = document.getElementById('updateUsername').value;
+    const email = document.getElementById('updateEmail').value;
+    const password = document.getElementById('updatePassword').value;
+
     const updates = {};
     if (username) updates.userFullName = username;
     if (email) updates.userEmail = email;
@@ -57,7 +62,7 @@ const updateUser = async ({ id, username, email, password } = {}) => {
         });
 
         if (!response.ok) throw new Error(await response.text());
-        
+
         const result = await response.text();
         console.log('Update response:', result);
 
@@ -68,7 +73,6 @@ const updateUser = async ({ id, username, email, password } = {}) => {
         showSnackbar('Failed to update user: ' + error.message);
     }
 };
-// Function to update all fields using PUT
 
 // @@ Attach event listener to the update form
 document.getElementById('updateUserForm').addEventListener('submit', (event) => {
