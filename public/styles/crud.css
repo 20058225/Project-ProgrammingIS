@@ -195,8 +195,8 @@
     box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.1);
 }
 .inputEditForm #updateUserId{
-    width: 5%;
-    height: 25px;
+    width: 10%;
+    height: 30px;
     font-weight: bold;
     text-align: center;
 }
@@ -205,4 +205,8 @@
     width: 40%;
     height: 25px;
     font-weight: bold;
+    margin-left: 20px;
+}
+.btnEditForm {
+    margin-top: 3%;
 }
