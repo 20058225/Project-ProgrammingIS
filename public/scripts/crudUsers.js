@@ -42,6 +42,8 @@ const updateUser = async ({ id, username, email, password } = {}) => {
     if (email) updates.userEmail = email;
     if (password) updates.userPassword = password;
 
+    console.log('Updates object:', updates);
+
     // Check if there are any updates to send
     if (Object.keys(updates).length === 0) {
         showSnackbar('No fields to update.');
@@ -64,6 +66,23 @@ const updateUser = async ({ id, username, email, password } = {}) => {
     } catch (error) {
         console.error('Error updating user:', error);
         showSnackbar('Failed to update user: ' + error.message);
+    }
+};
+// Function to update all fields using PUT
+const updateUserFull = async ({ id, username, email, password }) => {
+    try {
+        const response = await fetch(`/updateUser/${id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id, username, email, password }),
+        });
+
+        if (!response.ok) throw new Error(await response.text());
+
+        alert('User updated successfully'); // Success message
+    } catch (error) {
+        console.error('Error updating user:', error);
+        alert('Failed to update user: ' + error.message);
     }
 };
 // @@ Attach event listener to the update form
