@@ -36,41 +36,41 @@ else
     echo "@@ express open fs are already installed."
 fi
 
-echo "@@ Installing necessary packages 3"
+echo "@@ Installing Cors"
 if ! command -v cors &> /dev/null; then
-    echo "@@ cors is required." 
+    echo "@@ Cors is required." 
     npm install cors
 else
-    echo "@@ ecors is already installed."
+    echo "@@ Cors is already installed."
 fi
 
-echo "@@ Installing dotenv"
+echo "@@ Installing Dotenv"
 if ! command -v dotenv &> /dev/null; then
-    echo "@@ dotenv is required." 
+    echo "@@ Dotenv is required." 
     npm install dotenv
 else
-    echo "@@ dotenv is already installed."
+    echo "@@ Dotenv is already installed."
 fi
 
-echo "@@ Installing nodemon"
+echo "@@ Installing Nodemon"
 if ! command -v nodemon &> /dev/null; then
-    echo "@@ nodemon is required." 
+    echo "@@ Nodemon is required." 
     npm install --save-dev nodemon
 else
-    echo "@@ dotenv is already installed."
+    echo "@@ Nodemon is already installed."
 fi
 
-echo "@@ Installing eslint"
+echo "@@ Installing Eslint"
 if ! command -v eslint &> /dev/null; then
-    echo "@@ eslint is required." 
+    echo "@@ Eslint is required." 
     npm install --save-dev eslint
 else
-    echo "@@ eslint is already installed."
+    echo "@@ Eslint is already installed."
 fi
 
 echo "@@ Installing MySql"
 if ! command -v mysql &> /dev/null; then
-    echo "@@ mysql is required." 
+    echo "@@ MySql is required." 
     npm install mysql
     npm install mysql2
     sudo apt install -y mysql-client
@@ -78,5 +78,10 @@ else
     echo "@@ MySql is already installed."
 fi
 
-echo "@@ Starting server"
-node server.js
+echo "@@ Starting server and file log being created.."
+nohup node server.js > server.log 2>&1 &
+
+echo "@@ Server running.."
+ps aux | grep node
+
+
