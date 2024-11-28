@@ -1,10 +1,5 @@
-server
 .env
-public/scripts/userManager.js
 /node_modules
+/server
 package-lock.json
 package.json
-app.log
-server copy.js
-public/scripts/crud copy.js
-app.js
