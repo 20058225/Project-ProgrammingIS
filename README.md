@@ -26,7 +26,8 @@
 [x] Amount due being calculated (addition and subtraction)  
 [x] Button Systems provide administrator access  
 [x] Filter by category showing product configuration colors
-[x] Receipt file json   
+[x] Receipt file json  
+[x] Receipt download ? 
 [ ] Formate of json     
 [ ] Print receipt pdf ..?
 
