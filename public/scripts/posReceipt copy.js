@@ -71,12 +71,14 @@ document.getElementById("finishOrder").addEventListener("click", () => {
     const orderContainer = document.querySelector('.order-container-area');
     console.log(orderContainer);
     const items = [];
+
     let total = 0; // Initialize total
 
     // Collect all items and calculate total from item prices
     orderContainer.querySelectorAll('.item').forEach(item => {
         const itemText = item.textContent.trim();
         items.push(itemText);
+
         // Extract price from the item text (assuming price is in the format "Item - €Price")
         const priceMatch = itemText.match(/€(\d+\.\d{2})/);
         if (priceMatch) {
@@ -85,17 +87,10 @@ document.getElementById("finishOrder").addEventListener("click", () => {
     });
 
     // Structure the data
-    const now = new Date();
     const orderData = {
         items: items,
-        total: total.toFixed(2),
-        timestamp: now.toISOString(),
-        paymentMethod: document.querySelector('.payment-options button.paySelected').dataset.method,
-        serverName: document.getElementById("userName").textContent,
-        pubName: "Your Pub Name", // Replace with actual pub name
-        address: "Your Pub Address", // Replace with actual address
-        date: now.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
-        time: now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' })
+        total: total.toFixed(2), // Ensure the total is a number with two decimals
+        timestamp: new Date().toISOString(),
     };
     console.log(orderData);
 
@@ -118,7 +113,7 @@ document.getElementById("finishOrder").addEventListener("click", () => {
     .then(data => {
         if (data.orderId) {
             alert(`Order saved successfully! Order ID: ${data.orderId}`);
-            downloadReceipt(data.orderId, orderData);
+            downloadReceipt(data.orderId);
             window.location = 'pos.html';
         } else {
             throw new Error('Failed to save order');
@@ -126,27 +121,9 @@ document.getElementById("finishOrder").addEventListener("click", () => {
     })
     .catch(error => console.error('Error saving order:', error));
 });
-function downloadReceipt(orderId, orderData) {
-    if (!orderData) {
-        console.error('Order data is undefined');
-        return;
-    }
-    const content = `
-        Receipt for Order: ${orderId}
-        Pub: ${orderData.pubName || 'N/A'}
-        Address: ${orderData.address || 'N/A'}
-        Date: ${orderData.date}
-        Time: ${orderData.time}
-        Server: ${orderData.serverName}
+function downloadReceipt(orderId) {
+    const content = `Receipt for Order: ${orderId}\nThank you for your purchase!`;
 
-        Items:
-        ${orderData.items.join('\n')}
-
-        Total: €${orderData.total}
-        Payment Method: ${orderData.paymentMethod}
-
-        Thank you for your purchase!
-    `;
     const blob = new Blob([content], { type: 'text/plain' });
 
     // Create a temporary <a> element
@@ -155,7 +132,6 @@ function downloadReceipt(orderId, orderData) {
 
     // Set dynamic file name
     link.download = `${orderId}.txt`;
-    //link.download = `${orderId}.pdf`;
 
     // Programmatically click the link to trigger download
     link.click();

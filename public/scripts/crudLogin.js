@@ -41,12 +41,12 @@ addUserForm.addEventListener('submit', (event) => {
 });
 
 // @@ Handle login
-const loginUser = async ({ username, password }) => {
+const loginUser = async ({ email, password }) => {
     try {
         const response = await fetch('/getUser', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username, password })
+            body: JSON.stringify({ email, password })
         });
 
         if (!response.ok) { const errorText = await response.text(); throw new Error(errorText); }
@@ -65,8 +65,8 @@ const loginForm = document.getElementById('loginForm');
 loginForm.addEventListener('submit', (event) => {
     event.preventDefault();
 
-    const username = document.getElementById('loginUsername').value;
+    const email = document.getElementById('loginUsername').value;
     const password = document.getElementById('loginPassword').value;
 
-    loginUser({ username, password });
+    loginUser({ email, password });
 });

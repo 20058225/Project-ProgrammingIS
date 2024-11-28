@@ -61,17 +61,17 @@ app.post('/addUser', async (req, res) => {
 });
 // Endpoint to Login with a User
 app.post('/getUser', async (req, res) => {
-    const { username, password } = req.body;
+    const { email, password } = req.body;
     console.log('Request Body:', req.body);
-    if (!username || !password) {
+    if (!email || !password) {
         return res.status(400).send('Username and password are required.');
     }
     let connection;
     try {
         connection = await pool.promise().getConnection();
         const [rows] = await connection.execute(
-            'SELECT * FROM users WHERE userFullName = ? AND userPassword = ?',
-            [username, password]
+            'SELECT * FROM users WHERE userEmail = ? AND userPassword = ?',
+            [email, password]
         );
 
         if (rows.length > 0) {
@@ -196,40 +196,57 @@ process.on('SIGINT', () => {
     });
 });
 
+let currentOrderId = 1000;
+const idFilePath = path.join(__dirname, 'lastOrderId.txt');
+
+// Load the last used ID from file if it exists
+if (fs.existsSync(idFilePath)) {
+    currentOrderId = parseInt(fs.readFileSync(idFilePath, 'utf8'));
+}
+
+function generateOrderId() {
+    const orderId = currentOrderId;
+    currentOrderId++;
+    
+    // Save the new ID to file
+    fs.writeFileSync(idFilePath, currentOrderId.toString());
+    
+    return `ORDER-${orderId}`;
+}
+
 // POST endpoint to save order
 app.post('/saveOrder', (req, res) => {
-    console.log('Received Order Data:', req.body); // Log the incoming request body
+    console.log('Received Order Data:', req.body);
 
-    const orderData = req.body; // Get order data from request body
+    const orderData = req.body;
 
-    // Check if orderData has required fields
-    if (!orderData.items || !orderData.total) {
+    const orderId = generateOrderId();
+    orderData.orderId = orderId;
+
+    if (!orderData.items || !orderData.total || !orderData.paymentMethod || !orderData.serverName || !orderData.pubName || !orderData.address || !orderData.date || !orderData.time) {
         console.error('Invalid order data:', orderData);
-        return res.status(400).send('Invalid order data');
+        return res.status(400).json({ error: 'Invalid order data' });
     }
 
-    // Set the file path to receipt.json inside the "public/data" folder
-    const filePath = path.join(__dirname, 'public', 'data', 'receipt.json');
+    const filePath = path.join(__dirname, 'public', 'data', 'receipts.json');
 
-    // Ensure the directory exists and file is writable
-    fs.mkdir(path.dirname(filePath), { recursive: true }, (err) => {
+    let existingData = [];
+    if (fs.existsSync(filePath)) {
+        const fileContent = fs.readFileSync(filePath, 'utf8');
+        existingData = JSON.parse(fileContent);
+    }
+
+    existingData.push(orderData);
+
+    fs.writeFile(filePath, JSON.stringify(existingData, null, 2), (err) => {
         if (err) {
-            console.error('Error creating directory:', err);
-            return res.status(500).send('Error creating directory');
+            console.error('Error saving order:', err);
+            return res.status(500).json({ error: 'Error saving order' });
         }
-
-        // Write the order data to a JSON file
-        fs.writeFile(filePath, JSON.stringify(orderData, null, 2), (err) => {
-            if (err) {
-                console.error('Error saving order:', err);
-                return res.status(500).send('Error saving order');
-            }
-            console.log('Order saved successfully:', orderData); // Log the saved order data
-            res.send('Order saved successfully');
-        });
+        console.log('Order saved successfully:', orderData);
+        res.json({ message: 'Order saved successfully', orderId: orderData.orderId });
     });
 });
-
 // Start Server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
