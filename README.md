@@ -3,14 +3,14 @@
 * Focus: Bar drinks sales system
 
 ## You can install the necessary tools for your environment
-```./environment.sh``` 
+```./linux.sh``` 
 
 ## Implemented
 * Portal    
 [x] Header with scroll   
 [x] Footer with privacy policy | links  
-[x] Input password with a icon Show/Hide   
-[x] Button go to top     
+[x] Input password with an icon Show/Hide   
+[x] The Button goes to top     
 [x] Chat    
 [x] Windows with a timer    
 [x] Modal   
@@ -19,16 +19,16 @@
 [x] Function register (create|edit|delete)    
   
 * POS   
-[x] Querying JSON as database    
+[x] Querying JSON as a database    
 [x] Filter for category  
 [x] Buttons move up and down on selected products  
 [x] Delete item button in order products      
 [x] Amount due being calculated (addition and subtraction)  
-[x] Button Systems provide administrator access  
+[x] Button Systems provides administrator access  
 [x] Filter by category showing product configuration colors     
 [x] Receipt file json    
 [x] Receipt download .txt   
-[x] Formate of json      
+[x] Formate of JSON      
 
 * Local infrastructure  
 [x] The *.sh file creates an environment to run the project   
@@ -38,6 +38,6 @@
 ## In process
 [ ] Button Commum Items  
 [ ] Exhibit map of tables    
-[ ] Exhibit tables by colors (busy | avaliable)   
+[ ] Exhibit tables by colors (busy | available)   
 [ ] Grouping products   
 [ ] Print receipt pdf ..?
