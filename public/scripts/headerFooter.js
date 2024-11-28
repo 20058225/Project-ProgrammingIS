@@ -63,18 +63,17 @@ document.addEventListener("DOMContentLoaded", function() {
                                     <h6 id="header-subtitle">${subtitle}</h6>
                                 </div>
                             </div> 
-                            <div>
-                                <nav class="header-menu">
-                                    <ul class="nav-list">
-                                        <li class="nav-item"><a href="#" onclick="openPage('index')">Home</a></li>
-                                        <li class="nav-item"><a href="#" onclick="openPage('login')">Login</a></li>
-                                        <li class="nav-item"><a href="#" onclick="openPage('news')">News</a></li>
-                                        <li class="nav-item"><a href="#" onclick="openPage('customize')">Customize</a></li>
-                                        <li class="nav-item"><a href="#" onclick="openPage('contact-us')">About</a></li>
-                                    </ul>
-                                </nav>  
-                            </div>                                         
+                            <nav class="header-menu">
+                                <ul class="nav-list">
+                                    <li class="nav-item"><a href="#" onclick="openPage('index')">Home</a></li>
+                                    <li class="nav-item"><a href="#" onclick="openPage('login')">Login</a></li>
+                                    <li class="nav-item"><a href="#" onclick="openPage('news')">News</a></li>
+                                    <li class="nav-item"><a href="#" onclick="openPage('customize')">Customize</a></li>
+                                    <li class="nav-item"><a href="#" onclick="openPage('contact-us')">About</a></li>
+                                </ul>
+                            </nav>                                      
                         </div>
+                    </div>
                     <button onclick="btnGoTop()" id="btnGoTop" title="Go to top"><i class="fa-solid fa-arrow-up"></i></button>
                     <button onclick="openChat()" id="btnChat" class="btnChat" title="Chat"><i class="fa-regular fa-comment-dots"></i></button>
                     

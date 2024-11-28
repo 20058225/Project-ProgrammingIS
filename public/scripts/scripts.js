@@ -22,13 +22,6 @@ window.openChat = function() {
     
     const messageInput = document.getElementById("msg");
     const sendMessage = document.getElementById("sendMessage");
-
-    if (!messageInput) {
-        console.error("Message input element with id 'msg' is missing.");
-    }
-    if (!sendMessage) {
-        console.error("Send button element with id 'sendMessage' is missing.");
-    }
     // Check if elements exist before adding event listener
     if (messageInput && sendMessage) {
         // Initially disable the "Send" button
@@ -56,8 +49,18 @@ const closeForm = () => {
     document.getElementById('searchResult').innerHTML = '';
 };
 
-function openPage(pageName) {
-    window.location = `${pageName}.html`;
+function openPage(pageName) { window.location = `${pageName}.html`; }
+
+function showsnackbar(message) {
+    createSnackbar(snackbarId); // Ensure snackbar exists
+    const snackbar = document.getElementById(snackbarId);
+    snackbar.innerHTML = `
+        <img src="images/logo.png" alt="PubPal Logo" class="icons" id="logo">
+        <span>${message}</span>
+    `;
+    //snackbar.style.backgroundColor = type === 'success' ? '#2ECC71' : '#E74C3C';
+    snackbar.classList.add('show');
+    setTimeout(() => snackbar.classList.remove('show'), 2000);
 }
 function showSnackbar(message, type, snackbarId = "snackbar") {
     const snackbar = document.getElementById(snackbarId);
@@ -75,16 +78,20 @@ function showSnackbar(message, type, snackbarId = "snackbar") {
         snackbar.classList.remove("show", "hide");
     }, 2500);
 }
-
 function showSnackbarContact() {
     cleanInput();
-    showSnackbar('E-mail sent successful', 'success');
+    createSnackbar('snackbar'); // Ensure snackbar exists
+    snackbar.style.backgroundColor = '#2ECC71';
+    showSnackbar('E-mail sent successfully');
+    
 }
-
-function cleanInput() {// Clear inputs from reset button (onclick="cleanInput()")
-    document.querySelectorAll("input[type='text'], input[type='email'], textarea[type='text'], input[type='password']").forEach(input => {
-        input.value = ""; // Clear input fields
-    });
+function createSnackbar(snackbarId) {
+    if (!document.getElementById(snackbarId)) {
+        const snackbar = document.createElement('div');
+        snackbar.id = snackbarId;
+        snackbar.classList.add('snackbar'); // Add styles if needed
+        document.body.appendChild(snackbar);
+    }
 }
 document.addEventListener("DOMContentLoaded", function() {
     window.onscroll = function() { scrollFunction(); };
@@ -164,8 +171,6 @@ window.addEventListener("beforeunload", function() {
         input.value = ""; // Clear input fields
     });
 });
-function openPage(pageName) { window.location = `${pageName}.html`; }
-
 function cleanInput() { // Clear inputs from reset button (onclick="cleanInput()")
     document.querySelectorAll("input[type='text'], input[type='email'], input[type='password']").forEach(input => {
         input.value = ""; // Clear input fields
@@ -173,23 +178,4 @@ function cleanInput() { // Clear inputs from reset button (onclick="cleanInput()
     document.querySelectorAll("textarea[type='text']").forEach(textarea => {
         textarea.value = ""; // Clear input fields
     });    
-}
-function showSnackbar(message, /*type,*/ snackbarId = 'snackbar') {
-    createSnackbar(snackbarId); // Ensure snackbar exists
-    const snackbar = document.getElementById(snackbarId);
-    snackbar.innerHTML = `
-        <img src="images/logo.png" alt="PubPal Logo" class="icons" id="logo">
-        <span>${message}</span>
-    `;
-    //snackbar.style.backgroundColor = type === 'success' ? '#2ECC71' : '#E74C3C';
-    snackbar.classList.add('show');
-    setTimeout(() => snackbar.classList.remove('show'), 2000);
-}
-function createSnackbar(snackbarId) {
-    if (!document.getElementById(snackbarId)) {
-        const snackbar = document.createElement('div');
-        snackbar.id = snackbarId;
-        snackbar.classList.add('snackbar'); // Add snackbar styles if needed
-        document.body.appendChild(snackbar);
-    }
 }

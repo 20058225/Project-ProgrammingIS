@@ -26,6 +26,9 @@
 [x] Amount due being calculated (addition and subtraction)  
 [x] Button Systems provide administrator access  
 [x] Filter by category showing product configuration colors
+[x] Receipt file json   
+[ ] Formate of json     
+[ ] Print receipt pdf ..?
 
 * Local infrastructure  
 [x] The *.sh file creates an environment to run the project   
@@ -36,5 +39,4 @@
 [ ] Button Commum Items  
 [ ] Exhibit map of tables    
 [ ] Exhibit tables by colors (busy | avaliable)   
-[ ] Print receipt   
 [ ] Grouping products

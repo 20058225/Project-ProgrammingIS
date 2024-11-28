@@ -65,6 +65,7 @@
     justify-content: center;
     gap: 10px;
     margin-bottom: 20px;
+    position: relative;
 }
 .header-flex-container h3 {
     margin: 5px 0 0px 0px;
@@ -209,4 +210,9 @@
 }
 .btnEditForm {
     margin-top: 3%;
+}
+.exit {
+    position: absolute;
+    top: 0px; /* Adjust spacing from the top */
+    right: 0px; /* Adjust spacing from the right */
 }

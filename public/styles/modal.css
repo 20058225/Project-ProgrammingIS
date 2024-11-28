@@ -1,3 +1,14 @@
+:root {
+    --primary-color: #2C3E50;
+    --secondary-color: #ECF0F1;
+    --accent-color-teal: #1ABC9C;
+    --accent-color-orange: #E67E22;
+    --text-primary: #333333;
+    --text-secondary: #555555;
+    --background-light: #F5E9DA;
+    --success-color: #2ECC71;
+    --animation-color: #1ABC9C;
+}
 /* Modal styles */
 .modal {
     display: none; /* Hidden by default */

@@ -9,8 +9,8 @@
                 <section class="register column-thirty">
                     <form id="addUserForm" class="formRegister">
                         <div class="header-flex-container">
-                            <a href="#" onclick="openPage('index')"><img src="images/logo.png" alt="PubPal" class="icons" id="logo"></a>
-                            <h3>Register</h3>
+                            <a href="#" onclick="openPage('index')"><img src="images/logo.png" alt="Logo PubPal" class="icons"></a>
+                            <h3>Register a new user</h3>
                         </div>
                         <div class="divColumn">
                             <div class="classAddUserForm">
@@ -23,12 +23,12 @@
                                 <div class="password-container">
                                     <input class="userPwd" type="password" id="managePassword" required>
                                     <button type="button" onclick="showHidePwd('managePassword', 'pwdIconR')">
-                                        <i class="fa-regular fa-eye-slash" id="pwdIconR" alt="Show/Hide Password"></i>
+                                        <i class="fa-regular fa-eye-slash" id="pwdIconR"></i>
                                     </button>
                                     
                                     <input class="userPwd" type="password" id="managePasswordConf" required>
                                     <button type="button" onclick="showHidePwd('managePasswordConf', 'pwdIconRC')">
-                                        <i class="fa-regular fa-eye-slash" id="pwdIconRC" alt="Show/Hide Password"></i>
+                                        <i class="fa-regular fa-eye-slash" id="pwdIconRC"></i>
                                     </button>
                                 </div>
                             </div>
@@ -43,8 +43,9 @@
                 <section class="login column-thirty">
                     <form id="searchUserForm" class="formRegister" onsubmit="event.preventDefault(); searchUser();">
                         <div class="header-flex-container">
-                            <a href="#" onclick="openPage('index')"><img src="images/logo.png" alt="PubPal" class="icons" id="logo"></a>
+                            <a href="#" onclick="openPage('index')"><img src="images/logo.png" alt="Logo PubPal" class="icons"></a>
                             <h3>Search</h3>
+                            <div class="exit"><a href="#" onclick="openPage('pos')"><i class="fa-solid fa-arrow-right-from-bracket"></i>Exit</a></div>
                         </div>
                         <input class="userPwd" type="number" id="searchUserID" placeholder="User ID"> 
                         <input class="userPwd" type="text" id="searchFullName" placeholder="Full Name">

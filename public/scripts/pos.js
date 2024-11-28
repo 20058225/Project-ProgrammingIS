@@ -3,7 +3,6 @@ let orderTotal = 0; // Global variable to keep track of the order total
 let items = []; // Array to store ordered items
 let selectedItemIndex = null; // Index of the currently selected item
 
-// Page navigation
 function openPage(pageName) {
     window.location = `${pageName}.html`;
 }
@@ -97,16 +96,13 @@ document.addEventListener("DOMContentLoaded", () => {
             button.textContent = buttonText;
 
             // Add a fallback category class if `product.category` is missing
-            const categoryClass = product.category
-                ? product.category.toLowerCase().replace(/\s+/g, '-')
-                : 'category';
+            const categoryClass = product.category ? product.category.toLowerCase().replace(/\s+/g, '-') : 'category';
             button.classList.add('product-btn', categoryClass);
 
             button.addEventListener('click', () => addToOrder(product));
             container.appendChild(button);
         });
     }
-
     // Add product to order
     function addToOrder(product) {
         const orderTextarea = document.querySelector('.itemsDescript .order-container-area');
@@ -154,7 +150,6 @@ document.addEventListener("DOMContentLoaded", () => {
             if (totalInput) {
                 totalInput.value = `€${orderTotal.toFixed(2)}`;
             }
-
             updateDisplay();
         }
     });
@@ -295,3 +290,33 @@ document.addEventListener("DOMContentLoaded", () => {
     loadStock();
     showSnackbar();
 });
+function finish() {
+    document.getElementById("productWrapper").classList.add("hidden");
+    document.getElementById("selectedProductsView").classList.remove("hidden");
+    document.getElementById("selectedProductsView").classList.add("product-wrapper");
+    document.getElementById("btnDescript").classList.add("hidden");
+    document.getElementById("itemsSetUp").classList.add("hidden");
+    document.getElementById("category-navigation").classList.add("hidden");
+}
+// Function to check for items and enable the button
+function checkItems() {
+    const orderContainer = document.querySelector('.order-container-area');
+    const enablefinish = document.getElementById('finish');
+    
+    // Check if there are any `.item` elements
+    if (orderContainer.querySelectorAll('.item').length > 0) {
+        enablefinish.disabled = false; // Enable the button
+    } else {
+        enablefinish.disabled = true; // Disable the button
+    }
+}
+
+// Call the function on page load
+checkItems();
+
+// Add a MutationObserver to watch for changes in `.order-container-area`
+const observer = new MutationObserver(() => checkItems());
+
+// Observe changes in the `.order-container-area` div
+const orderContainer = document.querySelector('.order-container-area');
+observer.observe(orderContainer, { childList: true });

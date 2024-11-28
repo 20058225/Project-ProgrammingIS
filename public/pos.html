@@ -9,7 +9,7 @@
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 	</head>
 	<body>
-		<div class="container">
+		<div class="container" id="container">
 			<div class="main-container">
 				<div id="quantityModal" class="modal">
 					<div class="modal-content">
@@ -39,7 +39,7 @@
 					<div class="itemsDescript">
 						<div class="order-container-area"></div>
 					</div>
-					<div class="btnDescript">
+					<div class="btnDescript" id="btnDescript">
 						<button id="void-item" class="btndescript">Void Item</button>
 						<button id="down-button" class="btndescript"><i class="fa-solid fa-chevron-down"></i></button>
 						<button id="up-button" class="btndescript"><i class="fa-solid fa-chevron-up"></i></button>
@@ -48,7 +48,7 @@
 						<label>Amount Due</label>
 						<input type="text" class="itemsAmountTotal" disabled>
 					</div>
-					<div class="itemsSetUp">
+					<div class="itemsSetUp" id="itemsSetUp">
 						<button class="setUp" id="group-items">Group Items</button>
 						<button class="setUp" id="multiply-item">Multiples</button> <!--type a N number of drinks-->
 						<button class="setUp" id="noSale">No Sale</button>
@@ -72,25 +72,51 @@
 						<button class="Snacks" id="Snacks"><i class="fa-solid fa-pizza-slice"></i> Snacks</button>
 					</div>
 				</div>
+				<div id="selectedProductsView" class="hidden">
+					<div id="payment-options" class="payment-options">
+						<button data-method="cash">Cash</button>
+						<button data-method="card">Card</button>
+					</div>
+					<div id="button-option" class="button-option">
+						<button id="closePaymentView">Return to Products</button>
+						<button id="finishOrder">Finish</button>
+					</div>
+				</div>
 			</div>
 			<div class="menu-container">
 				<div class="userInfo">
-					<p><strong>Open Date:</strong> 2024-11-13</p>
-					<p><strong>Time Seat:</strong> 12:30 PM</p>
-					<p><strong>Server:</strong> Rosa</p>
+					<p>Open Date: <span id="openDate"></span></p>
+					<p>Time Seat: <span id="timeSeat"></span></p>
+					<p>Server: <span id="userName"></span></p>
 				</div>
-				<div class="category navigation">
+				<div class="category navigation" id="category-navigation">
 					<button class="nav-btn" onclick="openPage('index')"><i class="fa-solid fa-xmark"></i>Quit</button>
 					<button class="nav-btn"><i class="fa-regular fa-pen-to-square"></i>Add Name To Tab</button>
-					<button class="nav-btn" onclick="openModal(event)"><i class="fa-solid fa-flag-checkered"></i>Finish</button>
-					<button class="nav-btn"><i class="fa-solid fa-print"></i>Print Receipt</button>
+					<button class="nav-btn" id="finish" onclick="finish()"><i class="fa-solid fa-flag-checkered"></i>Finish</button>
+					<!--<button class="nav-btn"><i class="fa-solid fa-print"></i>Print Receipt</button>-->
 					<button class="nav-btn"><i class="fa-regular fa-floppy-disk"></i>Save Check</button>
 					<button class="nav-btn"><i class="fa-solid fa-screwdriver-wrench"></i>Functions</button>
 					<button class="nav-btn" onclick="openPage('users')"><i class="fa-solid fa-chevron-right"></i>System</button>
 				</div>
 			</div>
 		</div>
-		<div id="snackbar">Welcome to PubPal's Systems!</div>
+	<!-- Modal for Receipt -->
+		<div id="receiptModal" class="modal hidden">
+			<div class="modal-content">
+				<h2>Transaction Receipt</h2>
+				<div id="receiptDetails">
+					<!-- Receipt content dynamically added -->
+				</div>
+				<button onclick="printReceipt()">Print</button>
+				<button onclick="closeReceiptModal()">Close</button>
+			</div>
+		</div>
+	<!-- Modal snackbar Welcome -->
+		<div id="snackbar">
+			<img src="images/logo.png" alt="PubPal Logo" class="icons" id="logo">
+			<span>Welcome to PubPal's Systems!</span>
+		</div>
 		<script src="scripts/pos.js"></script>
+		<script src="scripts/posReceipt.js"></script>
 	</body>
 </html>

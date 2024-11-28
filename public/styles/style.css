@@ -135,7 +135,6 @@ main {
 .icons {
     height: 50px;
     width: auto;
-
 }
 .btn[type="button"] {
     background-color: var(--accent-color-teal);
@@ -166,7 +165,7 @@ main {
     transition: 0.3s;
 }
 #btnGoTop:hover {
-    color: var(--secondary-color);
+    color: var(--primary-color);
     background-color: var(--secondary-color);
 }
 #btnChat {
@@ -334,7 +333,6 @@ li.dropdown {
 }
 .snackbar.show {
     visibility: visible;
-    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
     animation: fadein 0.5s, fadeout 0.5s 2.5s;
 }
 .announcement {
@@ -368,7 +366,7 @@ li.dropdown {
 	height: 10px;
 	border-radius: 5px;
 	background-color: var(--animation-color);
-	color: var(--animation-color);
+	color: var(--secondary-color);
 	box-shadow: 9999px 0 0 0 var(--animation-color);
 	animation: dot-falling 1s infinite linear;
 	animation-delay: 0.1s;

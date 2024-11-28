@@ -3,6 +3,7 @@ const mysql = require('mysql2');
 const path = require('path');
 const dotenv = require('dotenv');
 const cors = require('cors');
+const fs = require('fs');
 
 dotenv.config(); // Load environment variables
 
@@ -194,6 +195,41 @@ process.on('SIGINT', () => {
         process.exit(0);
     });
 });
+
+// POST endpoint to save order
+app.post('/saveOrder', (req, res) => {
+    console.log('Received Order Data:', req.body); // Log the incoming request body
+
+    const orderData = req.body; // Get order data from request body
+
+    // Check if orderData has required fields
+    if (!orderData.items || !orderData.total) {
+        console.error('Invalid order data:', orderData);
+        return res.status(400).send('Invalid order data');
+    }
+
+    // Set the file path to receipt.json inside the "public/data" folder
+    const filePath = path.join(__dirname, 'public', 'data', 'receipt.json');
+
+    // Ensure the directory exists and file is writable
+    fs.mkdir(path.dirname(filePath), { recursive: true }, (err) => {
+        if (err) {
+            console.error('Error creating directory:', err);
+            return res.status(500).send('Error creating directory');
+        }
+
+        // Write the order data to a JSON file
+        fs.writeFile(filePath, JSON.stringify(orderData, null, 2), (err) => {
+            if (err) {
+                console.error('Error saving order:', err);
+                return res.status(500).send('Error saving order');
+            }
+            console.log('Order saved successfully:', orderData); // Log the saved order data
+            res.send('Order saved successfully');
+        });
+    });
+});
+
 // Start Server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

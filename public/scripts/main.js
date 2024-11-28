@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 <section class="register column-thirty">
                     <form id="addUserForm" class="formRegister">
                         <div class="header-flex-container">
-                            <a href="#" onclick="openPage('index')"><img src="images/logo.png" alt="PubPal" class="icons" id="logo"></a>
+                            <a href="#" onclick="openPage('index')"><img src="images/logo.png" alt="Logo PubPal" class="icons"></a>
                             <h3>Register</h3>
                         </div>
                         <div class="divColumn">
@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 <section class="login column-thirty">
                     <div class="formLogin">
                         <div class="header-flex-container">
-                            <a href="#" onclick="openPage('index')"><img src="images/logo.png" alt="PubPal" class="icons" id="logo"></a>
+                            <a href="#" onclick="openPage('index')"><img src="images/logo.png" alt="Logo PubPal" class="icons"></a>
                             <h3>Login</h3>
                         </div>
                         <form id="loginForm" class="divColumn">
@@ -112,7 +112,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 <section class="register column-thirty">
                     <form id="addUserForm" class="formRegister">
                         <div class="header-flex-container">
-                            <a href="#" onclick="openPage('index')"><img src="images/logo.png" alt="PubPal" class="icons" id="logo"></a>
+                            <a href="#" onclick="openPage('index')"><img src="images/logo.png" alt="Logo PubPal" class="icons"></a>
                             <h3>Register</h3>
                         </div>
                         <div class="divColumn">
@@ -146,7 +146,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 <section class="login column-thirty">
                     <form id="searchUserForm" class="formRegister" onsubmit="event.preventDefault(); searchUser();">
                         <div class="header-flex-container">
-                            <a href="#" onclick="openPage('index')"><img src="images/logo.png" alt="PubPal" class="icons" id="logo"></a>
+                            <a href="#" onclick="openPage('index')"><img src="images/logo.png" alt="Logo PubPal" class="icons"></a>
                             <h3>Search</h3>
                         </div>
                         <input class="userPwd" type="number" id="searchUserID" placeholder="User ID"> 
