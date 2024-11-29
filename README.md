@@ -1,6 +1,12 @@
 # Project -  Programming for Information Systems. 
 * Name: PubPal Systems
 * Focus: Bar drinks sales system
+  
+Cash Register Software focuses on pub service, serving beverages and snacks/meals.  
+Users can create/edit/delete users, items, and purchases.  
+Users can create an order by inserting one or more items and taking payment (the option to add a type of payment).  
+An order receipt is available after each purchase, and a report of the items sold is available. 
+
 
 ## You can install the necessary tools for your environment
 ```./linux.sh``` 
