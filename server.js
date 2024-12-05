@@ -2,6 +2,7 @@ const express = require('express');
 const mysql = require('mysql2');
 const path = require('path');
 const dotenv = require('dotenv');
+const bcrypt = require('bcryptjs');
 const cors = require('cors');
 const fs = require('fs');
 
@@ -46,6 +47,7 @@ app.post('/addUser', async (req, res) => {
     let connection;
     try {
         connection = await pool.promise().getConnection();
+        const hashedPassword = await bcrypt.hash(password, 10); // Hash the password with a salt
         const [result] = await connection.execute(
             'INSERT INTO users (userFullName, userEmail, userPassword) VALUES (?, ?, ?)',
             [username, email, password]

@@ -31,7 +31,7 @@ fi
 echo "@@ Installing necessary packages 2"
 if ! command -v express body-parser express-validator &> /dev/null; then
     echo "@@ express body-parser express-validator are required." 
-    npm install express body-parser express-validator
+    npm install express body-parser express-validator bcryptjs
 else
     echo "@@ express open fs are already installed."
 fi
@@ -83,5 +83,3 @@ nohup node server.js > server.log 2>&1 &
 
 echo "@@ Server running.."
 ps aux | grep node
-
-
