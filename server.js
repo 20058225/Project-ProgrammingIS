@@ -262,21 +262,12 @@ app.post('/saveOrder', (req, res) => {
     res.json({ message: 'Order saved successfully', orderId: orderId });
 });
 
-// Serve static files from the "public" directory
-app.use(express.static(path.join(__dirname, 'public')));
-
-// Log incoming requests
-app.use((req, res, next) => {
-    console.log(`Incoming request: ${req.method} ${req.url}`, req.body);
-    next();
-});
-
-// Route to serve index.html for the root URL
+// Redirect root URL to /index.html
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// Fallback for unknown routes to serve index.html
+// Fallback for unknown routes (optional, but useful for SPAs or 404 fallback)
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
