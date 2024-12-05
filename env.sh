@@ -71,12 +71,12 @@ if ! command -v mysql &> /dev/null; then
     npm install mysql
     npm install mysql2
     sudo apt install -y mysql-client
+    sudo apt-get install -y mysql-server
 else
     echo "@@ MySql is already installed."
 fi
 
-echo "@@ Starting server and file log being created.."
-nohup node server.js > server.log 2>&1 &
+echo "Update and CTRL + X and ENTER"
+echo "@@ change it to bind-address = 0.0.0.0"
 
-echo "@@ Server running.."
-ps aux | grep node
+sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf

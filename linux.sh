@@ -74,6 +74,7 @@ if ! command -v mysql &> /dev/null; then
     npm install mysql
     npm install mysql2
     sudo apt install -y mysql-client
+    sudo apt-get install mysql-server
 else
     echo "@@ MySql is already installed."
 fi
