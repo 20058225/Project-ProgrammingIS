@@ -47,10 +47,15 @@ app.post('/addUser', async (req, res) => {
     let connection;
     try {
         connection = await pool.promise().getConnection();
-        const hashedPassword = await bcrypt.hash(password, 10); // Hash the password with a salt
+                
+        // Hash the password
+        const hashedPassword = await bcrypt.hash(password, 10); 
+        console.log("Hashed Password:", hashedPassword); // Log the hashed password for debugging
+
+        // Insert the user into the database
         const [result] = await connection.execute(
             'INSERT INTO users (userFullName, userEmail, userPassword) VALUES (?, ?, ?)',
-            [username, email, password]
+            [username, email, hashedPassword]
         );
         res.send('User added successfully.');
         console.log('User added successfully.');
@@ -64,25 +69,34 @@ app.post('/addUser', async (req, res) => {
 // Endpoint to Login with a User
 app.post('/getUser', async (req, res) => {
     const { email, password } = req.body;
-    console.log('Request Body:', req.body);
+
     if (!email || !password) {
-        return res.status(400).send('Username and password are required.');
+        return res.status(400).send('Email and password are required.');
     }
+
     let connection;
     try {
         connection = await pool.promise().getConnection();
+
+        // Fetch the user by email
         const [rows] = await connection.execute(
-            'SELECT * FROM users WHERE userEmail = ? AND userPassword = ?',
-            [email, password]
+            'SELECT * FROM users WHERE userEmail = ?',
+            [email]
         );
 
-        if (rows.length > 0) {
-            res.status(200).json({ message: 'Login successful.', user: rows[0] });
-            console.log('Login successful.');
-        } else {
-            res.status(401).send('Invalid username or password.');
-            console.log('Invalid username or password.');
+        if (rows.length === 0) {
+            return res.status(401).send('Invalid email or password.');
         }
+
+        const user = rows[0];
+
+        // Compare provided password with the hashed password
+        const isMatch = await bcrypt.compare(password, user.userPassword);
+        if (!isMatch) {
+            return res.status(401).send('Invalid email or password.');
+        }
+
+        res.status(200).json({ message: 'Login successful.', user });
     } catch (err) {
         console.error('Error querying the database:', err.message);
         res.status(500).send('Error checking the user in the database.');

@@ -1,4 +1,4 @@
-sudo apt update
+#sudo apt update
 
 if ! command -v node &> /dev/null; then
     echo "@@ Node.js is required." 

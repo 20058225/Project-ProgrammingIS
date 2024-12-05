@@ -3,3 +3,9 @@
 /server
 package-lock.json
 package.json
+env.sh
+public/data/pos.sql
+public/data/user.sql
+env.sh
+server.log
+env.sh

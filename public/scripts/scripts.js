@@ -63,6 +63,7 @@ function showsnackbar(message) {
     setTimeout(() => snackbar.classList.remove('show'), 2000);
 }
 function showSnackbar(message, type, snackbarId = "snackbar") {
+    createSnackbar(snackbarId); // Ensure snackbar exists
     const snackbar = document.getElementById(snackbarId);
 
     if (!snackbar) { console.error("Snackbar element not found!"); return; }
