@@ -97,7 +97,6 @@ document.getElementById("finishOrder").addEventListener("click", () => {
         date: now.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
         time: now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' })
     };
-    console.log(orderData);
 
     // Convert data to JSON
     const orderJSON = JSON.stringify(orderData);
@@ -117,7 +116,9 @@ document.getElementById("finishOrder").addEventListener("click", () => {
         if (data.orderId) {
             showSnackbar(`Order saved successfully! Order ID: ${data.orderId}`, 'success');
             downloadReceipt(data.orderId, orderData);
-            window.location = 'pos.html';
+            setTimeout(() => {
+                window.location = 'pos.html'; 
+            }, 2000);
         } else {
             throw new Error('Failed to save order');
         }
