@@ -194,15 +194,6 @@ app.delete('/deleteUser/:userID', async (req, res) => {
         res.status(500).send('Error deleting user.');
     } 
 });
-
-// @@ Fallback to serve index.html for unknown routes
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
-});
-app.use((req, res, next) => {
-    console.log(`Incoming request: ${req.method} ${req.url}`, req.body);
-    next();
-});
 process.on('SIGINT', () => {
     console.log('Closing MySQL pool...');
     pool.end((err) => {
@@ -269,6 +260,25 @@ app.post('/saveOrder', (req, res) => {
 
     console.log(`Order saved successfully: ${orderId}`);
     res.json({ message: 'Order saved successfully', orderId: orderId });
+});
+
+// Serve static files from the "public" directory
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Log incoming requests
+app.use((req, res, next) => {
+    console.log(`Incoming request: ${req.method} ${req.url}`, req.body);
+    next();
+});
+
+// Route to serve index.html for the root URL
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+// Fallback for unknown routes to serve index.html
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 // Start server
