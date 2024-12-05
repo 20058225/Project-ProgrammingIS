@@ -124,6 +124,33 @@ document.getElementById("finishOrder").addEventListener("click", () => {
     })
     .catch(error => console.error('Error saving order:', error));
 });
+function showSnackbar(message, type, snackbarId = "snackbar") {
+    createSnackbar(snackbarId); // Ensure snackbar exists
+    const snackbar = document.getElementById(snackbarId);
+
+    if (!snackbar) { console.error("Snackbar element not found!"); return; }
+
+    snackbar.style.backgroundColor = type === 'success' ? '#2ECC71' : '#E74C3C';
+    
+    snackbar.innerHTML = message;
+    snackbar.classList.add("show");
+
+    setTimeout(() => {
+        snackbar.classList.add("hide");
+    }, 2000);
+
+    setTimeout(() => {
+        snackbar.classList.remove("show", "hide");
+    }, 2500);
+}   
+function createSnackbar(snackbarId) {
+    if (!document.getElementById(snackbarId)) {
+        const snackbar = document.createElement('div');
+        snackbar.id = snackbarId;
+        snackbar.classList.add('snackbar'); // Add styles if needed
+        document.body.appendChild(snackbar);
+    }
+} 
 function downloadReceipt(orderId, orderData) {
     if (!orderData) {
         console.error('Order data is undefined');

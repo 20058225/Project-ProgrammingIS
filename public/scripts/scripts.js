@@ -86,7 +86,6 @@ function showSnackbarContact() {
     createSnackbar('snackbar'); // Ensure snackbar exists
     snackbar.style.backgroundColor = '#2ECC71';
     showSnackbar('E-mail sent successfully');
-    
 }
 function createSnackbar(snackbarId) {
     if (!document.getElementById(snackbarId)) {
