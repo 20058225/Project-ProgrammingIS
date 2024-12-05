@@ -68,6 +68,8 @@ function showSnackbar(message, type, snackbarId = "snackbar") {
 
     if (!snackbar) { console.error("Snackbar element not found!"); return; }
 
+    snackbar.style.backgroundColor = type === 'success' ? '#2ECC71' : '#E74C3C';
+    
     snackbar.innerHTML = message;
     snackbar.classList.add("show");
 

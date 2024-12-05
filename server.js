@@ -244,6 +244,12 @@ app.post('/saveOrder', (req, res) => {
         return res.status(400).json({ error: 'Invalid order data' });
     }
 
+    // Ensure the 'receipt' directory exists
+    const receiptDir = path.join(__dirname, 'public', 'data', 'receipts');
+    if (!fs.existsSync(receiptDir)) {
+        fs.mkdirSync(receiptDir);
+    }
+
     const filePath = path.join(__dirname, 'public', 'data', 'receipts.json');
 
     let existingData = [];

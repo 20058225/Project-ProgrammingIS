@@ -110,14 +110,12 @@ document.getElementById("finishOrder").addEventListener("click", () => {
         body: orderJSON,
     })
     .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
+        if (!response.ok) { throw new Error('Network response was not ok'); }
         return response.json();
     })
     .then(data => {
         if (data.orderId) {
-            alert(`Order saved successfully! Order ID: ${data.orderId}`);
+            showSnackbar(`Order saved successfully! Order ID: ${data.orderId}`, 'success');
             downloadReceipt(data.orderId, orderData);
             window.location = 'pos.html';
         } else {
