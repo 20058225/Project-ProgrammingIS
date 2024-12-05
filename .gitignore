@@ -9,3 +9,4 @@ public/data/user.sql
 env.sh
 server.log
 env.sh
+public/data/create_pubpal_db.sql
