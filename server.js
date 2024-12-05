@@ -211,65 +211,67 @@ process.on('SIGINT', () => {
         process.exit(0);
     });
 });
-
 let currentOrderId = 1000;
 const idFilePath = path.join(__dirname, 'lastOrderId.txt');
 
-// Load the last used ID from file if it exists
+// Load last used ID from file if it exists
 if (fs.existsSync(idFilePath)) {
-    currentOrderId = parseInt(fs.readFileSync(idFilePath, 'utf8'));
+    currentOrderId = parseInt(fs.readFileSync(idFilePath, 'utf8'), 10);
 }
 
+// Generate unique order ID
 function generateOrderId() {
-    const orderId = currentOrderId;
-    currentOrderId++;
-    
-    // Save the new ID to file
+    const orderId = `ORDER-${currentOrderId++}`;
     fs.writeFileSync(idFilePath, currentOrderId.toString());
-    
-    return `ORDER-${orderId}`;
+    return orderId;
 }
 
-// POST endpoint to save order
+// Save order details and receipt
 app.post('/saveOrder', (req, res) => {
-    console.log('Received Order Data:', req.body);
-
     const orderData = req.body;
 
-    const orderId = generateOrderId();
-    orderData.orderId = orderId;
-
-    if (!orderData.items || !orderData.total || !orderData.paymentMethod || !orderData.serverName || !orderData.pubName || !orderData.address || !orderData.date || !orderData.time) {
-        console.error('Invalid order data:', orderData);
+    // Validate order data
+    if (!orderData.items || !orderData.total || !orderData.paymentMethod) {
         return res.status(400).json({ error: 'Invalid order data' });
     }
 
-    // Ensure the 'receipt' directory exists
-    const receiptDir = path.join(__dirname, 'public', 'data', 'receipts');
-    if (!fs.existsSync(receiptDir)) {
-        fs.mkdirSync(receiptDir);
+    // Generate unique order ID
+    const orderId = generateOrderId();
+    orderData.orderId = orderId;
+
+    // Create receipt content
+    const receiptContent = `
+        Receipt for Order: ${orderId}
+        Pub: ${orderData.pubName || 'N/A'}
+        Address: ${orderData.address || 'N/A'}
+        Date: ${orderData.date}
+        Time: ${orderData.time}
+        Server: ${orderData.serverName}
+
+        Items:
+        ${orderData.items.join('\n')}
+
+        Total: €${orderData.total}
+        Payment Method: ${orderData.paymentMethod}
+
+        Thank you for your purchase!
+    `;
+
+    // Ensure receipts directory exists
+    const receiptsDir = path.join(__dirname, 'public', 'data', 'receipts');
+    if (!fs.existsSync(receiptsDir)) {
+        fs.mkdirSync(receiptsDir);
     }
 
-    const filePath = path.join(__dirname, 'public', 'data', 'receipts.json');
+    // Save receipt to a text file
+    const receiptPath = path.join(receiptsDir, `${orderId}.txt`);
+    fs.writeFileSync(receiptPath, receiptContent);
 
-    let existingData = [];
-    if (fs.existsSync(filePath)) {
-        const fileContent = fs.readFileSync(filePath, 'utf8');
-        existingData = JSON.parse(fileContent);
-    }
-
-    existingData.push(orderData);
-
-    fs.writeFile(filePath, JSON.stringify(existingData, null, 2), (err) => {
-        if (err) {
-            console.error('Error saving order:', err);
-            return res.status(500).json({ error: 'Error saving order' });
-        }
-        console.log('Order saved successfully:', orderData);
-        res.json({ message: 'Order saved successfully', orderId: orderData.orderId });
-    });
+    console.log(`Order saved successfully: ${orderId}`);
+    res.json({ message: 'Order saved successfully', orderId: orderId });
 });
-// Start Server
+
+// Start server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);

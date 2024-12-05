@@ -66,10 +66,8 @@ function calculateOrderTotal() {
     return total.toFixed(2);
 }
 
-// Event listener for "finishOrder" button
 document.getElementById("finishOrder").addEventListener("click", () => {
     const orderContainer = document.querySelector('.order-container-area');
-    console.log(orderContainer);
     const items = [];
     let total = 0; // Initialize total
 
@@ -77,7 +75,6 @@ document.getElementById("finishOrder").addEventListener("click", () => {
     orderContainer.querySelectorAll('.item').forEach(item => {
         const itemText = item.textContent.trim();
         items.push(itemText);
-        // Extract price from the item text (assuming price is in the format "Item - €Price")
         const priceMatch = itemText.match(/€(\d+\.\d{2})/);
         if (priceMatch) {
             total += parseFloat(priceMatch[1]);
@@ -98,30 +95,21 @@ document.getElementById("finishOrder").addEventListener("click", () => {
         time: now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' })
     };
 
-    // Convert data to JSON
-    const orderJSON = JSON.stringify(orderData);
-    console.log('Order Data:', orderJSON);
-
     // Send JSON to server
     fetch('/saveOrder', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: orderJSON,
+        body: JSON.stringify(orderData),
     })
     .then(response => {
-        if (!response.ok) { throw new Error('Network response was not ok'); }
+        if (!response.ok) throw new Error('Failed to save order');
         return response.json();
     })
     .then(data => {
-        if (data.orderId) {
-            showSnackbar(`Order saved successfully! Order ID: ${data.orderId}`, 'success');
-            downloadReceipt(data.orderId, orderData);
-            setTimeout(() => {
-                window.location = 'pos.html'; 
-            }, 2000);
-        } else {
-            throw new Error('Failed to save order');
-        }
+        showSnackbar(`Order saved successfully! Order ID: ${data.orderId}`, 'success');
+        setTimeout(() => {
+            window.location = 'pos.html'; 
+        }, 2000);
     })
     .catch(error => console.error('Error saving order:', error));
 });
@@ -148,44 +136,7 @@ function createSnackbar(snackbarId) {
     if (!document.getElementById(snackbarId)) {
         const snackbar = document.createElement('div');
         snackbar.id = snackbarId;
-        snackbar.classList.add('snackbar'); // Add styles if needed
+        snackbar.classList.add('snackbar');
         document.body.appendChild(snackbar);
     }
-} 
-function downloadReceipt(orderId, orderData) {
-    if (!orderData) {
-        console.error('Order data is undefined');
-        return;
-    }
-    const content = `
-        Receipt for Order: ${orderId}
-        Pub: ${orderData.pubName || 'N/A'}
-        Address: ${orderData.address || 'N/A'}
-        Date: ${orderData.date}
-        Time: ${orderData.time}
-        Server: ${orderData.serverName}
-
-        Items:
-        ${orderData.items.join('\n')}
-
-        Total: €${orderData.total}
-        Payment Method: ${orderData.paymentMethod}
-
-        Thank you for your purchase!
-    `;
-    const blob = new Blob([content], { type: 'text/plain' });
-
-    // Create a temporary <a> element
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(blob);
-
-    // Set dynamic file name
-    link.download = `${orderId}.txt`;
-    //link.download = `${orderId}.pdf`;
-
-    // Programmatically click the link to trigger download
-    link.click();
-
-    // Revoke the object URL to free up memory
-    URL.revokeObjectURL(link.href);
 }
