@@ -40,6 +40,7 @@ const promisePool = pool.promise(); // Use promise-based queries
 
 // @@ Endpoint to Add a User
 app.post('/addUser', async (req, res) => {
+    const { id } = req.params;
     const { username, email, password } = req.body;
     if (!username || !email || !password) {
         return res.status(400).send('Username, email, and password are required.');
@@ -58,6 +59,8 @@ app.post('/addUser', async (req, res) => {
             [username, email, hashedPassword]
         );
         res.send('User added successfully.');
+        res.status(200).json({ message: 'UserID created: ', user: id});
+
         console.log('User added successfully.');
     } catch (err) {
         console.error("Database Error:",err.message);
@@ -203,7 +206,7 @@ process.on('SIGINT', () => {
     });
 });
 let currentOrderId = 1000;
-const idFilePath = path.join(__dirname, 'lastOrderId.txt');
+const idFilePath = path.join(__dirname, 'public', 'data', 'receipts', 'lastOrderId.txt');
 
 // Load last used ID from file if it exists
 if (fs.existsSync(idFilePath)) {
@@ -273,7 +276,8 @@ app.get('*', (req, res) => {
 });
 
 // Start server
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
 });
+module.exports = app;
