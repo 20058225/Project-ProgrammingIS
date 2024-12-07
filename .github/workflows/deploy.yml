@@ -22,7 +22,7 @@ jobs:
     - name: Deploy to Azure VM
       run: |
         ssh -o StrictHostKeyChecking=no ${{ secrets.AZURE_VM_USER }}@13.80.26.188 << 'EOF'
-          cd /path/to/your/project  # Navigate to your project directory on the VM
+          cd /home/useradmin/Project-ProgrammingIS  # Navigate to your project directory on the VM
           git pull origin main  # Pull latest changes from GitHub
           npm install  # Install dependencies (if using Node.js)
           # Optionally, you can restart a service or Docker container here
