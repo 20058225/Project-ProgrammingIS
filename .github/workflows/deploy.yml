@@ -33,6 +33,7 @@ jobs:
         ssh -v -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no ${{ secrets.AZURE_VM_USER }}@13.80.26.188 << 'EOF'
           # Step 4.1: Navigate to the project directory
           cd /home/${{ secrets.AZURE_VM_USER }}/Project-ProgrammingIS  # Navigate to your project directory
+          rm server.log
 
           # Step 4.2: Run the env.sh script (no need for chmod +x)
           echo "Running env.sh script..."
