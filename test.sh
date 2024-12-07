@@ -55,6 +55,7 @@ install_package() {
 
 # Check and install required npm packages
 install_package express
+install_package --save mysql2
 
 if ! command -v mysql &> /dev/null; then
     echo "@@ MySQL client is required."
