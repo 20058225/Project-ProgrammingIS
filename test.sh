@@ -42,4 +42,4 @@ fi
 
 # Running the User Test
 echo "@@ Running the User Test.."
-npx mocha user.test.js --require esm || { echo "@@ User test failed"; exit 1; }
+npx PORT=4000 mocha user.test.js --require esm || { echo "@@ User test failed"; exit 1; }
