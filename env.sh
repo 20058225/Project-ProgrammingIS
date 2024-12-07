@@ -1,82 +1,68 @@
-#sudo apt update
+#!/bin/bash
 
+# Check if Node.js is installed
 if ! command -v node &> /dev/null; then
-    echo "@@ Node.js is required." 
+    echo "@@ Node.js is required."
+    # Optionally, use NVM to install Node.js instead of apt
     sudo apt install -y nodejs
 else
     echo "@@ Node.js is already installed."
 fi
 
+# Check if npm is installed
 if ! command -v npm &> /dev/null; then
-    echo "@@ NPM is required." 
+    echo "@@ NPM is required."
     sudo apt install -y npm
 else
     echo "@@ NPM is already installed."
 fi
 
-echo "@@ Initializing npm"
-npm init -y
-
-echo "@@ Installing necessary packages"
-if ! command -v express open fs &> /dev/null; then
-    echo "@@ express open fs are required." 
-    npm install express open fs
+# Initialize npm project if package.json does not exist
+if [ ! -f package.json ]; then
+    echo "@@ Initializing npm project."
+    npm init -y
 else
-    echo "@@ express open fs are already installed."
+    echo "@@ package.json already exists."
 fi
 
-echo "@@ Installing necessary packages 2"
-if ! command -v express body-parser express-validator &> /dev/null; then
-    echo "@@ express body-parser express-validator are required." 
-    npm install express body-parser express-validator bcryptjs
-else
-    echo "@@ express open fs are already installed."
-fi
+# Install missing packages if not found
+install_package() {
+    if ! npm list "$1" &> /dev/null; then
+        echo "@@ $1 is required."
+        npm install "$1"
+    else
+        echo "@@ $1 is already installed."
+    fi
+}
 
-echo "@@ Installing Cors"
-if ! command -v cors &> /dev/null; then
-    echo "@@ Cors is required." 
-    npm install cors
-else
-    echo "@@ Cors is already installed."
-fi
+# Check and install required npm packages
+install_package express
+install_package body-parser
+install_package express-validator
+install_package cors
+install_package dotenv
+install_package nodemon
+install_package eslint
 
-echo "@@ Installing Dotenv"
-if ! command -v dotenv &> /dev/null; then
-    echo "@@ Dotenv is required." 
-    npm install dotenv
-else
-    echo "@@ Dotenv is already installed."
-fi
-
-echo "@@ Installing Nodemon"
-if ! command -v nodemon &> /dev/null; then
-    echo "@@ Nodemon is required." 
-    npm install --save-dev nodemon
-else
-    echo "@@ Nodemon is already installed."
-fi
-
-echo "@@ Installing Eslint"
-if ! command -v eslint &> /dev/null; then
-    echo "@@ Eslint is required." 
-    npm install --save-dev eslint
-else
-    echo "@@ Eslint is already installed."
-fi
-
-echo "@@ Installing MySql"
+# Check if MySQL client is installed
 if ! command -v mysql &> /dev/null; then
-    echo "@@ MySql is required." 
-    npm install mysql
-    npm install mysql2
+    echo "@@ MySQL client is required."
     sudo apt install -y mysql-client
-    sudo apt-get install -y mysql-server
 else
-    echo "@@ MySql is already installed."
+    echo "@@ MySQL client is already installed."
 fi
 
-echo "Update and CTRL + X and ENTER"
-echo "@@ change it to bind-address = 0.0.0.0"
+# Check if MySQL server is installed
+if ! dpkg -l | grep mysql-server &> /dev/null; then
+    echo "@@ MySQL server is required."
+    sudo apt install -y mysql-server
+else
+    echo "@@ MySQL server is already installed."
+fi
 
-sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf
+# Configure MySQL for remote access (automatically)
+echo "@@ Configuring MySQL for remote access (bind-address = 0.0.0.0)."
+sudo sed -i 's/^bind-address.*/bind-address = 0.0.0.0/' /etc/mysql/mysql.conf.d/mysqld.cnf
+
+echo "Restarting MySQL service..."
+sudo systemctl restart mysql

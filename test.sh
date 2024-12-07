@@ -1,49 +1,55 @@
+#!/bin/bash
+
 echo "@@ Accessing the folder to run tests"
 
-# Install Mocha, Chai, and Supertest if not already installed
-if ! command -v mocha &> /dev/null; then
+# Install Mocha if not already installed
+if ! npm list mocha &> /dev/null; then
     echo "@@ Mocha is required."
-    #npm install --save-dev mocha
-    npm install chai@^4.3.7
-
+    npm install --save-dev mocha
 else
     echo "@@ Mocha is already installed."
 fi
 
-if ! command -v chai &> /dev/null; then
+# Install Chai if not already installed
+if ! npm list chai &> /dev/null; then
     echo "@@ Chai is required."
     npm install chai
 else
     echo "@@ Chai is already installed."
 fi
 
-if ! command -v supertest &> /dev/null; then
+# Install Supertest if not already installed
+if ! npm list supertest &> /dev/null; then
     echo "@@ Supertest is required."
     npm install --save-dev supertest
 else
     echo "@@ Supertest is already installed."
 fi
 
-if ! command -v sinon &> /dev/null; then
+# Install Sinon if not already installed
+if ! npm list sinon &> /dev/null; then
     echo "@@ Sinon is required."
     npm install --save-dev sinon
 else
     echo "@@ Sinon is already installed."
 fi
 
-if ! command -v esm &> /dev/null; then
-    echo "@@ Esm is required."
+# Install ESM if not already installed
+if ! npm list esm &> /dev/null; then
+    echo "@@ ESM is required."
     npm install esm --save-dev
 else
-    echo "@@ Esm is already installed."
+    echo "@@ ESM is already installed."
 fi
 
+# Running the User Test
 echo "@@ Running the User Test.."
-npx mocha user.test.js --require esm
+npx mocha user.test.js --require esm || { echo "@@ User test failed"; exit 1; }
 
 echo "@@ .. @@" 
 
+# Running the Integration Test
 echo "@@ Running the Integration Test.."
-#npx mocha integration.test.js
+npx mocha integration.test.js --require esm || { echo "@@ Integration test failed"; exit 1; }
 
-echo "@@ .. @@"
+echo "@@ .. @@" 

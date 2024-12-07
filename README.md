@@ -46,3 +46,9 @@ An order receipt is available after each purchase, and a report of the items sol
 [ ] Exhibit tables by colors (busy | available)   
 [ ] Grouping products   
 [ ] Print receipt pdf ..?
+
+
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICA5OGmMli3K+y7D/O4Pc3CsWA8wlrRg1HIsTnSrqSgK 20058225@mydbs.ie
+
+ssh-keygen -t rsa -b 4096 -C "20058225@mydbs.ie" -f ~/.ssh/id_rsa
+ssh -i ~/.ssh/id_rsa useradmin@13.80.26.188
