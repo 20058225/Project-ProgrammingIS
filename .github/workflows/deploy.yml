@@ -30,6 +30,8 @@ jobs:
     # Step 3: Add Azure VM to known hosts (Only if not already done)
     - name: Add Azure VM to known hosts
       run: |
+        # Ensure the .ssh directory exists
+        mkdir -p ~/.ssh
         if ! grep -q "13.80.26.188" ~/.ssh/known_hosts; then
           ssh-keyscan -H 13.80.26.188 >> ~/.ssh/known_hosts 
           echo "@@ Azure VM added to known hosts."
