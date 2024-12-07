@@ -12,3 +12,4 @@ env.sh
 public/data/create_pubpal_db.sql
 /test
 /public/data/receipts
+public/scripts/convertFile.js

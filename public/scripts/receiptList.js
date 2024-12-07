@@ -1,71 +1,57 @@
+let globalReceiptsData = [];
+
 async function fetchReceipts() {
     try {
-        const response = await fetch('/api/receipts');
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        const response = await fetch('api/receipts');
+        if (!response.ok) {
+            throw new Error('Failed to fetch receipts');
+        }
 
-        const receiptsData = await response.json(); // Now the response is JSON
-        showReceipts(receiptsData);
+        globalReceiptsData = await response.json(); // Store fetched data
+        console.log('Global receipts data set: ', globalReceiptsData);
+
+        // Now call `showReceipts()` only after the data is fetched
+        // You could call showReceipts here directly, or later when the modal is opened
     } catch (error) {
         console.error('Error fetching receipts:', error);
     }
 }
 
-
-// Function to display the receipts in a list
 function showReceipts(receiptsData) {
-    const receiptsContainer = document.getElementById('receiptContainer');
+    console.log('Received receipts data:', receiptsData); // Log data received
+
+    const modalListContent = document.getElementById('modalListContent');
+    modalListContent.innerHTML = ''; // Clear existing content
 
     if (!receiptsData || receiptsData.length === 0) {
-        receiptsContainer.innerHTML = '<p>No receipts available</p>';
+        modalListContent.innerHTML = '<p>No receipts available.</p>';
         return;
     }
 
-    receiptsContainer.innerHTML = receiptsData
-        .map(
-            (receipt) => `
+    receiptsData.forEach(receipt => {
+        modalListContent.innerHTML += `
             <div class="receiptListItem">
-                <p><strong>Order ID:</strong> ${receipt.orderId}</p>
-                <p><strong>Date:</strong> ${receipt.date}</p>
-                <p><strong>Total:</strong> ${receipt.total}</p>
-            </div>
-        `
-        )
-        .join('');
-
-    document.querySelectorAll('.receiptListItem').forEach((item, index) => {
-        item.addEventListener('click', () => {
-            showReceiptDetails(receiptsData[index]);
-        });
+                <p><strong>Order ID:</strong> ${receipt.orderId} | <strong>Date:</strong> ${receipt.date} | <strong>Total:</strong> ${receipt.total}</p>
+            </div>`;
     });
+
+    console.log('Modal content populated:', modalListContent.innerHTML);
 }
 
-// Call fetchReceipts when the DOM is ready or button is clicked
-document.addEventListener('DOMContentLoaded', fetchReceipts);
-
-// Function to show receipt details in a modal
-function showReceiptDetails(receipt) {
-    //document.getElementById("receiptListModal").classList.remove("hidden");
-    const modal = document.getElementById("receiptListModal");
-    const modalContent = document.getElementById("modalListContent");
-
-    modalContent.innerHTML = `
-        <h2>Receipt #${receipt.orderId}</h2>
-        <p><strong>Server:</strong> ${receipt.serverName}</p>
-        <p><strong>Total:</strong> ${receipt.total}</p>
-        <p><strong>Payment Method:</strong> ${receipt.paymentMethod}</p>
-        <p><strong>Date:</strong> ${new Date(receipt.timestamp).toLocaleString()}</p>
-        <ul>
-            ${receipt.items.map(item => `<li>${item}</li>`).join("")}
-        </ul>
-    `;
-
+document.getElementById('showReceipts').addEventListener('click', () => {
+    const modal = document.getElementById('receiptListModal');
     modal.classList.remove('hidden');
-}
+    console.log('Modal is now visible');
+    
+    // Call showReceipts with the globalReceiptsData when the modal is opened
+    showReceipts(globalReceiptsData);
+});
 
-// Close the modal
-document.getElementById("closeModalButton").addEventListener("click", () => {
-    document.getElementById("receiptListModal").classList.add('hidden');
+document.getElementById('closeModalButton').addEventListener('click', () => {
+    const modal = document.getElementById('receiptListModal');
+    modal.classList.add('hidden');
+    console.log('Modal is now hidden');
 });
-document.getElementById("showReceipts").addEventListener("click", () => {
-    document.getElementById("receiptContainer").classList.remove('hidden');
-});
+
+// Fetch receipts when the page loads (or wherever appropriate)
+fetchReceipts();

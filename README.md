@@ -32,9 +32,8 @@ An order receipt is available after each purchase, and a report of the items sol
 [x] Amount due being calculated (addition and subtraction)  
 [x] Button Systems provides administrator access  
 [x] Filter by category showing product configuration colors     
-[x] Receipt file json    
 [x] Receipt download .txt   
-[x] Formate of JSON      
+[x] List of Receipt 
 
 * Local infrastructure  
 [x] The *.sh file creates an environment to run the project   
