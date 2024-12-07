@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Set PORT environment variable
+export PORT=4000
+
 # Install Mocha if not already installed
 if ! npm list mocha --depth=0 &> /dev/null; then
     echo "@@ Mocha is required."
@@ -42,4 +45,4 @@ fi
 
 # Running the User Test
 echo "@@ Running the User Test.."
-npx PORT=4000 mocha user.test.js --require esm || { echo "@@ User test failed"; exit 1; }
+npx mocha user.test.js --require esm || { echo "@@ User test failed"; exit 1; }

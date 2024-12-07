@@ -1,9 +1,6 @@
 const sinon = require('sinon');
 const request = require('supertest');
-
-process.env.PORT = 4000;
 const app = require('./server');
-
 const mysql = require('mysql2');
 const bcrypt = require('bcryptjs');
 
