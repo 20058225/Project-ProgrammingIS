@@ -149,7 +149,6 @@ app.patch('/updateUser/:id', async (req, res) => {
         res.status(500).send('Error updating user.');
     }
 });
-
 // @@ Endpoint to Search a User
 app.post('/searchUser', async (req, res) => {
     const { userId, fullName } = req.body;
@@ -343,7 +342,7 @@ function parseReceiptContent(content) {
 }
 
 // Start server
-const PORT = process.env.PORT || 3005;
+const PORT = process.env.PORT;
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
 });

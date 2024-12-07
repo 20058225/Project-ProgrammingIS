@@ -3,7 +3,6 @@
 # Check if Node.js is installed
 if ! command -v node &> /dev/null; then
     echo "@@ Node.js is required."
-    # Optionally, use NVM to install Node.js instead of apt
     sudo apt install -y nodejs
 else
     echo "@@ Node.js is already installed."
@@ -66,3 +65,11 @@ sudo sed -i 's/^bind-address.*/bind-address = 0.0.0.0/' /etc/mysql/mysql.conf.d/
 
 echo "Restarting MySQL service..."
 sudo systemctl restart mysql
+
+echo "@@ Creating MySQL database and user..."
+mysql -u root -p -e "CREATE DATABASE IF NOT EXISTS users;"
+mysql -u root -p -e "CREATE DATABASE IF NOT EXISTS categories;"
+mysql -u root -p -e "CREATE DATABASE IF NOT EXISTS products;"
+
+# Done
+echo "@@ Environment setup complete."

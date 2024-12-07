@@ -19,6 +19,7 @@ jobs:
       run: |
         echo "@@ Running Tests via test.sh script..."
         export PORT=4000 
+        
         bash test.sh      
         export DEBUG=mocha:*   
 

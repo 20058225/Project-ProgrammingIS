@@ -43,6 +43,14 @@ else
     echo "@@ ESM is already installed."
 fi
 
+# Install ESM if not already installed
+if ! npm list express --depth=0 &> /dev/null; then
+    echo "@@ Express is required."
+    npm install express
+else
+    echo "@@ Express is already installed."
+fi
+
 # Running the User Test
 echo "@@ Running the User Test.."
 npx mocha user.test.js --require esm || { echo "@@ User test failed"; exit 1; }
