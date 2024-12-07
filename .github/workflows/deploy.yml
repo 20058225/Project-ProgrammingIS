@@ -17,12 +17,11 @@ jobs:
     # Step 2: Set up SSH key for GitHub Actions (Only if not already done)
     - name: Set up SSH key
       run: |
-        # Check if the SSH private key exists
         if [ ! -f ~/.ssh/id_ed25519 ]; then
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > private_key.pem  # Store private key in a file
           chmod 600 private_key.pem  # Secure the key file
           mkdir -p ~/.ssh
-          mv private_key.pem ~/.ssh/id_ed25519  # Move key to the correct directory
+          mv private_key.pem ~/.ssh/id_ed25519  
           echo "@@ SSH private key has been set up."
         else
           echo "@@ SSH private key already exists, skipping setup."
@@ -31,12 +30,11 @@ jobs:
     # Step 3: Add Azure VM to known hosts (Only if not already done)
     - name: Add Azure VM to known hosts
       run: |
-        # Check if the Azure VM is already in known hosts
         if ! grep -q "13.80.26.188" ~/.ssh/known_hosts; then
-        ssh-keyscan -H 13.80.26.188 >> ~/.ssh/known_hosts  # Avoid host verification prompt
-        echo "@@ Azure VM added to known hosts."
+          ssh-keyscan -H 13.80.26.188 >> ~/.ssh/known_hosts 
+          echo "@@ Azure VM added to known hosts."
         else
-        echo "@@ Azure VM is already in known hosts, skipping addition."
+          echo "@@ Azure VM is already in known hosts, skipping addition."
         fi
 
     # Step 4: Run the env.sh script, stop the existing Node.js process, and restart it
