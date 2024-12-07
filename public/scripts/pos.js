@@ -298,6 +298,14 @@ function finish() {
     document.getElementById("itemsSetUp").classList.add("hidden");
     document.getElementById("category-navigation").classList.add("hidden");
 }
+function listReceipt() {
+    document.getElementById("productWrapper").classList.add("hidden");
+    document.getElementById("selectedProductsView").classList.remove("hidden");
+    document.getElementById("selectedProductsView").classList.add("product-wrapper");
+    document.getElementById("btnDescript").classList.add("hidden");
+    document.getElementById("itemsSetUp").classList.add("hidden");
+    document.getElementById("category-navigation").classList.add("hidden");
+}
 // Function to check for items and enable the button
 function checkItems() {
     const orderContainer = document.querySelector('.order-container-area');

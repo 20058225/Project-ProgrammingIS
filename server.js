@@ -215,9 +215,14 @@ if (fs.existsSync(idFilePath)) {
 
 // Generate unique order ID
 function generateOrderId() {
-    const orderId = `ORDER-${currentOrderId++}`;
-    fs.writeFileSync(idFilePath, currentOrderId.toString());
-    return orderId;
+    try {
+        const orderId = `ORDER-${currentOrderId++}`;
+        fs.writeFileSync(idFilePath, currentOrderId.toString());
+        return orderId;
+    } catch (error) {
+        console.error('Error writing order ID to file:', error);
+        return null;
+    }
 }
 
 // Save order details and receipt
@@ -231,38 +236,61 @@ app.post('/saveOrder', (req, res) => {
 
     // Generate unique order ID
     const orderId = generateOrderId();
+    if (!orderId) {
+        return res.status(500).json({ error: 'Failed to generate order ID' });
+    }
     orderData.orderId = orderId;
+
+    // Ensure receipts directory exists
+    const receiptsDir = path.join(__dirname, 'public', 'data', 'receipts');
+    if (!fs.existsSync(receiptsDir)) {
+        fs.mkdirSync(receiptsDir, { recursive: true });
+    }
+
+    // Handle missing date and time
+    const currentDateTime = new Date();
+    orderData.date = orderData.date || currentDateTime.toLocaleDateString();
+    orderData.time = orderData.time || currentDateTime.toLocaleTimeString();
 
     // Create receipt content
     const receiptContent = `
+        ================================
         Receipt for Order: ${orderId}
+        ================================
         Pub: ${orderData.pubName || 'N/A'}
         Address: ${orderData.address || 'N/A'}
         Date: ${orderData.date}
         Time: ${orderData.time}
-        Server: ${orderData.serverName}
+        Server: ${orderData.serverName || 'Unknown'}
 
         Items:
+        --------------------------------
         ${orderData.items.join('\n')}
+        --------------------------------
 
         Total: €${orderData.total}
         Payment Method: ${orderData.paymentMethod}
 
         Thank you for your purchase!
+        ================================
     `;
 
-    // Ensure receipts directory exists
-    const receiptsDir = path.join(__dirname, 'public', 'data', 'receipts');
-    if (!fs.existsSync(receiptsDir)) {
-        fs.mkdirSync(receiptsDir);
-    }
-
     // Save receipt to a text file
-    const receiptPath = path.join(receiptsDir, `${orderId}.txt`);
-    fs.writeFileSync(receiptPath, receiptContent);
+    const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+    const receiptPath = path.join(receiptsDir, `${orderId}-${timestamp}.txt`);
 
-    console.log(`Order saved successfully: ${orderId}`);
-    res.json({ message: 'Order saved successfully', orderId: orderId });
+    try {
+        fs.writeFileSync(receiptPath, receiptContent);
+        console.log(`Order saved successfully: ${orderId}`);
+        res.json({ 
+            message: 'Order saved successfully', 
+            orderId: orderId, 
+            receiptPath: `/data/receipts/${path.basename(receiptPath)}` 
+        });
+    } catch (error) {
+        console.error('Error saving receipt:', error);
+        res.status(500).json({ error: 'Failed to save receipt' });
+    }
 });
 
 // Redirect root URL to /index.html
