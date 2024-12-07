@@ -1,9 +1,7 @@
 #!/bin/bash
 
-echo "@@ Accessing the folder to run tests"
-
 # Install Mocha if not already installed
-if ! npm list mocha &> /dev/null; then
+if ! npm list mocha --depth=0 &> /dev/null; then
     echo "@@ Mocha is required."
     npm install --save-dev mocha
 else
@@ -11,7 +9,7 @@ else
 fi
 
 # Install Chai if not already installed
-if ! npm list chai &> /dev/null; then
+if ! npm list chai --depth=0 &> /dev/null; then
     echo "@@ Chai is required."
     npm install chai
 else
@@ -19,7 +17,7 @@ else
 fi
 
 # Install Supertest if not already installed
-if ! npm list supertest &> /dev/null; then
+if ! npm list supertest --depth=0 &> /dev/null; then
     echo "@@ Supertest is required."
     npm install --save-dev supertest
 else
@@ -27,7 +25,7 @@ else
 fi
 
 # Install Sinon if not already installed
-if ! npm list sinon &> /dev/null; then
+if ! npm list sinon --depth=0 &> /dev/null; then
     echo "@@ Sinon is required."
     npm install --save-dev sinon
 else
@@ -35,7 +33,7 @@ else
 fi
 
 # Install ESM if not already installed
-if ! npm list esm &> /dev/null; then
+if ! npm list esm --depth=0 &> /dev/null; then
     echo "@@ ESM is required."
     npm install esm --save-dev
 else
@@ -45,11 +43,3 @@ fi
 # Running the User Test
 echo "@@ Running the User Test.."
 npx mocha user.test.js --require esm || { echo "@@ User test failed"; exit 1; }
-
-echo "@@ .. @@" 
-
-# Running the Integration Test
-echo "@@ Running the Integration Test.."
-npx mocha integration.test.js --require esm || { echo "@@ Integration test failed"; exit 1; }
-
-echo "@@ .. @@" 

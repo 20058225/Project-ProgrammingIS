@@ -40,7 +40,6 @@ const promisePool = pool.promise(); // Use promise-based queries
 
 // @@ Endpoint to Add a User
 app.post('/addUser', async (req, res) => {
-    const { id } = req.params;
     const { username, email, password } = req.body;
     if (!username || !email || !password) {
         return res.status(400).send('Username, email, and password are required.');
@@ -49,19 +48,13 @@ app.post('/addUser', async (req, res) => {
     try {
         connection = await pool.promise().getConnection();
                 
-        // Hash the password
         const hashedPassword = await bcrypt.hash(password, 10); 
-        console.log("Hashed Password:", hashedPassword); // Log the hashed password for debugging
 
-        // Insert the user into the database
         const [result] = await connection.execute(
             'INSERT INTO users (userFullName, userEmail, userPassword) VALUES (?, ?, ?)',
             [username, email, hashedPassword]
         );
-        res.send('User added successfully.');
-        res.status(200).json({ message: 'UserID created: ', user: id});
-
-        console.log('User added successfully.');
+        res.status(200).json({ message: 'User added successfully.', userId: result.insertId });
     } catch (err) {
         console.error("Database Error:",err.message);
         res.status(500).send('Error saving user to the database.');
