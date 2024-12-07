@@ -1,15 +1,13 @@
 .env
 /node_modules
-/server
 package-lock.json
 package.json
 env.sh
-public/data/pos.sql
-public/data/user.sql
+public/data/create_pubpal_db.sql
 env.sh
 server.log
 env.sh
 public/data/create_pubpal_db.sql
-/test
 /public/data/receipts
 public/scripts/convertFile.js
+public/data/receipts.json

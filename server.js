@@ -205,6 +205,7 @@ process.on('SIGINT', () => {
         process.exit(0);
     });
 });
+
 let currentOrderId = 1000;
 const idFilePath = path.join(__dirname, 'public', 'data', 'receipts', 'lastOrderId.txt');
 
