@@ -55,6 +55,12 @@ install_package() {
 
 # Check and install required npm packages
 install_package express
+install_package body-parser
+install_package express-validator
+install_package cors
+install_package dotenv
+install_package nodemon
+install_package eslint
 
 npm install --save mysql2
 
