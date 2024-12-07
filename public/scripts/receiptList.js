@@ -1,43 +1,55 @@
-// Function to display the receipts in a list
-/*function showReceipts() {
-    const receiptsContainer = document.getElementById("receiptsContainer");
-    receiptsContainer.innerHTML = ""; // Clear previous list
+async function fetchReceipts() {
+    try {
+        const response = await fetch('/api/receipts');
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
 
-    receiptsData.forEach((receipt) => {
-        const listItem = document.createElement("div");
-        listItem.className = "receipt-item";
-        listItem.textContent = `Receipt #${receipt.id} - Total: ${receipt.total}`;
-        listItem.addEventListener("click", () => showReceiptDetails(receipt));
-        receiptsContainer.appendChild(listItem);
-    });
-}*/
-function showReceipts() {
-    if (!receiptsData || !Array.isArray(receiptsData)) {
-        console.error('No receipts data available');
+        const receiptsData = await response.json(); // Now the response is JSON
+        showReceipts(receiptsData);
+    } catch (error) {
+        console.error('Error fetching receipts:', error);
+    }
+}
+
+
+// Function to display the receipts in a list
+function showReceipts(receiptsData) {
+    const receiptsContainer = document.getElementById('receiptContainer');
+
+    if (!receiptsData || receiptsData.length === 0) {
+        receiptsContainer.innerHTML = '<p>No receipts available</p>';
         return;
     }
 
-    const receiptsContainer = document.getElementById('receipts-container');
     receiptsContainer.innerHTML = receiptsData
         .map(
             (receipt) => `
-            <div class="receipt-item">
-                <p>Order ID: ${receipt.orderId}</p>
-                <p>Date: ${receipt.date}</p>
-                <p>Total: €${receipt.total}</p>
+            <div class="receiptListItem">
+                <p><strong>Order ID:</strong> ${receipt.orderId}</p>
+                <p><strong>Date:</strong> ${receipt.date}</p>
+                <p><strong>Total:</strong> ${receipt.total}</p>
             </div>
         `
         )
         .join('');
+
+    document.querySelectorAll('.receiptListItem').forEach((item, index) => {
+        item.addEventListener('click', () => {
+            showReceiptDetails(receiptsData[index]);
+        });
+    });
 }
+
+// Call fetchReceipts when the DOM is ready or button is clicked
+document.addEventListener('DOMContentLoaded', fetchReceipts);
 
 // Function to show receipt details in a modal
 function showReceiptDetails(receipt) {
-    const modal = document.getElementById("receiptModal");
-    const modalContent = document.getElementById("modalContent");
+    //document.getElementById("receiptListModal").classList.remove("hidden");
+    const modal = document.getElementById("receiptListModal");
+    const modalContent = document.getElementById("modalListContent");
 
     modalContent.innerHTML = `
-        <h2>Receipt #${receipt.id}</h2>
+        <h2>Receipt #${receipt.orderId}</h2>
         <p><strong>Server:</strong> ${receipt.serverName}</p>
         <p><strong>Total:</strong> ${receipt.total}</p>
         <p><strong>Payment Method:</strong> ${receipt.paymentMethod}</p>
@@ -47,10 +59,13 @@ function showReceiptDetails(receipt) {
         </ul>
     `;
 
-    modal.style.display = "block";
+    modal.classList.remove('hidden');
 }
 
 // Close the modal
 document.getElementById("closeModalButton").addEventListener("click", () => {
-    document.getElementById("receiptModal").style.display = "none";
+    document.getElementById("receiptListModal").classList.add('hidden');
+});
+document.getElementById("showReceipts").addEventListener("click", () => {
+    document.getElementById("receiptContainer").classList.remove('hidden');
 });

@@ -103,20 +103,21 @@
 			</div>
 		</div>
 	<!-- Container to display receipts list -->
-		<div id="receiptsContainer" class="receipts-list"></div>
+		<div id="receiptContainer" class="receiptsList hidden"></div>
+
 	<!-- Modal for receipt details -->
-		<div id="receiptModal" class="modal">
-			<div class="modal-content">
+		<div id="receiptListModal" class="modalList hidden">
+			<div class="modalListContent">
 				<span id="closeModalButton" class="close">&times;</span>
-				<div id="modalContent"></div>
+				<div id="modalListContent"></div>
 			</div>
 		</div>
+
 	<!-- Modal for Receipt -->
 		<div id="receiptModal" class="modal hidden">
 			<div class="modal-content">
 				<h2>Transaction Receipt</h2>
 				<div id="receiptDetails">
-					<!-- Receipt content dynamically added -->
 				</div>
 				<button onclick="printReceipt()">Print</button>
 				<button onclick="closeReceiptModal()">Close</button>
