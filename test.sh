@@ -62,7 +62,7 @@ install_package dotenv
 install_package nodemon
 install_package eslint
 
-npm install bcrypt
+npm install bcryptjs
 
 npm install --save mysql2
 
