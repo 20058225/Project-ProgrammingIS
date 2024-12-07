@@ -43,12 +43,31 @@ else
     echo "@@ ESM is already installed."
 fi
 
-# Install ESM if not already installed
-if ! npm list express --depth=0 &> /dev/null; then
-    echo "@@ Express is required."
-    npm install express
+# Install missing packages if not found
+install_package() {
+    if ! npm list "$1" &> /dev/null; then
+        echo "@@ $1 is required."
+        npm install "$1"
+    else
+        echo "@@ $1 is already installed."
+    fi
+}
+
+# Check and install required npm packages
+install_package express
+
+if ! command -v mysql &> /dev/null; then
+    echo "@@ MySQL client is required."
+    sudo apt install -y mysql-client
 else
-    echo "@@ Express is already installed."
+    echo "@@ MySQL client is already installed."
+fi
+
+if ! dpkg -l | grep mysql-server &> /dev/null; then
+    echo "@@ MySQL server is required."
+    sudo apt install -y mysql-server
+else
+    echo "@@ MySQL server is already installed."
 fi
 
 # Running the User Test
