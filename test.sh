@@ -61,7 +61,8 @@ install_package cors
 install_package dotenv
 install_package nodemon
 install_package eslint
-install_package bcrypt
+
+npm install bcrypt
 
 npm install --save mysql2
 
