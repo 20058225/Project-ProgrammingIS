@@ -3,28 +3,47 @@ name: Deploy to Azure VM
 on:
   push:
     branches:
-      - main  # Trigger on push to the main branch
-  workflow_dispatch:  # Manual trigger from GitHub UI
+      - main  # Trigger the workflow on push to the main branch
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # You can change this to a different runner if needed
 
     steps:
+    # Step 1: Checkout the repository
     - name: Checkout repository
-      uses: actions/checkout@v2  # Check out the repository code
+      uses: actions/checkout@v2
 
+    # Step 2: Set up SSH key for GitHub Actions
     - name: Set up SSH key
-      uses: webfactory/ssh-agent@v0.5.3
-      with:
-        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}  # SSH key stored as a secret in GitHub
+      run: |
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > private_key.pem  # Store private key in a file
+        chmod 600 private_key.pem  # Secure the key file
+        mkdir -p ~/.ssh
+        mv private_key.pem ~/.ssh/id_ed25519  # Move key to the correct directory
 
+    # Step 3: Add Azure VM to known hosts
+    - name: Add Azure VM to known hosts
+      run: |
+        ssh-keyscan -H 13.80.26.188 >> ~/.ssh/known_hosts  # Avoid host verification prompt
+
+    # Step 4: Run the env.sh script, stop the existing Node.js process, and restart it
     - name: Deploy to Azure VM
       run: |
-        ssh -o StrictHostKeyChecking=no ${{ secrets.AZURE_VM_USER }}@13.80.26.188 << 'EOF'
-          cd /home/useradmin/Project-ProgrammingIS  # Navigate to your project directory on the VM
-          git pull origin main  # Pull latest changes from GitHub
-          npm install  # Install dependencies (if using Node.js)
-          # Optionally, you can restart a service or Docker container here
-          # Example: docker-compose down && docker-compose up -d
+        ssh -v -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no ${{ secrets.AZURE_VM_USER }}@13.80.26.188 << 'EOF'
+          # Step 4.1: Navigate to the project directory
+          cd /home/${{ secrets.AZURE_VM_USER }}/Project-ProgrammingIS  # Navigate to your project directory
+
+          # Step 4.2: Run the env.sh script (no need for chmod +x)
+          echo "Running env.sh script..."
+          bash env.sh  # Run env.sh script
+
+          # Step 4.3: Kill any running Node.js process (replace server.js with your app script name if different)
+          pkill -f 'node server.js' || echo 'No running process found'
+
+          # Step 4.4: Pull the latest changes from GitHub
+          git pull origin main
+
+          # Step 4.5: Start the Node.js server in the background and log output
+          nohup node server.js > server.log 2>&1 &  # Start the Node.js app in the background
         EOF
