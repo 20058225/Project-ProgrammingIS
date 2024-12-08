@@ -14,7 +14,7 @@ let expect;
 const mockExecute = sinon.stub();
 const testDbConnection = mysql.createPool({
     host: 'localhost',
-    user: 'userTest',
+    user: 'usertest',
     password: 'userTest1*',
     database: 'test_db',
     waitForConnections: true,
