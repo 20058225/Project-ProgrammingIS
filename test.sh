@@ -81,5 +81,11 @@ else
 fi
 
 # Running the User Test
+echo "@@ Setting up a test database..."
+mysql -u usertest -p userTest1* -e "CREATE DATABASE IF NOT EXISTS test_db;"
+
+
+# Running the User Test
 echo "@@ Running the User Test.."
+export DATABASE_NAME=test_db 
 npx mocha user.test.js --require esm || { echo "@@ User test failed"; exit 1; }

@@ -12,32 +12,31 @@ let expect;
 
 // Mocking MySQL connection
 const mockExecute = sinon.stub();
-const mockConnection = { execute: mockExecute, release: sinon.spy() };
-
-// Mock data
-const user = {
-    userFullName: 'Test User',
-    userEmail: 'testuser@example.com',
-    userPassword: 'password123',
-};
-
-// Setup for all tests
-beforeEach(() => {
-    // Mock MySQL connection
-    sinon.stub(mysql, 'createPool').returns({
-        promise: () => ({
-            getConnection: sinon.stub().resolves(mockConnection),
-            execute: mockExecute,
-        }),
-    });
-
-    // Reset the mock behavior before each test
-    mockExecute.resetHistory();
+const testDbConnection = mysql.createPool({
+    host: 'localhost',
+    user: 'userTest',
+    password: 'userTest1*',
+    database: process.env.DATABASE_NAME || 'test_db',
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0,
 });
 
-// Cleanup after all tests
-afterEach(() => {
-    sinon.restore();
+// Setup for all tests
+beforeEach(async () => {
+    const connection = await testDbConnection.promise().getConnection();
+    await connection.query('DELETE FROM users'); 
+    await connection.query(`
+        INSERT INTO users (userFullName, userEmail, userPassword)
+        VALUES ('Test User', 'testuser@example.com', 'password123')
+    `); // Example setup
+    connection.release();
+});
+
+afterEach(async () => {
+    const connection = await testDbConnection.promise().getConnection();
+    await connection.query('DELETE FROM users'); 
+    connection.release();
 });
 
 describe('User CRUD API', function () {
