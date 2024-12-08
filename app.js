@@ -1,20 +1,15 @@
 import express from 'express';
 import mysql from 'mysql2';
 import path from 'path';
-import dotenv from 'dotenv';
 import bcrypt from 'bcryptjs';
 import cors from 'cors';
 import fs from 'fs';
-import supertest from 'supertest';
 import { fileURLToPath } from 'url'; 
-
-dotenv.config(); // Load environment variables
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
-const request = supertest(app);
 
 app.use(cors());
 app.use(express.static(path.join(__dirname, 'public')));
@@ -345,22 +340,5 @@ function parseReceiptContent(content) {
 
     return { orderId, pubName, address, date, time, serverName, items, total, paymentMethod };
 }
-
-describe('User Routes', () => {
-    it('should create a new user', async () => {
-        const response = await request.post('/addUser').send({
-            username: 'TestUser',
-            email: 'test@example.com',
-            password: 'password123',
-        });
-        expect(response.status).toBe(200);
-        expect(response.body.message).toBe('User added successfully.');
-    });
-});
-
-// Routes
-app.get('/', (req, res) => {
-    res.send('Welcome to PubPal!');
-});
 
 export { app };
