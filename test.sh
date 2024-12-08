@@ -2,6 +2,7 @@
 
 # Set PORT environment variable
 export PORT=4000
+npm install bcryptjs
 
 # Function to check and install npm packages
 install_package() {
@@ -19,7 +20,6 @@ install_package chai
 install_package sinon
 install_package supertest
 install_package esm
-install_package bcryptjs
 install_package mysql2
 install_package express
 install_package body-parser
