@@ -53,7 +53,6 @@ install_package() {
     fi
 }
 
-# Check and install required npm packages
 install_package express
 install_package body-parser
 install_package express-validator
@@ -66,4 +65,4 @@ npm install --save mysql2
 
 # Running the User Test
 echo "@@ Running the User Test..."
-npx mocha user.test.js --require esm || { echo "@@ User test failed"; exit 1; }
+npx mocha user.test.js || { echo "@@ User test failed"; exit 1; }

@@ -28,7 +28,6 @@ describe('User CRUD API', function () {
     });
 
     after(function () {
-        // Restore the original mysql.createConnection method
         sinon.restore();
     });
 
