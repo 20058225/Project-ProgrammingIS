@@ -3,34 +3,31 @@
 # Set PORT environment variable
 export PORT=4000
 
-# List of packages to install
-DEV_PACKAGES=(mocha chai supertest sinon)
-DEP_PACKAGES=(express body-parser express-validator cors dotenv bcryptjs mysql2 nodemon eslint)
-
-# Function to check and install packages
-install_packages() {
-    local packages=("$@")
-    for package in "${packages[@]}"; do
-        if ! npm list "$package" --depth=0 &> /dev/null; then
-            echo "@@ Installing $package..."
-            npm install --save-dev "$package"
-        else
-            echo "@@ $package is already installed."
-        fi
-    done
+# Function to check and install npm packages
+install_package() {
+    if ! npm list "$1" --depth=0 &> /dev/null; then
+        echo "@@ $1 is required."
+        npm install "$1"
+    else
+        echo "@@ $1 is already installed."
+    fi
 }
 
-# Install devDependencies and dependencies
-echo "@@ Checking and installing devDependencies..."
-install_packages "${DEV_PACKAGES[@]}"
-echo "@@ Checking and installing dependencies..."
-install_packages "${DEP_PACKAGES[@]}"
+# Check and install required npm packages
+install_package mocha
+install_package chai
+install_package sinon
+install_package supertest
+install_package esm
+install_package bcryptjs
+install_package mysql2
+install_package express
+install_package body-parser
+install_package cors
+install_package dotenv
+install_package express-validator
+install_package nodemon
 
-# Run tests
+# Running the User Test
 echo "@@ Running the User Test..."
-if npx mocha user.test.js; then
-    echo "@@ All tests passed successfully!"
-else
-    echo "@@ User test failed. Check the error logs above."
-    exit 1
-fi
+npx mocha user.test.js --require esm || { echo "@@ User test failed"; exit 1; }
