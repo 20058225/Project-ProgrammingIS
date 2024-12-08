@@ -449,3 +449,19 @@ button:hover {
         top: 10px;
     }
 }
+.showReturn, .showFinish, .showBtnFinish {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    font-size: 12px;
+}
+
+.tooltipReturn:hover .showReturn, .tooltipFinish:hover .showFinish, .tooltipBtnFinish:hover .showBtnFinish {
+    visibility: visible;
+}

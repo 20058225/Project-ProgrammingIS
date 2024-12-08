@@ -79,8 +79,10 @@
 						<button data-method="card">Card</button>
 					</div>
 					<div id="button-option" class="button-option">
-						<button id="closePaymentView">Return to Products</button>
-						<button id="finishOrder">Finish</button>
+						<button id="closePaymentView" class="tooltipReturn">Return to Products
+							<span class="showReturn">To add more products, please click Return to Products.</span></button>
+						<button id="finishOrder" class="tooltipFinish">Finish
+							<span class="showFinish">Please select a payment option and click Finish.</span></button>
 					</div>
 				</div>
 			</div>
@@ -93,7 +95,8 @@
 				<div class="category navigation" id="category-navigation">
 					<button class="nav-btn" onclick="openPage('index')"><i class="fa-solid fa-xmark"></i>Quit</button>
 					<!--<button class="nav-btn"><i class="fa-regular fa-pen-to-square"></i>Add Name To Tab</button>-->
-					<button class="nav-btn" id="finish" onclick="finish()"><i class="fa-solid fa-flag-checkered"></i>Finish</button>
+					<button class="nav-btn tooltipBtnFinish" id="finish" onclick="finish()"><i class="fa-solid fa-flag-checkered"></i>Finish
+						<span class="showBtnFinish">You must select at least one product to continue.</span></button>
 					<!--<button class="nav-btn"><i class="fa-solid fa-print"></i>Print Receipt</button>-->
 					<button class="nav-btn" id="showReceipts" onclick="showReceipts()"><i class="fa-regular fa-floppy-disk"></i>Receipts</button>
 					<button class="nav-btn"><i class="fa-solid fa-screwdriver-wrench"></i>Functions</button>

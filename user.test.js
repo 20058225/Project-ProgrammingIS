@@ -10,7 +10,7 @@ describe('User CRUD API', function () {
     before(async function () {
         // Mock the MySQL connection and query behavior
         sinon.stub(mysql, 'createConnection').resolves({
-            query: sinon.stub().callsFake(async (sql) => {
+            query: sinon.stub().callsFake(async (sql, params) => {
                 if (sql.includes('INSERT INTO users')) {
                     return [{ insertId: 1 }];
                 } else if (sql.includes('SELECT * FROM users')) {
@@ -33,8 +33,8 @@ describe('User CRUD API', function () {
 
     it('should add a user successfully', async function () {
         const res = await request(app)
-            .post('/addUser')
-            .send({ username: 'Test User', email: 'testuser@example.com', password: 'password123' })
+            .post('/addUser')  // Ensure route matches
+            .send({ userFullName: 'Test User', userEmail: 'testuser@example.com', userPassword: 'password123' }) // Ensure body matches route
             .expect(200);
 
         expect(res.text).to.include('User added successfully.');
@@ -42,7 +42,7 @@ describe('User CRUD API', function () {
 
     it('should delete a user successfully', async function () {
         const res = await request(app)
-            .delete('/deleteUser/1')
+            .delete('/deleteUser/1')  // Ensure route matches
             .expect(200);
 
         expect(res.text).to.equal('User deleted successfully.');

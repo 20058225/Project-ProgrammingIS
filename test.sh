@@ -2,7 +2,6 @@
 
 # Set PORT environment variable
 export PORT=4000
-npm install bcryptjs
 
 # Function to check and install npm packages
 install_package() {
