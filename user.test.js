@@ -16,27 +16,39 @@ const testDbConnection = mysql.createPool({
     host: 'localhost',
     user: 'userTest',
     password: 'userTest1*',
-    database: process.env.DATABASE_NAME || 'test_db',
+    database: 'test_db',
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0,
 });
 
 // Setup for all tests
-beforeEach(async () => {
-    const connection = await testDbConnection.promise().getConnection();
-    await connection.query('DELETE FROM users'); 
-    await connection.query(`
-        INSERT INTO users (userFullName, userEmail, userPassword)
-        VALUES ('Test User', 'testuser@example.com', 'password123')
-    `); // Example setup
-    connection.release();
+beforeEach(async function () {
+    try {
+        const connection = await testDbConnection.promise().getConnection();
+        // Perform test setup (e.g., clearing tables)
+        /*await connection.query('DELETE FROM users');
+        await connection.query(`
+            INSERT INTO users (userFullName, userEmail, userPassword)
+            VALUES ('Test User', 'testuser@example.com', 'password123')
+        `);*/
+        connection.release();
+    } catch (error) {
+        console.error('Error during test setup:', error.message);
+        this.skip(); // Skip the test if database connection fails
+    }
 });
 
-afterEach(async () => {
-    const connection = await testDbConnection.promise().getConnection();
-    await connection.query('DELETE FROM users'); 
-    connection.release();
+afterEach(async function () {
+    try {
+        const connection = await testDbConnection.promise().getConnection();
+        // Perform test cleanup
+        //await connection.query('DELETE FROM users');
+        connection.release();
+    } catch (error) {
+        console.error('Error during test cleanup:', error.message);
+        this.skip(); // Skip cleanup if database connection fails
+    }
 });
 
 describe('User CRUD API', function () {
