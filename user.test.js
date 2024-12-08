@@ -6,7 +6,6 @@ import request from 'supertest';
 
 describe('User CRUD API', function () {
     let mockDB;
-
     before(async function () {
         mockDB = sinon.stub(mysql, 'createPool').returns({
             query: sinon.stub().resolves(),
