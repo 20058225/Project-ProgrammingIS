@@ -16,17 +16,9 @@ install_package() {
 # Check and install required npm packages
 install_package mocha
 install_package chai
+install_package chai-http
 install_package sinon
-install_package supertest
-install_package esm
-install_package mysql2
-install_package express
-install_package body-parser
-install_package cors
-install_package dotenv
-install_package express-validator
-install_package nodemon
 
 # Running the User Test
 echo "@@ Running the User Test..."
-npx mocha user.test.js --require esm || { echo "@@ User test failed"; exit 1; }
+npx mocha user.test.js --timeout 10000 --reporter spec || { echo "@@ User test failed"; exit 1; }

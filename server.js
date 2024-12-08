@@ -15,7 +15,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// @@ MySQL Configuration
+// MySQL Configuration
 const dbConfig = {
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
@@ -25,18 +25,19 @@ const dbConfig = {
     connectionLimit: 10,
     queueLimit: 0
 };
-// @@ Create the pool
+
 const pool = mysql.createPool(dbConfig);
-// @@ Test connection
+const promisePool = pool.promise();
+
+// Test database connection
 pool.getConnection((err, connection) => {
     if (err) {
         console.error('Error connecting to MySQL:', err);
     } else {
         console.log('Connected to MySQL.');
-        connection.release(); 
+        connection.release();
     }
 });
-const promisePool = pool.promise(); 
 
 function hashPassword(password) {
     const salt = crypto.randomBytes(16).toString('hex'); 
@@ -47,6 +48,7 @@ function hashPassword(password) {
         });
     });
 }
+
 function comparePassword(password, storedHash, storedSalt) {
     return new Promise((resolve, reject) => {
         crypto.pbkdf2(password, storedSalt, 100000, 64, 'sha512', (err, derivedKey) => {
@@ -166,7 +168,6 @@ app.patch('/updateUser/:id', async (req, res) => {
         res.status(500).send('Error updating user.');
     }
 });
-
 // @@ Endpoint to Search a User
 app.post('/searchUser', async (req, res) => {
     const { userId, fullName } = req.body;

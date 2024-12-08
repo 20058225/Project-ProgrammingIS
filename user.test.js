@@ -1,47 +1,54 @@
+const chai = require('chai');
+const chaiHttp = require('chai-http');
 const sinon = require('sinon');
-const mysql = require('mysql2/promise');
-const { expect } = require('chai');
-const request = require('supertest');
-const app = require('./server'); // Ensure the correct path to your server.js file
+const mysql = require('mysql2');
+const server = require('./server');
+const expect = chai.expect;
+
+chai.use(chaiHttp);
 
 describe('User CRUD API', function () {
     let connectionMock;
 
     before(async function () {
-        // Mock the MySQL connection and query behavior
-        sinon.stub(mysql, 'createConnection').resolves({
-            query: sinon.stub().callsFake(async (sql, params) => {
-                if (sql.includes('INSERT INTO users')) {
-                    return [{ insertId: 1 }];
-                } else if (sql.includes('SELECT * FROM users')) {
-                    return [[{ userID: 1, userFullName: 'Test User', userEmail: 'testuser@example.com' }]];
-                } else if (sql.includes('UPDATE users')) {
-                    return [{ affectedRows: 1 }];
-                } else if (sql.includes('DELETE FROM users')) {
-                    return [{ affectedRows: 1 }];
-                }
-                return [[]];
+        // Mock MySQL connection
+        sinon.stub(mysql, 'createPool').returns({
+            promise: () => ({
+                execute: sinon.stub().resolves([{ insertId: 1 }]),
+                query: sinon.stub(),
             }),
-            end: sinon.stub().resolves(),
         });
     });
 
-    after(function () {
-        // Restore the original mysql.createConnection method
+    after(async function () {
+        // Restore original MySQL methods
         sinon.restore();
     });
 
     it('should add a user successfully', async function () {
-        const res = await request(app)
-            .post('/addUser')  // Ensure route matches
-            .send({ userFullName: 'Test User', userEmail: 'testuser@example.com', userPassword: 'password123' }) // Ensure body matches route
+        const res = await chai
+            .request(server)
+            .post('/addUser')  
+            .send({ userFullName: 'Test User', userEmail: 'testuser@example.com', userPassword: 'password123' })
             .expect(200);
 
-        expect(res.text).to.include('User added successfully.');
+            expect(res).to.have.status(200);
+            expect(res.body).to.have.property('message', 'User added successfully.');
+    });
+    
+    it('should fail to add a user if fields are missing', async function () {
+        const res = await chai
+        .request(server)
+        .post('/addUser')
+        .send({});
+
+        expect(res).to.have.status(400);
+        expect(res.text).to.equal('Username, email, and password are required.');
     });
 
     it('should delete a user successfully', async function () {
-        const res = await request(app)
+        const res = await chai
+            .request(server)
             .delete('/deleteUser/1')  // Ensure route matches
             .expect(200);
 
