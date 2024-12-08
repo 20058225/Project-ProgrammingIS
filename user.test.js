@@ -24,7 +24,7 @@ describe('User CRUD API', function () {
         const res = await chai
             .request(server)
             .post('/addUser')  
-            .send({ userFullName: 'Test User', userEmail: 'testuser@example.com', userPassword: 'password123' })
+            .send({ username: 'Test User', email: 'testuser@example.com', password: 'password123' })
             .expect(200);
 
             expect(res).to.have.status(200);
@@ -35,7 +35,7 @@ describe('User CRUD API', function () {
         const res = await chai
         .request(server)
         .post('/addUser')
-        .send({});
+        .send({ username: 'Test User', email: 'testuser@example.com' })
 
         expect(res).to.have.status(400);
         expect(res.text).to.equal('Username, email, and password are required.');
