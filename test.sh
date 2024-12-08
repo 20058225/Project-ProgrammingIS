@@ -3,66 +3,34 @@
 # Set PORT environment variable
 export PORT=4000
 
-# Install Mocha if not already installed
-if ! npm list mocha --depth=0 &> /dev/null; then
-    echo "@@ Mocha is required."
-    npm install --save-dev mocha
-else
-    echo "@@ Mocha is already installed."
-fi
+# List of packages to install
+DEV_PACKAGES=(mocha chai supertest sinon)
+DEP_PACKAGES=(express body-parser express-validator cors dotenv bcryptjs mysql2 nodemon eslint)
 
-# Install Chai if not already installed
-if ! npm list chai --depth=0 &> /dev/null; then
-    echo "@@ Chai is required."
-    npm install chai
-else
-    echo "@@ Chai is already installed."
-fi
-
-# Install Supertest if not already installed
-if ! npm list supertest --depth=0 &> /dev/null; then
-    echo "@@ Supertest is required."
-    npm install --save-dev supertest
-else
-    echo "@@ Supertest is already installed."
-fi
-
-# Install Sinon if not already installed
-if ! npm list sinon --depth=0 &> /dev/null; then
-    echo "@@ Sinon is required."
-    npm install --save-dev sinon
-else
-    echo "@@ Sinon is already installed."
-fi
-
-# Install ESM if not already installed
-if ! npm list esm --depth=0 &> /dev/null; then
-    echo "@@ ESM is required."
-    npm install esm --save-dev
-else
-    echo "@@ ESM is already installed."
-fi
-
-# Install missing packages if not found
-install_package() {
-    if ! npm list "$1" --depth=0 &> /dev/null; then
-        echo "@@ $1 is required."
-        npm install "$1"
-    else
-        echo "@@ $1 is already installed."
-    fi
+# Function to check and install packages
+install_packages() {
+    local packages=("$@")
+    for package in "${packages[@]}"; do
+        if ! npm list "$package" --depth=0 &> /dev/null; then
+            echo "@@ Installing $package..."
+            npm install --save-dev "$package"
+        else
+            echo "@@ $package is already installed."
+        fi
+    done
 }
 
-install_package express
-install_package body-parser
-install_package express-validator
-install_package cors
-install_package dotenv
-install_package nodemon
-install_package eslint
-npm install bcryptjs
-npm install --save mysql2
+# Install devDependencies and dependencies
+echo "@@ Checking and installing devDependencies..."
+install_packages "${DEV_PACKAGES[@]}"
+echo "@@ Checking and installing dependencies..."
+install_packages "${DEP_PACKAGES[@]}"
 
-# Running the User Test
+# Run tests
 echo "@@ Running the User Test..."
-npx mocha user.test.js || { echo "@@ User test failed"; exit 1; }
+if npx mocha user.test.js; then
+    echo "@@ All tests passed successfully!"
+else
+    echo "@@ User test failed. Check the error logs above."
+    exit 1
+fi

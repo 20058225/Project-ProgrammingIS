@@ -1,12 +1,13 @@
-const sinon = require('sinon');
-const mysql = require('mysql2/promise');
-const { expect } = require('chai');
-const request = require('supertest');
-const app = require('../app'); // Update with your app's path
+import { app } from './app.js'; // Import the app from app.js
+
+import sinon from 'sinon';
+import * as mysql from 'mysql2/promise';
+import { expect } from 'chai';
+import request from 'supertest';
+import app from '../server.js'; // Ensure the correct path to your app module
 
 describe('User CRUD API', function () {
     let connectionMock;
-    let queryStub;
 
     before(async function () {
         // Mock the MySQL connection and query behavior
