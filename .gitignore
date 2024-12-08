@@ -11,3 +11,4 @@ public/data/create_pubpal_db.sql
 /public/data/receipts
 public/scripts/convertFile.js
 public/data/receipts.json
+user.test copy.js
