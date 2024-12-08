@@ -43,9 +43,17 @@ else
     echo "@@ ESM is already installed."
 fi
 
+# Install Mock MySQL if not already installed
+if ! npm list mock-mysql2 --depth=0 &> /dev/null; then
+    echo "@@ Mock-MySQL2 is required."
+    npm install mock-mysql2 --save-dev
+else
+    echo "@@ Mock-MySQL2 is already installed."
+fi
+
 # Install missing packages if not found
 install_package() {
-    if ! npm list "$1" &> /dev/null; then
+    if ! npm list "$1" --depth=0 &> /dev/null; then
         echo "@@ $1 is required."
         npm install "$1"
     else
@@ -61,31 +69,12 @@ install_package cors
 install_package dotenv
 install_package nodemon
 install_package eslint
-
 npm install bcryptjs
-
 npm install --save mysql2
 
-if ! command -v mysql &> /dev/null; then
-    echo "@@ MySQL client is required."
-    sudo apt install -y mysql-client
-else
-    echo "@@ MySQL client is already installed."
-fi
-
-if ! dpkg -l | grep mysql-server &> /dev/null; then
-    echo "@@ MySQL server is required."
-    sudo apt install -y mysql-server
-else
-    echo "@@ MySQL server is already installed."
-fi
+# Skip MySQL installation and real database setup
+echo "@@ Skipping real MySQL setup as tests use a mock."
 
 # Running the User Test
-echo "@@ Setting up a test database..."
-mysql -u usertest -p userTest1* -e "CREATE DATABASE IF NOT EXISTS test_db;"
-
-
-# Running the User Test
-echo "@@ Running the User Test.."
-export DATABASE_NAME=test_db 
+echo "@@ Running the User Test..."
 npx mocha user.test.js --require esm || { echo "@@ User test failed"; exit 1; }

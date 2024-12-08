@@ -12,3 +12,4 @@ public/data/create_pubpal_db.sql
 public/scripts/convertFile.js
 public/data/receipts.json
 user.test copy.js
+test copy.sh
