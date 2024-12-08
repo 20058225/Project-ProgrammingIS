@@ -43,7 +43,7 @@ install_package dotenv
 install_package nodemon
 install_package eslint
 
-npm install bcrypt
+npm install bcryptjs
 
 # Check if MySQL client is installed
 if ! command -v mysql &> /dev/null; then
