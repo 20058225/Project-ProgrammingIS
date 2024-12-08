@@ -43,14 +43,6 @@ else
     echo "@@ ESM is already installed."
 fi
 
-# Install Mock MySQL if not already installed
-if ! npm list mock-mysql2 --depth=0 &> /dev/null; then
-    echo "@@ Mock-MySQL2 is required."
-    npm install mock-mysql2 --save-dev
-else
-    echo "@@ Mock-MySQL2 is already installed."
-fi
-
 # Install missing packages if not found
 install_package() {
     if ! npm list "$1" --depth=0 &> /dev/null; then
@@ -71,9 +63,6 @@ install_package nodemon
 install_package eslint
 npm install bcryptjs
 npm install --save mysql2
-
-# Skip MySQL installation and real database setup
-echo "@@ Skipping real MySQL setup as tests use a mock."
 
 # Running the User Test
 echo "@@ Running the User Test..."
