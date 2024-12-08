@@ -358,5 +358,9 @@ describe('User Routes', () => {
     });
 });
 
-// Export the app and promisePool
-export { app, promisePool };
+// Routes
+app.get('/', (req, res) => {
+    res.send('Welcome to PubPal!');
+});
+
+export { app };

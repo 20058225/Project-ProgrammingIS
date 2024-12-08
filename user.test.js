@@ -1,5 +1,4 @@
 import { app } from './app.js'; // Import the app from app.js
-
 import sinon from 'sinon';
 import * as mysql from 'mysql2/promise';
 import { expect } from 'chai';
