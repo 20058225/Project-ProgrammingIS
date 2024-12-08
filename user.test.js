@@ -3,25 +3,20 @@ const chaiHttp = require('chai-http');
 const sinon = require('sinon');
 const mysql = require('mysql2');
 const server = require('./server');
-const expect = chai.expect;
+const { promisePool } = require('./server');
 
 chai.use(chaiHttp);
+
+const expect = chai.expect;
 
 describe('User CRUD API', function () {
     let connectionMock;
 
     before(async function () {
-        // Mock MySQL connection
-        sinon.stub(mysql, 'createPool').returns({
-            promise: () => ({
-                execute: sinon.stub().resolves([{ insertId: 1 }]),
-                query: sinon.stub(),
-            }),
-        });
+        connectionMock  = sinon.stub(promisePool, 'execute');
     });
 
     after(async function () {
-        // Restore original MySQL methods
         sinon.restore();
     });
 
