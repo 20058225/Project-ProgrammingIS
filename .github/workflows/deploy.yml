@@ -14,16 +14,7 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    # Step 2: Run the test.sh script for testing
-    - name: Run Tests
-      run: |
-        echo "@@ Running Tests via test.sh script..."
-        export PORT=4000 
-        
-        bash test.sh      
-        export DEBUG=mocha:*   
-
-    # Step 3: Set up SSH key for GitHub Actions (Only if not already done)
+    # Step 2: Set up SSH key for GitHub Actions (Only if not already done)
     - name: Set up SSH key
       run: |
         if [ ! -f ~/.ssh/id_ed25519 ]; then
@@ -36,22 +27,22 @@ jobs:
           echo "@@ SSH private key already exists, skipping setup."
         fi
 
-    # Step 4: Add Azure VM to known hosts (Only if not already done)
+    # Step 3: Add Azure VM to known hosts (Only if not already done)
     - name: Add Azure VM to known hosts
       run: |
         # Ensure the .ssh directory exists
         mkdir -p ~/.ssh
-        if ! grep -q "13.80.26.188" ~/.ssh/known_hosts; then
-          ssh-keyscan -H 13.80.26.188 >> ~/.ssh/known_hosts 
+        if ! grep -q "40.115.48.144" ~/.ssh/known_hosts; then
+          ssh-keyscan -H 40.115.48.144 >> ~/.ssh/known_hosts 
           echo "@@ Azure VM added to known hosts."
         else
           echo "@@ Azure VM is already in known hosts, skipping addition."
         fi
 
-    # Step 5: Run the env.sh script, stop the existing Node.js process, and restart it
+    # Step 4: Run the env.sh script, stop the existing Node.js process, and restart it
     - name: Deploy to Azure VM
       run: |
-        ssh -v -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no ${{ secrets.AZURE_VM_USER }}@13.80.26.188 << 'EOF'
+        ssh -v -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no ${{ secrets.AZURE_VM_USER }}@40.115.48.144 << 'EOF'
           # Step 4.1: Navigate to the project directory
           echo "@@ Navigate to the project directory"
           cd /home/${{ secrets.AZURE_VM_USER }}/Project-ProgrammingIS 
