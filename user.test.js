@@ -1,13 +1,11 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
+const { app } = require('./server'); // Import `app`
 const sinon = require('sinon');
-const mysql = require('mysql2');
-const server = require('./server');
 const { promisePool } = require('./server');
 
 chai.use(chaiHttp);
-
-const expect = chai.expect;
+const { expect } = chai;
 
 // Mock data
 const user = {
