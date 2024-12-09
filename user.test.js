@@ -24,9 +24,15 @@ describe('User CRUD API', function () {
     });
 
     after(async function () {
-        await promisePool.execute('DELETE FROM users WHERE userEmail LIKE ?', ['testuser%@example.com']);
-        sinon.restore();
+        sinon.restore(); // Restore promisePool to its original state
+        try {
+            await promisePool.execute('DELETE FROM users WHERE userEmail LIKE ?', ['testuser%@example.com']);
+            console.log('Test users deleted successfully.');
+        } catch (err) {
+            console.error('Error during cleanup:', err.message);
+        }
     });
+    
 
     it('should add a user successfully', async function () {
         connectionMock.resolves([{ affectedRows: 1 }]); // Mock DB response
