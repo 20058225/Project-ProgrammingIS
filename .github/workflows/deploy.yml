@@ -18,19 +18,20 @@ jobs:
     - name: Set up SSH key
       run: |
         if [ ! -f ~/.ssh/id_ed25519 ]; then
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > private_key.pem  # Store private key in a file
-          chmod 600 private_key.pem  # Secure the key file
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > private_key.pem
+          chmod 600 private_key.pem
           mkdir -p ~/.ssh
           mv private_key.pem ~/.ssh/id_ed25519  
+          export SSH_PRIVATE_KEY=~/.ssh/id_ed25519
           echo "@@ SSH private key has been set up."
         else
           echo "@@ SSH private key already exists, skipping setup."
+          export SSH_PRIVATE_KEY=~/.ssh/id_ed25519
         fi
 
     # Step 3: Add Azure VM to known hosts (Only if not already done)
     - name: Add Azure VM to known hosts
       run: |
-        # Ensure the .ssh directory exists
         mkdir -p ~/.ssh
         if ! grep -q "40.115.48.144" ~/.ssh/known_hosts; then
           ssh-keyscan -H 40.115.48.144 >> ~/.ssh/known_hosts 
@@ -43,24 +44,20 @@ jobs:
     - name: Deploy to Azure VM
       run: |
         ssh -v -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no ${{ secrets.AZURE_VM_USER }}@40.115.48.144 << 'EOF'
-          # Step 4.1: Navigate to the project directory
-          echo "@@ Navigate to the project directory"
+          set -e
+          echo "@@ Step 4.1: Navigate to the project directory"
           cd /home/${{ secrets.AZURE_VM_USER }}/Project-ProgrammingIS 
           rm server.log
 
-          # Step 4.2: Run the env.sh script (no need for chmod +x)
-          echo "@@ Running env.sh script..."
+          echo "@@ Step 4.2: Running env.sh script..."
           bash env.sh  # Run env.sh script
 
-          # Step 4.3: Kill any running Node.js process 
-          echo "@@ Kill any running Node.js process"
+          echo "@@ 4.3: Kill any running Node.js process"
           pkill -f 'node server.js' || echo 'No running process found'
 
-          # Step 4.4: Pull the latest changes from GitHub
-          echo "@@ Git Pull"
+          echo "@@ 4.4: Git Pull"
           git pull origin main || { echo "@@ Git pull failed"; exit 1; }
 
-          # Step 4.5: Start the Node.js server in the background and log output
-          echo "@@ Start the Node.js server"
-          nohup node server.js > server.log 2>&1 
+          echo "@@ 4.5: Start the server.js in the background and log output"
+          nohup node server.js > server.log 2>&1 &
         EOF
