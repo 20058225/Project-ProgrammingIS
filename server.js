@@ -293,77 +293,32 @@ Thank you for your purchase!
 
     try {
         fs.writeFileSync(receiptPath, receiptContent);
-        console.log(`Order saved successfully: ${orderId}`);
-        res.json({ 
-            message: 'Order saved successfully', 
-            orderId: orderId, 
-            receiptPath: `/data/receipts/${path.basename(receiptPath)}` 
-        });
+        res.json({ message: 'Order saved successfully', orderId, receiptPath });
     } catch (error) {
         console.error('Error saving receipt:', error);
         res.status(500).json({ error: 'Failed to save receipt' });
     }
 });
-
-// Define the receipts directory
-const receiptsDir = path.join(__dirname, 'public', 'data', 'receipts');
-
-// API to get all receipts
 app.get('/api/receipts', (req, res) => {
-    try {
-        // Read all receipt files
-        if (!fs.existsSync(receiptsDir)) {
-            console.warn('No receipts directory found.');
-            return res.status(404).json({ error: 'No receipts directory found.' });
+    const receiptsDir = path.join(__dirname, 'public', 'data', 'receipts');
+
+    fs.readdir(receiptsDir, (err, files) => {
+        if (err) {
+            console.error('Error reading receipts directory:', err);
+            return res.status(500).json({ error: 'Failed to retrieve receipts' });
         }
 
-        const files = fs.readdirSync(receiptsDir).filter(file => file.startsWith('ORDER-') && file.endsWith('.txt'));
-        if (files.length === 0) {
-            return res.json([]); // No receipts available
-        }
-        const receipts = files.map((file) => {
-            try {
-                const content = fs.readFileSync(path.join(receiptsDir, file), 'utf8');
-                return parseReceiptContent(content);
-            } catch (error) {
-                console.error(`Failed to parse ${file}:`, error);
-                return { error: `Receipt ${file} parsing error` };
-            }
+        const receiptData = files.map((file) => {
+            const filePath = path.join(receiptsDir, file);
+            const fileContent = fs.readFileSync(filePath, 'utf8');
+            return { fileName: file, content: fileContent };
         });
 
-        res.json(receipts); // Send JSON response
-    } catch (error) {
-        console.error('Error retrieving receipts:', error);
-        res.status(500).json({ error: 'Failed to retrieve receipts' });
-    }
+        res.json(receiptData);
+    });
 });
+const PORT = process.env.PORT || 8080;
 
-// Helper function to parse receipt text
-function parseReceiptContent(content) {
-    const lines = content.split('\n').map(line => line.trim()).filter(Boolean);
-
-    const orderId = lines.find(line => line.startsWith('Receipt for Order:'))?.split(':')[1]?.trim() || 'Unknown';
-    const pubName = lines.find(line => line.startsWith('Pub:'))?.split(':')[1]?.trim() || 'Unknown Pub';
-    const address = lines.find(line => line.startsWith('Address:'))?.split(':')[1]?.trim() || 'Unknown Address';
-    const date = lines.find(line => line.startsWith('Date:'))?.split(':')[1]?.trim() || 'Unknown Date';
-    const time = lines.find(line => line.startsWith('Time:'))?.split(':')[1]?.trim() || 'Unknown Time';
-    const serverName = lines.find(line => line.startsWith('Server:'))?.split(':')[1]?.trim() || 'Unknown Server';
-
-    const itemsStartIndex = lines.findIndex(line => line.startsWith('Items:')) + 2; // Skip the "Items:" line and the separator
-    const itemsEndIndex = lines.findIndex(line => line.startsWith('Total:'));
-    //const items = lines.slice(itemsStartIndex, itemsEndIndex).map(item => item.trim());
-    const items = lines.slice(itemsStartIndex, itemsEndIndex).filter(line => !line.startsWith('---')).map(item => item.trim());
-
-    const total = lines.find(line => line.startsWith('Total:'))?.split(':')[1]?.trim() || '€0.00';
-    const paymentMethod = lines.find(line => line.startsWith('Payment Method:'))?.split(':')[1]?.trim() || 'Unknown';
-
-    return { orderId, pubName, address, date, time, serverName, items, total, paymentMethod };
-}
-
-// Start server
-const PORT = process.env.PORT;
 app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+    console.log(`Server is running on port ${PORT}`);
 });
-
-module.exports = { app, promisePool };
