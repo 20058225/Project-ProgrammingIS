@@ -4,13 +4,7 @@ package-lock.json
 package.json
 env.sh
 public/data/create_pubpal_db.sql
-env.sh
 server.log
-env.sh
-public/data/create_pubpal_db.sql
 /public/data/receipts
 public/scripts/convertFile.js
 public/data/receipts.json
-user.test copy.js
-test copy.sh
-server copy.js
