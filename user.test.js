@@ -22,6 +22,7 @@ describe('User CRUD API', function () {
     });
 
     after(async function () {
+        await mockDB.query('DELETE FROM users');
         sinon.restore();
     });
 
@@ -48,24 +49,30 @@ describe('User CRUD API', function () {
     });
 
     it('should login a user successfully with correct credentials', async function () {
-        const hashedPassword = await bcrypt.hash(user.userPassword, 10);
+        const hashedPassword = crypto
+            .createHmac('sha256', 'your-secret-key') // Use your secret key here
+            .update(user.userPassword)
+            .digest('hex');        
+            
         connectionMock.resolves([[{ userEmail: user.userEmail, userPassword: hashedPassword }]]);
 
-        const res = await request(app)
+        const res = await chai
+            .request(app)
             .post('/getUser')
             .send({ email: user.userEmail, password: user.userPassword })
-            .expect(200);
 
         expect(res).to.have.status(200);
         expect(res.body.message).to.equal('Login successful.');
     });
 
     it('should return error if email or password is incorrect', async function () {
-        const res = await request(app)
+        const res = await chai
+            .request(app)
             .post('/getUser')
             .send({ email: user.userEmail, password: 'wrongpassword' })
-            .expect(401);
 
+        
+        expect(res).to.have.status(401);
         expect(res.text).to.equal('Invalid email or password.');
     });
 
