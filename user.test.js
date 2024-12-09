@@ -51,21 +51,23 @@ describe('User CRUD API', function () {
     });
 
     it('should login a user successfully with correct credentials', async function () {
+        const salt = 'random-generated-salt'; // Mock the salt value
         const hashedPassword = crypto
-            .createHmac('sha256', 'your-secret-key') // Use your secret key here
+            .createHmac('sha256', salt)
             .update(user.userPassword)
             .digest('hex');
-
-        connectionMock.resolves([[{ userEmail: user.userEmail, userPassword: hashedPassword }]]);
-
+    
+        // Mock DB response
+        connectionMock.resolves([[{ userEmail: user.userEmail, userPassword: hashedPassword, salt }]]);
+    
         const res = await chai
             .request(app)
             .post('/getUser')
             .send({ email: user.userEmail, password: user.userPassword });
-
+    
         expect(res).to.have.status(200);
         expect(res.body.message).to.equal('Login successful.');
-    });
+    });    
 
     it('should return error if email or password is incorrect', async function () {
         const res = await chai
