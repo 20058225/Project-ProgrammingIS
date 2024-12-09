@@ -60,11 +60,11 @@ else
 fi
 
 # Configure MySQL for remote access (automatically)
-echo "@@ Configuring MySQL for remote access (bind-address = 0.0.0.0)."
-sudo sed -i 's/^bind-address.*/bind-address = 0.0.0.0/' /etc/mysql/mysql.conf.d/mysqld.cnf
+#echo "@@ Configuring MySQL for remote access (bind-address = 0.0.0.0)."
+# sudo sed -i 's/^bind-address.*/bind-address = 0.0.0.0/' /etc/mysql/mysql.conf.d/mysqld.cnf
 
-echo "Restarting MySQL service..."
-sudo systemctl restart mysql
+#echo "Restarting MySQL service..."
+#sudo systemctl restart mysql
 
 echo "@@ Creating MySQL database and user..."
 # Get the directory of the current script
