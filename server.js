@@ -60,9 +60,9 @@ function comparePassword(password, storedHash, storedSalt) {
 // @@ Endpoint to Add a User
 app.post('/addUser', async (req, res) => {
     const { username, email, password } = req.body;
-    if (!username || !email || !password) {
-        return res.status(400).send('Username, email, and password are required.');
-    }
+
+    if (!username || !email || !password) { return res.status(400).send('Username, email, and password are required.'); }
+
     let connection;
     try {
         connection = await pool.promise().getConnection();
@@ -70,8 +70,8 @@ app.post('/addUser', async (req, res) => {
         const { hashedPassword, salt } = await hashPassword(password);
 
         const [result] = await connection.execute(
-            'INSERT INTO users (userFullName, userEmail, userPassword) VALUES (?, ?, ?)',
-            [username, email, hashedPassword]
+            'INSERT INTO users (userFullName, userEmail, userPassword, salt) VALUES (?, ?, ?, ?)',
+            [username, email, hashedPassword, salt]
         );
         res.status(200).json({ message: 'User added successfully.', userId: result.insertId });
     } catch (err) {
@@ -85,31 +85,25 @@ app.post('/addUser', async (req, res) => {
 app.post('/getUser', async (req, res) => {
     const { email, password } = req.body;
 
-    if (!email || !password) {
-        return res.status(400).send('Email and password are required.');
-    }
+    if (!email || !password) { return res.status(400).send('Email and password are required.'); }
 
     let connection;
     try {
         connection = await pool.promise().getConnection();
 
-        // Fetch the user by email
         const [rows] = await connection.execute(
             'SELECT * FROM users WHERE userEmail = ?',
             [email]
         );
 
-        if (rows.length === 0) {
-            return res.status(401).send('Invalid email or password.');
-        }
+        if (rows.length === 0) { return res.status(404).send('User not found.'); }
 
         const user = rows[0];
 
-        // Compare provided password with the hashed password
-        const isMatch = await comparePassword(password, user.userPassword, user.salt);
-        if (!isMatch) {
-            return res.status(401).send('Invalid email or password.');
-        }
+        const { userPassword: storedHash, salt: storedSalt } = rows[0];
+        const isMatch = await comparePassword(password, storedHash, storedSalt);
+
+        if (!isMatch) { return res.status(401).send('Invalid email or password.'); }
 
         res.status(200).json({ message: 'Login successful.', user });
     } catch (err) {
