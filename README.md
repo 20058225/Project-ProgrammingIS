@@ -22,7 +22,7 @@ run  ```bash test.sh``` to test the codes.
 
 ## Prepare Environment with GitHub PipeLine
 * _Make sure of your IP and ssh key is created and informed on the files and on the GitHub:_    
-To create the variables USER and SSH_KEY ```Access your Repository >> Settings >> Secrets and variables.``` 
+To create the variables USER and SSH_KEY ```Access your Repository >> Settings >> Secrets and variables.```  
 Now, adjust the ```deploy.yml``` file located in the ```.github/workflows``` folder, informing the public IP  of the machine that will receive the system.
 
 ## Implemented
