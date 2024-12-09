@@ -19,12 +19,12 @@ describe('User CRUD API', function () {
     let connectionMock;
 
     before(async function () {
-        connectionMock  = sinon.stub(promisePool, 'execute');
-        await connectionMock.query('DELETE FROM users');
+        connectionMock = sinon.stub(promisePool, 'execute'); // Mock the 'execute' method directly
+        // The query method is not directly available on 'promisePool' as it's stubbed
     });
 
     after(async function () {
-        await connectionMock.query('DELETE FROM users');
+        // No need for connectionMock.query, just use the mock
         sinon.restore();
     });
 
@@ -33,18 +33,18 @@ describe('User CRUD API', function () {
 
         const res = await chai
             .request(app)
-            .post('/addUser')  
-            .send({ username: user.userFullName, email: user.userEmail, password: user.userPassword })
-            
+            .post('/addUser')
+            .send({ username: user.userFullName, email: user.userEmail, password: user.userPassword });
+
         expect(res).to.have.status(200);
         expect(res.body).to.have.property('message', 'User added successfully.');
     });
-    
+
     it('should fail to add a user if fields are missing', async function () {
         const res = await chai
             .request(app)
             .post('/addUser')
-            .send({ username: user.userFullName, email: user.userEmail })
+            .send({ username: user.userFullName, email: user.userEmail });
 
         expect(res).to.have.status(400);
         expect(res.text).to.equal('Username, email, and password are required.');
@@ -54,14 +54,14 @@ describe('User CRUD API', function () {
         const hashedPassword = crypto
             .createHmac('sha256', 'your-secret-key') // Use your secret key here
             .update(user.userPassword)
-            .digest('hex');        
-            
+            .digest('hex');
+
         connectionMock.resolves([[{ userEmail: user.userEmail, userPassword: hashedPassword }]]);
 
         const res = await chai
             .request(app)
             .post('/getUser')
-            .send({ email: user.userEmail, password: user.userPassword })
+            .send({ email: user.userEmail, password: user.userPassword });
 
         expect(res).to.have.status(200);
         expect(res.body.message).to.equal('Login successful.');
@@ -71,9 +71,8 @@ describe('User CRUD API', function () {
         const res = await chai
             .request(app)
             .post('/getUser')
-            .send({ email: user.userEmail, password: 'wrongpassword' })
+            .send({ email: user.userEmail, password: 'wrongpassword' });
 
-        
         expect(res).to.have.status(401);
         expect(res.text).to.equal('Invalid email or password.');
     });
@@ -120,7 +119,7 @@ describe('User CRUD API', function () {
 
         const res = await chai
             .request(app)
-            .delete('/deleteUser/1')  // Ensure route matches
+            .delete('/deleteUser/1');  // Ensure route matches
 
         expect(res).to.have.status(200);
         expect(res.text).to.equal('User deleted successfully.');
