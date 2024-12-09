@@ -22,7 +22,7 @@ describe('User CRUD API', function () {
     });
 
     after(async function () {
-        await mockDB.query('DELETE FROM users');
+        await connectionMock.query('DELETE FROM users');
         sinon.restore();
     });
 
@@ -80,7 +80,8 @@ describe('User CRUD API', function () {
         connectionMock.resolves([{ affectedRows: 1 }]);
 
         const updatedData = { userFullName: 'Updated User', userEmail: 'updated@example.com' };
-        const res = await request(app)
+        const res = await chai
+            .request(app)
             .patch('/updateUser/1')
             .send(updatedData)
             .expect(200);
@@ -90,7 +91,8 @@ describe('User CRUD API', function () {
     });
 
     it('should return error if no fields are provided for update', async function () {
-        const res = await request(app)
+        const res = await chai
+            .request(app)
             .patch('/updateUser/1')
             .send({})
             .expect(400);
@@ -101,7 +103,8 @@ describe('User CRUD API', function () {
     it('should search users by ID and full name', async function () {
         connectionMock.resolves([[{ userID: 1, userFullName: 'Test User', userEmail: 'testuser@example.com' }]]);
 
-        const res = await request(app)
+        const res = await chai
+            .request(app)
             .post('/searchUser')
             .send({ userId: 1, fullName: 'Test' })
             .expect(200);
