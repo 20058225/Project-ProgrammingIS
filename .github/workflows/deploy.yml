@@ -47,7 +47,6 @@ jobs:
           set -e
           echo "@@ Step 4.1: Navigate to the project directory"
           cd /home/${{ secrets.AZURE_VM_USER }}/Project-ProgrammingIS 
-          rm server.log
 
           echo "@@ Step 4.2: Running env.sh script..."
           bash env.sh  # Run env.sh script
@@ -56,7 +55,7 @@ jobs:
           pkill -f 'node server.js' || echo 'No running process found'
 
           echo "@@ 4.4: Git Pull"
-          git pull origin main || { echo "@@ Git pull failed"; exit 1; }
+          git pull origin main 
 
           echo "@@ 4.5: Start the server.js in the background and log output"
           nohup node server.js > server.log 2>&1 &
