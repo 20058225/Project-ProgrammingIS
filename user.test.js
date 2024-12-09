@@ -33,7 +33,6 @@ describe('User CRUD API', function () {
         }
     });
     
-
     it('should add a user successfully', async function () {
         connectionMock.resolves([{ affectedRows: 1 }]); // Mock DB response
 
