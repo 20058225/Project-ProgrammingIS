@@ -11,7 +11,7 @@ const { expect } = chai;
 const user = {
     userFullName: 'Test User',
     userEmail: 'testuser@example.com',
-    userPassword: 'password123',
+    userPassword: 'shortpassword',
 };
 
 describe('User CRUD API', function () {
@@ -53,7 +53,6 @@ describe('User CRUD API', function () {
         const res = await chai
             .request(app)
             .delete('/deleteUser/1')  // Ensure route matches
-            .expect(200);
 
         expect(res).to.have.status(200);
         expect(res.text).to.equal('User deleted successfully.');
