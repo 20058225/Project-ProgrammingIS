@@ -27,7 +27,7 @@ describe('User CRUD API', function () {
 
     it('should add a user successfully', async function () {
         const res = await chai
-        .request(server)
+        .request(app)
         .post('/addUser')  
         .send({ username: user.userFullName, email: user.userEmail, password: user.userPassword })
         .expect(200);
@@ -38,7 +38,7 @@ describe('User CRUD API', function () {
     
     it('should fail to add a user if fields are missing', async function () {
         const res = await chai
-        .request(server)
+        .request(app)
         .post('/addUser')
         .send({ username: user.userFullName, email: user.userEmail })
 
@@ -48,7 +48,7 @@ describe('User CRUD API', function () {
 
     it('should delete a user successfully', async function () {
         const res = await chai
-            .request(server)
+            .request(app)
             .delete('/deleteUser/1')  // Ensure route matches
             .expect(200);
 
