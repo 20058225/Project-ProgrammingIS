@@ -11,7 +11,7 @@ const { expect } = chai;
 // Mock data
 const user = {
     userFullName: 'Test User',
-    userEmail: 'testuser@example.com',
+    userEmail: 'testuser${Date.now()}@example.com',
     userPassword: 'shortpassword',
 };
 
@@ -80,12 +80,11 @@ describe('User CRUD API', function () {
     it('should update user details successfully', async function () {
         connectionMock.resolves([{ affectedRows: 1 }]);
 
-        const updatedData = { userFullName: 'Updated User', userEmail: 'updated@example.com' };
+        const updatedData = { userFullName: 'Updated User', userEmail: 'updated${Date.now()}@example.com' };
         const res = await chai
             .request(app)
             .patch('/updateUser/1')
             .send(updatedData)
-            .expect(200);
 
         expect(res).to.have.status(200);
         expect(res.text).to.equal('User updated successfully.');
@@ -108,8 +107,8 @@ describe('User CRUD API', function () {
             .request(app)
             .post('/searchUser')
             .send({ userId: 1, fullName: 'Test' })
-            .expect(200);
 
+        expect(res).to.have.status(200);
         expect(res.body).to.have.lengthOf(1);
         expect(res.body[0].userFullName).to.equal('Test User');
     });
