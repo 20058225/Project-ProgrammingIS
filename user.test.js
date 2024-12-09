@@ -11,7 +11,7 @@ const { expect } = chai;
 // Mock data
 const user = {
     userFullName: 'Test User',
-    userEmail: 'testuser${Date.now()}@example.com',
+    userEmail: `testuser${Date.now()}@example.com`,
     userPassword: 'shortpassword',
 };
 
@@ -24,7 +24,7 @@ describe('User CRUD API', function () {
     });
 
     after(async function () {
-        // No need for connectionMock.query, just use the mock
+        await promisePool.execute('DELETE FROM users WHERE userEmail LIKE ?', ['testuser%@example.com']);
         sinon.restore();
     });
 
@@ -82,7 +82,7 @@ describe('User CRUD API', function () {
     it('should update user details successfully', async function () {
         connectionMock.resolves([{ affectedRows: 1 }]);
 
-        const updatedData = { userFullName: 'Updated User', userEmail: 'updated${Date.now()}@example.com' };
+        const updatedData = { userFullName: 'Updated User', userEmail: `updated${Date.now()}@example.com` };
         const res = await chai
             .request(app)
             .patch('/updateUser/1')
