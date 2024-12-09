@@ -51,13 +51,12 @@ describe('User CRUD API', function () {
     });
 
     it('should login a user successfully with correct credentials', async function () {
-        const salt = 'random-generated-salt'; // Mock the salt value
+        const salt = 'mockedSalt'; // Mocked salt value
         const hashedPassword = crypto
             .createHmac('sha256', salt)
             .update(user.userPassword)
             .digest('hex');
     
-        // Mock DB response
         connectionMock.resolves([[{ userEmail: user.userEmail, userPassword: hashedPassword, salt }]]);
     
         const res = await chai
@@ -67,7 +66,8 @@ describe('User CRUD API', function () {
     
         expect(res).to.have.status(200);
         expect(res.body.message).to.equal('Login successful.');
-    });    
+    });
+     
 
     it('should return error if email or password is incorrect', async function () {
         const res = await chai
