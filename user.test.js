@@ -3,6 +3,7 @@ const chaiHttp = require('chai-http');
 const { app } = require('./server'); // Import `app`
 const sinon = require('sinon');
 const { promisePool } = require('./server');
+const crypto = require('crypto'); // Add the crypto import
 
 chai.use(chaiHttp);
 const { expect } = chai;
