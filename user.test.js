@@ -26,10 +26,6 @@ describe('User CRUD API', function () {
     after(async function () {
         await promisePool.execute('DELETE FROM users WHERE userEmail LIKE ?', ['testuser%@example.com']);
         sinon.restore();
-        // Close the MySQL pool to gracefully exit
-        console.log('Closing MySQL pool...');
-        await promisePool.end(); // Ensures all MySQL connections are released
-        console.log('MySQL pool closed.');
     });
 
     it('should add a user successfully', async function () {
