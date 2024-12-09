@@ -9,6 +9,13 @@ chai.use(chaiHttp);
 
 const expect = chai.expect;
 
+// Mock data
+const user = {
+    userFullName: 'Test User',
+    userEmail: 'testuser@example.com',
+    userPassword: 'password123',
+};
+
 describe('User CRUD API', function () {
     let connectionMock;
 
@@ -22,20 +29,20 @@ describe('User CRUD API', function () {
 
     it('should add a user successfully', async function () {
         const res = await chai
-            .request(server)
-            .post('/addUser')  
-            .send({ username: 'Test User', email: 'testuser@example.com', password: 'password123' })
-            .expect(200);
+        .request(server)
+        .post('/addUser')  
+        .send({ username: user.userFullName, email: user.userEmail, password: user.userPassword })
+        .expect(200);
 
-            expect(res).to.have.status(200);
-            expect(res.body).to.have.property('message', 'User added successfully.');
+        expect(res).to.have.status(200);
+        expect(res.body).to.have.property('message', 'User added successfully.');
     });
     
     it('should fail to add a user if fields are missing', async function () {
         const res = await chai
         .request(server)
         .post('/addUser')
-        .send({ username: 'Test User', email: 'testuser@example.com' })
+        .send({ username: user.userFullName, email: user.userEmail })
 
         expect(res).to.have.status(400);
         expect(res.text).to.equal('Username, email, and password are required.');
@@ -47,6 +54,7 @@ describe('User CRUD API', function () {
             .delete('/deleteUser/1')  // Ensure route matches
             .expect(200);
 
+        expect(res).to.have.status(200);
         expect(res.text).to.equal('User deleted successfully.');
     });
 });
