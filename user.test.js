@@ -94,10 +94,11 @@ describe('User CRUD API', function () {
         const res = await chai
             .request(app)
             .patch('/updateUser/1')
-            .send({})
-            .expect(400);
+            .send({});
 
+        expect(res).to.have.status(400);
         expect(res.text).to.equal('No fields provided for update.');
+
     });
 
     it('should search users by ID and full name', async function () {
@@ -129,9 +130,9 @@ describe('User CRUD API', function () {
 
         const res = await chai
             .request(app)
-            .delete('/deleteUser/999')
-            .expect(404);
+            .delete('/deleteUser/999');
 
+        expect(res).to.have.status(404);
         expect(res.text).to.equal('User not found.');
     });
 });
