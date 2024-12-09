@@ -20,6 +20,7 @@ describe('User CRUD API', function () {
 
     before(async function () {
         connectionMock  = sinon.stub(promisePool, 'execute');
+        await connectionMock.query('DELETE FROM users');
     });
 
     after(async function () {
